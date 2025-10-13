@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
+import { MyContext } from '../Context';
 
 export default function Card(props) {
   // Default size "small"
   const [size, setSize] = useState('S');
+
+  const {addToCart} = useContext(MyContext);
 
   // Function to get price based on size
   const getPrice = () => {
@@ -65,7 +68,13 @@ export default function Card(props) {
             ))}
           </div>
         )}
-        <button className='w-full bg-red-600 md:text-2xl text-[12px] text-white mt-2  rounded-2xl text-center'>Order Now</button>
+        <button   onClick={() => {
+    addToCart({
+      ...props,
+      selectedSize: size,       // current size (S/M/L)
+      finalPrice: getPrice(),   // current size ka price
+    });
+  }} className='w-full bg-red-600 md:text-2xl text-[12px] text-white mt-2  rounded-2xl text-center'>Order Now</button>
       </div>
     </div>
   );
