@@ -74,7 +74,7 @@ export default function Card(props) {
       selectedSize: size,       // current size (S/M/L)
       finalPrice: getPrice(),   // current size ka price
     });
-  }} className='w-full bg-red-600 md:text-2xl text-[12px] text-white mt-2  rounded-2xl text-center'>Order Now</button>
+  }} className='w-full bg-green-400 active:bg-green-800 md:text-2xl text-[12px] text-white mt-2  rounded-2xl text-center'>Order Now</button>
       </div>
     </div>
   );

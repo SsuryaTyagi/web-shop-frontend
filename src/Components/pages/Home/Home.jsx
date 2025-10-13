@@ -23,13 +23,13 @@ export default function Home() {
         <img
           src="text.png"
           alt=""
-          className="absolute -top-1 w-[800px] h-[800px] object-center rotate-[7deg]"
+          className="absolute -top-0 w-[800px] h-[800px] object-center rotate-[9deg]"
         />
 
         {/* 🔹 Scroll button */}
         <button
           onClick={scrollToMenu}
-          className="mt-6 bg-[#EC1010] hover:bg-red-700 text-white text-3xl absolute bottom-[42%] left-[15%] font-semibold px-16 py-3 rounded-full shadow-lg transition-all duration-300"
+          className="mt-6 hover:bg-[#D36D00] bg-red-700 text-white text-3xl absolute bottom-[42%] left-[15%] font-semibold px-16 py-3 rounded-full shadow-lg transition-all duration-300"
         >
           Order Now 🍕
         </button>

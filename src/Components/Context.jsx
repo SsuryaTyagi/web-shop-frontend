@@ -239,11 +239,34 @@ export default function Context({ children }) {
     localStorage.setItem("cartData", JSON.stringify(cartData));
   }, [cartData]);
 
-  const addToCart = (item) => {
-    setCartData((prev) => [...prev, item]);
-  };
+ const addToCart = (item) => {
+  setCartData((prev) => [
+    ...prev,
+    { ...item, quantity: 1, basePrice: item.price },
+  ]);
+};
+
+// 🟡 NEW: Update quantity of a cart item
+const updateQuantity = (index, newQty) => {
+  setCartData((prev) =>
+    prev.map((item, i) =>
+      i === index
+        ? {
+            ...item,
+            quantity: newQty,
+            price: (item.basePrice || item.price) * newQty, // price update
+          }
+        : item
+    )
+  );
+};
 
   const clearCart = () => setCartData([]);
+  // 🟢 NEW: Delete item from cart
+const deleteFromCart = (index) => {
+  setCartData((prev) => prev.filter((_, i) => i !== index));
+};
+
 
   useEffect(() => {
     menu();
@@ -251,7 +274,7 @@ export default function Context({ children }) {
   }, []);
   return (
     <MyContext.Provider
-      value={{ data, best, Menu, cartData, addToCart, clearCart }}
+      value={{ data, best, Menu, cartData, addToCart,deleteFromCart,updateQuantity, clearCart }}
     >
       {children}
     </MyContext.Provider>
