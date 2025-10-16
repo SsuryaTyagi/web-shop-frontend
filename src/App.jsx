@@ -5,6 +5,7 @@ import Home from "./Components/Pages/Home/Home";
 import List from "./Components/pages/Menu/Menu";
 import Cart from "./Components/pages/Cart/Cart";
 import Footer from "./Components/Items/Footer";
+import Search from "./Components/pages/Search";
 
 export default function App() {
   return (
@@ -14,8 +15,9 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/menu" element={<List />} />
+        <Route path="/search" element={<Search/>}/>
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   )
 };

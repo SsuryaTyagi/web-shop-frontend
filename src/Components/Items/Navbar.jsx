@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BsCart3 } from "react-icons/bs";
+import { FaSearch } from "react-icons/fa";
 import { IoIosContact } from "react-icons/io";
 import { IoHomeOutline } from "react-icons/io5";
 import { Link } from "react-router";
@@ -9,6 +10,7 @@ export default function Navbar() {
 
   const links = [
     { icon: <IoHomeOutline />, Name: "Home", path: "/" },
+    { icon: <FaSearch />, Name: "Search", path: "/search" },
     { icon: <BsCart3 />, Name: "Cart", path: "/cart" },
     { icon: <IoIosContact />, Name: "Contact Us", path: "/contact" },
   ];
@@ -48,13 +50,14 @@ export default function Navbar() {
       {menuOpen && (
         <ul className="md:hidden flex flex-col bg-white w-full mt-2 shadow-lg text-lg font-medium">
           {links.map((link, idx) => (
-            <li
-              key={idx}
-              className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-gray-100"
-              onClick={() => setMenuOpen(false)} // close menu on click
-            >
-              {link.icon} {link.Name}
-            </li>
+            <Link key={idx} to={link.path}>
+              <li
+                className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-gray-100"
+                onClick={() => setMenuOpen(false)} // close menu on click
+              >
+                {link.icon} {link.Name}
+              </li>
+            </Link>
           ))}
         </ul>
       )}

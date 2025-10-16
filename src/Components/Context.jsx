@@ -34,7 +34,7 @@ export default function Context({ children }) {
   };
   const [Menu] = useState([
     {
-      img: "menu/margarita-pizza.jpg",
+      img: "menu/margarita-pizza.png",
       rating: 4.9,
       category: "Pizza",
       name: "Double Cheese Margarita",
@@ -44,7 +44,7 @@ export default function Context({ children }) {
       price_l: 350,
     },
     {
-      img: "menu/Fresh veggie.jpg",
+      img: "menu/Fresh veggie.png",
       rating: 4.8,
       category: "Pizza",
       name: "Fresh Veggie",
@@ -54,7 +54,7 @@ export default function Context({ children }) {
       price_l: 349,
     },
     {
-      img: "menu/Exotica.jpg",
+      img: "menu/Exotica.png",
       rating: 4.7,
       category: "Pizza",
       name: "Exotica",
@@ -64,7 +64,7 @@ export default function Context({ children }) {
       price_l: 399,
     },
     {
-      img: "menu/Framhouse.jpg",
+      img: "menu/Framhouse.png",
       rating: 4.9,
       category: "Pizza",
       name: "Farmhouse",
@@ -74,7 +74,7 @@ export default function Context({ children }) {
       price_l: 399,
     },
     {
-      img: "menu/veg Supreme.jpg",
+      img: "menu/veg Supreme.png",
       rating: 4.8,
       category: "Pizza",
       name: "Veg Supreme",
@@ -84,7 +84,7 @@ export default function Context({ children }) {
       price_l: 399,
     },
     {
-      img: "menu/Deluxe Veggie.jpg",
+      img: "menu/Deluxe Veggie.png",
       rating: 4.7,
       category: "Pizza",
       name: "Deluxe Veggie",
@@ -104,7 +104,7 @@ export default function Context({ children }) {
       price_l: 450,
     },
     {
-      img: "menu/Corn.jpg",
+      img: "menu/Corn.png",
       rating: 4.5,
       category: "Pizza",
       name: "Cheese & Corn Pizza",
@@ -134,7 +134,7 @@ export default function Context({ children }) {
       price_l: 299,
     },
     {
-      img: "menu/Capsicum.jpg",
+      img: "menu/Capsicum.png",
       rating: 4.6,
       category: "Pizza",
       name: "Cheese & Capsicum Pizza",
@@ -234,7 +234,7 @@ export default function Context({ children }) {
   ]);
 
   
-
+ 
   useEffect(() => {
     localStorage.setItem("cartData", JSON.stringify(cartData));
   }, [cartData]);
@@ -254,7 +254,7 @@ const updateQuantity = (index, newQty) => {
         ? {
             ...item,
             quantity: newQty,
-            price: (item.basePrice || item.price) * newQty, // price update
+            price: (item.basePrice || item.price) * newQty, 
           }
         : item
     )
