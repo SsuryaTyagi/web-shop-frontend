@@ -10,7 +10,7 @@ export default function Home() {
   const scrollToMenu = () => {
     menuSectionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
+// console.log("https://web-shop-backend.vercel.app/")
   return (
     <main className=" h-auto overflow-x-hidden no-scrollbar">
       {/* Banner */}
@@ -50,7 +50,7 @@ export default function Home() {
               >
                 <div className="flex-shrink-0 w-32 sm:w-56 h-[220px] bg-white overflow-hidden">
                   <img
-                    src={`http://localhost:8000/${value.image}`}
+                    src={`https://web-shop-nine-zeta.vercel.app/${value.image}`}
                     alt={value.path}
                     loading="lazy"
                     className="w-full md:h-[170px] h-[140px] object-center"
@@ -74,7 +74,7 @@ export default function Home() {
               <Card
                 key={index}
                 index={index}
-                img={`http://localhost:8000/${value.image}`}
+                img={`https://web-shop-nine-zeta.vercel.app/${value.image}`}
                 {...value}
               />
             ))}
