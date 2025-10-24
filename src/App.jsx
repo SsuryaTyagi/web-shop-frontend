@@ -1,11 +1,11 @@
 import React from "react";
 import Navbar from "./Components/Items/Navbar";
 import { Route, Routes } from "react-router";
-import Home from "./Components/Pages/HomePage/Home.jsx";
-import List from "./Components/Pages/Menu/Menu";
-import Cart from "./Components/Pages/Cart/Cart";
+import Home from "./Components/pages/Homepage/Home.jsx";
+import List from "./Components/pages/Menu/Menu";
+import Cart from "./Components/pages/Cart/Cart";
 // import Footer from "./Components/Items/Footer";
-import Search from "./Components/Pages/Search";
+import Search from "./Components/pages/Search";
 
 export default function App() {
   return (
