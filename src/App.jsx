@@ -2,10 +2,10 @@ import React from "react";
 import Navbar from "./Components/Items/Navbar";
 import { Route, Routes } from "react-router";
 import Home from "./Components/Pages/Home/Home";
-import List from "./Components/pages/Menu/Menu";
-import Cart from "./Components/pages/Cart/Cart";
+import List from "./Components/Pages/Menu/Menu";
+import Cart from "./Components/Pages/Cart/Cart";
 import Footer from "./Components/Items/Footer";
-import Search from "./Components/pages/Search";
+import Search from "./Components/Pages/Search";
 
 export default function App() {
   return (
