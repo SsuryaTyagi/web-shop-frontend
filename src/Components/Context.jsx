@@ -18,7 +18,7 @@ export default function Context({ children }) {
 
   const menu = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/menu");
+      const res = await axios.get("https://web-shop-nine-zeta.vercel.app/menu");
       setData(res.data);
     } catch (error) {
       console.error("Error fetching API:", error);
@@ -26,7 +26,7 @@ export default function Context({ children }) {
   };
   const Best = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/best");
+      const res = await axios.get("https://web-shop-nine-zeta.vercel.app/best");
       setBest(res.data);
     } catch (error) {
       console.error("Error fetching API:", error);
