@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Components/Items/Navbar";
 import { Route, Routes } from "react-router";
-import Home from "./Components/Pages/Home/Home";
+import Home from "./Components/Pages/HomePage/Home";
 import List from "./Components/Pages/Menu/Menu";
 import Cart from "./Components/Pages/Cart/Cart";
 import Footer from "./Components/Items/Footer";
