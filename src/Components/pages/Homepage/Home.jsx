@@ -1,6 +1,6 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, lazy, Suspense } from "react";
 import { MyContext } from "../../Context";
-import Card from "../../Items/Card";
+const Card = lazy(() => import("../../Items/Card"));
 import { Link } from "react-router";
 
 export default function Home() {
@@ -10,13 +10,13 @@ export default function Home() {
   const scrollToMenu = () => {
     menuSectionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-// console.log("https://web-shop-backend.vercel.app/")
+  // console.log("https://web-shop-backend.vercel.app/")
   return (
     <main className=" h-auto overflow-x-hidden no-scrollbar">
       {/* Banner */}
       <section className="h-auto w-full overflow-hidden relative">
         <img
-          src="Screenshot 2025-10-11 133221.png"
+          src="Screenshot 2025-10-11 133221.jpg"
           alt="Banner"
           className="w-full  object-cover object-center"
         />
@@ -69,16 +69,18 @@ export default function Home() {
             Our Most Popular Deals!
           </div>
 
-          <div className="grid grid-cols-3 sm:grid-cols-3 mr-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:mt-6">
-            {best.map((value, index) => (
-              <Card
-                key={index}
-                index={index}
-                img={`https://web-shop-nine-zeta.vercel.app/${value.image}`}
-                {...value}
-              />
-            ))}
-          </div>
+          <Suspense fallback={<div>Loading cards...</div>}>
+            <div className="grid grid-cols-3 sm:grid-cols-3 mr-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:mt-6">
+              {best.map((value, index) => (
+                <Card
+                  key={index}
+                  index={index}
+                  img={`https://web-shop-nine-zeta.vercel.app/${value.image}`}
+                  {...value}
+                />
+              ))}
+            </div>
+          </Suspense>
         </div>
       </section>
     </main>
