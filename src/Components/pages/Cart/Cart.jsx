@@ -105,7 +105,7 @@ Your location: ${locationUrl}`);
   };
 
   return (
-    <div className="p-6 pt-32 w-[1400px]   mx-auto">
+    <div className="p-6 pt-32 w-[1400px]   min-h-[500px]  mx-auto">
       <h2 className="text-2xl font-bold mb-4">🛍 Your Cart</h2>
       {cartData.length === 0 ? (
         <p>Cart is empty</p>

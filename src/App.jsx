@@ -1,6 +1,7 @@
  import React, { Suspense, lazy } from "react";
 import Navbar from "./Components/Items/Navbar";
 import { Route, Routes } from "react-router";
+import Footer from "./Components/Items/Footer.jsx";
 
 // Lazy imports
 const Home = lazy(() => import("./Components/pages/Homepage/Home.jsx"));
@@ -11,7 +12,7 @@ const Search = lazy(() => import("./Components/pages/Search"));
 
 export default function App() {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Navbar />
       <Suspense fallback={<div className="text-center mt-10">Loading...</div>}>
         <Routes>
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/search" element={<Search />} />
         </Routes>
       </Suspense>
+      <Footer/>
     </div>
   );
 }

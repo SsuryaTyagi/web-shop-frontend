@@ -14,7 +14,7 @@ const filter =Menu.filter((items)=>{
 });
 console.log(filter)
   return (
-    <div className='h-screen w-screen pt-26  flex  flex-col gap-5 items-center '>
+    <div className='h-screen w-screen pt-30  flex  flex-col gap-5 items-center '>
        <div className='h-[8vw] '>
          <input
          value={value}
