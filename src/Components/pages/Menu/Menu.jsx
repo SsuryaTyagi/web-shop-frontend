@@ -30,7 +30,7 @@ export default function List() {
             Restaurants to explore
           </div>
 
-          <div className="grid grid-cols-3 gap-3 mt-6 w-[1200px]">
+          <div className="grid grid-cols-3 sm:grid-cols-3 mr-2 md:grid-cols-3 gap-6 mt-6 w-[80vw]">
             {filteredData.map((item, index) => (
               <Card key={index} {...item} />
             ))}

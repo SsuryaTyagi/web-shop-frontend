@@ -7,8 +7,8 @@ import { IoLogoWhatsapp } from 'react-icons/io';
 
 export default function Footer() {
   return (
-<div className="bg-[#e0e0e0] mt-11 w-screen  flex flex-col justify-center items-center ">
-  <div className=" md:w-[85vw] w-full flex flex-row  justify-between md:p-10">
+<div className="bg-[#e0e0e0] mt-11 w-screen flex flex-col justify-center items-center ">
+  <div className=" md:w-[85vw] w-full flex flex-row  justify-between lg:p-10">
     
     {/* Logo / Image */}
     <div className=" w-auto h-full mt-20 md:m-0">
@@ -20,7 +20,7 @@ export default function Footer() {
     </div>
 
     {/* Contact Info */}
-    <div className="mt-12 h-[2vw] font-semibold flex flex-col justify-between ">
+    <div className="mt-12 h-[2vw]  font-semibold flex flex-col justify-between ">
       <h2 className="md:text-3xl text-[1.5rem] font-bold mb-[3vw]">Contact Us</h2>
  <div className="space-y-2 text-[.7em] md:text-[1.5rem]">
       {/* Email */}
@@ -60,10 +60,10 @@ export default function Footer() {
     <div className=" mt-12 font-semibold md:mb-0">
       <h2 className="md:text-3xl text-[1.5rem] font-bold mb-[3vw]">Follow Us</h2>
       <div className="flex mt-14  gap-4">
-        <a href="#" className="hover:text-blue-600"><FaFacebook md:fontSize={25}/></a>
-        <a href="#" className="hover:text-pink-600"><FaSquareInstagram md:fontSize={25} /></a>
-        <a href="#" className="hover:text-blue-400"><BsTwitterX md:fontSize={25}/></a>
-        <a href="#" className="hover:text-green-600"><IoLogoWhatsapp md:fontSize={25}/></a>
+        <a href="#" className="hover:text-blue-600"><FaFacebook fontSize={25}/></a>
+        <a href="#" className="hover:text-pink-600"><FaSquareInstagram fontSize={25} /></a>
+        <a href="#" className="hover:text-blue-400"><BsTwitterX fontSize={25}/></a>
+        <a href="#" className="hover:text-green-600"><IoLogoWhatsapp fontSize={25}/></a>
       </div>
     </div>
    

@@ -70,7 +70,7 @@ export default function Home() {
           </div>
 
           <Suspense fallback={<div>Loading cards...</div>}>
-            <div className="grid grid-cols-3 sm:grid-cols-3 mr-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:mt-6">
+            <div className="grid grid-cols-3 sm:grid-cols-3 mr-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:mt-3">
               {best.map((value, index) => (
                 <Card
                   key={index}

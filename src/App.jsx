@@ -12,7 +12,8 @@ const Search = lazy(() => import("./Components/pages/Search"));
 
 export default function App() {
   return (
-    <div className="overflow-x-hidden">
+<div className="h-screen sticky bottom-0">
+      <div className="overflow-x-hidden ">
       <Navbar />
       <Suspense fallback={<div className="text-center mt-10">Loading...</div>}>
         <Routes>
@@ -22,8 +23,10 @@ export default function App() {
           <Route path="/search" element={<Search />} />
         </Routes>
       </Suspense>
-      <Footer/>
+      
     </div>
+    <Footer/>
+</div>
   );
 }
 
