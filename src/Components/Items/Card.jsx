@@ -41,6 +41,7 @@ export default function Card(props) {
       updateQuantity(props.index, newQty);
     }
   };
+  console.log(props.index);
 
   return (
     <div className="w-[32vw] flex flex-col justify-between max-w-[320px] bg-white mb-4 rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl duration-300">
