@@ -18,7 +18,7 @@ export default function Context({ children }) {
 
   const menu = async () => {
     try {
-      const res = await axios.get("https://web-shop-nine-zeta.vercel.app/Menu");
+      const res = await axios.get("https://web-shop-nine-zeta.vercel.app/menu");
       setData(res.data);
     } catch (error) {
       console.error("Error fetching API:", error);
@@ -26,7 +26,7 @@ export default function Context({ children }) {
   };
   const Best = async () => {
     try {
-      const res = await axios.get("https://web-shop-nine-zeta.vercel.app/Best");
+      const res = await axios.get("https://web-shop-nine-zeta.vercel.app/best");
       setBest(res.data);
     } catch (error) {
       console.error("Error fetching API:", error);
@@ -246,7 +246,7 @@ export default function Context({ children }) {
   ]);
 };
 
-// 🟡 NEW: Update quantity of a cart item
+
 const updateQuantity = (index, newQty) => {
   setCartData((prev) =>
     prev.map((item, i) =>
