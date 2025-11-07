@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useState } from "react";
 
 export const MyContext = createContext();
 export default function Context({ children }) {
+
   const [data, setData] = useState();
   const [best, setBest] = useState();
   const [cartData, setCartData] = useState(() => {
@@ -24,7 +25,7 @@ export default function Context({ children }) {
       console.error("Error fetching API:", error);
     }
   };
-  const Best = async () => {
+  const Best = async () =>{
     try {
       const res = await axios.get("https://web-shop-nine-zeta.vercel.app/best");
       setBest(res.data);
@@ -32,6 +33,35 @@ export default function Context({ children }) {
       console.error("Error fetching API:", error);
     }
   };
+  const signup  = async(userData)=>{
+      try {
+        const res = await axios.post("https://web-shop-nine-zeta.vercel.app/register",userData)
+        alert("singn up successful ");
+        console.log(res.data.message);
+      } catch (error){
+    console.error("Signup error:", error);
+
+    if (error.response && error.response.data && error.response.data.message) {
+      alert(error.response.data.message);
+    } else {
+      alert("Something went wrong! Please try again.");
+    }
+  };
+}
+    const login  = async(userData)=>{
+      try {
+        const res = await axios.post("https://web-shop-nine-zeta.vercel.app/login",userData,{withCredentials:true})
+        alert("login successful ");
+        console.log(res.data.message);
+      } catch (error){
+    console.error("Signup error:", error);
+    
+    if (error.response && error.response.data && error.response.data.message) {
+      alert(error.response.data.message);
+    } else {
+      alert("Something went wrong! Please try again.");
+    }
+  } }
   const [Menu] = useState([
     {
       img: "menu/margarita-pizza.png",
@@ -262,7 +292,7 @@ const updateQuantity = (index, newQty) => {
 };
 
   const clearCart = () => setCartData([]);
-  // 🟢 NEW: Delete item from cart
+  
 const deleteFromCart = (index) => {
   setCartData((prev) => prev.filter((_, i) => i !== index));
 };
@@ -274,9 +304,9 @@ const deleteFromCart = (index) => {
   }, []);
   return (
     <MyContext.Provider
-      value={{ data, best, Menu, cartData, addToCart,deleteFromCart,updateQuantity, clearCart }}
+      value={{ data, best, Menu, cartData, addToCart,deleteFromCart,updateQuantity,login, clearCart,signup }}
     >
       {children}
     </MyContext.Provider>
-  );
-}
+  )
+  };

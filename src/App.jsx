@@ -2,6 +2,7 @@
 import Navbar from "./Components/Items/Navbar";
 import { Route, Routes } from "react-router";
 import Footer from "./Components/Items/Footer.jsx";
+import Login from "./Components/pages/user.jsx/login.jsx";
 
 // Lazy imports
 const Home = lazy(() => import("./Components/pages/Homepage/Home.jsx"));
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/menu" element={<List />} />
+           <Route path="/login" element={<Login/>} />
           <Route path="/search" element={<Search />} />
         </Routes>
       </Suspense>
