@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
-import { FiEye, FiEyeOff } from "react-icons/fi"; // 👁️ Eye icons
+import { FiEye, FiEyeOff } from "react-icons/fi"; 
 import { MyContext } from "../../Context";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
-  const [showPassword, setShowPassword] = useState(false); // ✅ default: hidden password
+  const [showPassword, setShowPassword] = useState(false); 
 
   const [formData, setFormData] = useState({
     name: "",
@@ -72,7 +72,7 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Right Section */}
+      {/*  Right Section  */}
       <div className="w-full mt-20 md:w-1/2 flex flex-col justify-center items-center px-6 sm:px-12">
         <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
           <h2 className="text-2xl font-semibold mb-6 text-gray-800">

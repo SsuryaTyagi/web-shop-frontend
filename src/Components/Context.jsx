@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 export const MyContext = createContext();
 export default function Context({ children }) {
+  const navigate = useNavigate();
 
   const [data, setData] = useState();
   const [best, setBest] = useState();
+  const [user, setUser] = useState();
   const [cartData, setCartData] = useState(() => {
     try {
       const saved = localStorage.getItem("cartData");
@@ -53,6 +56,8 @@ export default function Context({ children }) {
         const res = await axios.post("https://web-shop-nine-zeta.vercel.app/login",userData,{withCredentials:true})
         alert("login successful ");
         console.log(res.data.message);
+        navigate("/");
+        // await verify ();
       } catch (error){
     console.error("Signup error:", error);
     
@@ -61,6 +66,15 @@ export default function Context({ children }) {
     } else {
       alert("Something went wrong! Please try again.");
     }
+  } }
+   const verify  = async()=>{
+      try {
+        const res = await axios.get("https://web-shop-nine-zeta.vercel.app/verify",{withCredentials:true})
+        console.log(res.data.message);
+        setUser(res.data.user)
+      } catch (error){
+          console.error(error.response.data.message);
+        setUser(null);
   } }
   const [Menu] = useState([
     {
@@ -301,10 +315,21 @@ const deleteFromCart = (index) => {
   useEffect(() => {
     menu();
     Best();
+    verify();
   }, []);
   return (
     <MyContext.Provider
-      value={{ data, best, Menu, cartData, addToCart,deleteFromCart,updateQuantity,login, clearCart,signup }}
+      value={{ data,
+         best,
+          Menu,
+          user, 
+          cartData, 
+          addToCart,
+          deleteFromCart,
+          updateQuantity,
+          login, 
+          clearCart,
+          signup }}
     >
       {children}
     </MyContext.Provider>

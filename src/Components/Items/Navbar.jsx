@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { CgProfile } from "react-icons/cg";
 import { BsCart3 } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import { IoIosContact } from "react-icons/io";
 import { IoHomeOutline } from "react-icons/io5";
 import { Link } from "react-router";
+import { MyContext } from "../Context";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const links = [
-    { icon: <IoHomeOutline />, Name: "Home", path: "/" },
-    { icon: <FaSearch />, Name: "Search", path: "/search" },
-    { icon: <BsCart3 />, Name: "Cart", path: "/cart" },
-    { icon: <IoIosContact />, Name: "Contact Us", path: "/contact" },
-  ];
+  const {user} = useContext(MyContext);
+
+const links = [
+  { icon: <IoHomeOutline />, Name: "Home", path: "/" },
+  { icon: <FaSearch />, Name: "Search", path: "/search" },
+  ...(user
+    ? [{ icon: <CgProfile />, Name: "Profile", path: "/profile" }]
+    : [{ icon: <CgProfile />, Name: "Sign In", path: "/login" }]
+  ),
+  { icon: <BsCart3 />, Name: "Cart", path: "/cart" },
+  { icon: <IoIosContact />, Name: "Contact Us", path: "/contact" },
+];
 
   return (
     <nav className="shadow-xl fixed z-10 w-screen bg-white p-2">

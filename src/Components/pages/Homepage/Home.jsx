@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 export default function Home() {
   const { data = [], best = [] } = useContext(MyContext) || {};
-  const menuSectionRef = useRef(null); // 🔹 reference for 2nd section
+  const menuSectionRef = useRef(null); 
 
   const scrollToMenu = () => {
     menuSectionRef.current?.scrollIntoView({ behavior: "smooth" });

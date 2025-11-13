@@ -3,9 +3,10 @@ import Navbar from "./Components/Items/Navbar";
 import { Route, Routes } from "react-router";
 import Footer from "./Components/Items/Footer.jsx";
 import Login from "./Components/pages/user.jsx/login.jsx";
+import Profile from "./Components/pages/profile/Profile.jsx";
 
 // Lazy imports
-const Home = lazy(() => import("./Components/pages/Homepage/Home.jsx"));
+const Home = lazy(() => import("./Components/pages/Homepage/Home"));
 const List = lazy(() => import("./Components/pages/Menu/Menu"));
 const Cart = lazy(() => import("./Components/pages/Cart/Cart"));
 const Search = lazy(() => import("./Components/pages/Search"));
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/menu" element={<List />} />
            <Route path="/login" element={<Login/>} />
+           <Route path="/profile" element={<Profile/>} />
           <Route path="/search" element={<Search />} />
         </Routes>
       </Suspense>
