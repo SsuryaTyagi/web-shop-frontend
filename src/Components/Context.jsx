@@ -83,9 +83,9 @@ export default function Context({ children }) {
       category: "Pizza",
       name: "Double Cheese Margarita",
       title: "Loaded with extra cheese",
-      price: 120,
-      price_m: 250,
-      price_l: 350,
+      price: 99,
+      price_m: 199,
+      price_l: 349,
     },
     {
       img: "menu/Fresh veggie.png",
@@ -93,7 +93,7 @@ export default function Context({ children }) {
       category: "Pizza",
       name: "Fresh Veggie",
       title: "Onion, Tomato, Capsicum & Sweet Corn",
-      price: 150,
+      price: 99,
       price_m: 200,
       price_l: 349,
     },
@@ -168,7 +168,7 @@ export default function Context({ children }) {
       price_l: 249,
     },
     {
-      img: "menu/paneer pizza.jpg",
+      img: "menu/Peppy paneer.png",
       rating: 4.7,
       category: "Pizza",
       name: "Cheese & Paneer Pizza",
@@ -193,7 +193,7 @@ export default function Context({ children }) {
       category: "Burger",
       name: "Aloo Tikki Burger",
       title: "Aloo tikki,onion",
-      price: 50,
+      price: 39,
     },
     {
       img: "menu/Burger/paneer burger.jpg",
@@ -201,7 +201,7 @@ export default function Context({ children }) {
       category: "Burger",
       name: "Spicy Paneer with cheese ",
       title: "Paneer,aloo tikki,cheese,onion,spicy",
-      price: 90,
+      price: 79,
     },
     {
       img: "menu/Burger/Veg Cheese.jpg",
@@ -209,7 +209,7 @@ export default function Context({ children }) {
       category: "Burger",
       name: "Veg Cheese",
       title: "Onion with cheese Burger",
-      price: 65,
+      price: 49,
     },
     {
       img: "menu/Burger/veggie King Double cheese.jpg",
@@ -217,7 +217,7 @@ export default function Context({ children }) {
       category: "Burger",
       name: "Veggie king double cheese Burger",
       title: "Special items",
-      price: 120,
+      price: 99,
     },
     {
       img: "menu/French Fries/cheese french frice.jpg",
@@ -225,7 +225,7 @@ export default function Context({ children }) {
       category: "french fries",
       name: "Cheese french frice",
       title: "cheese french frice with peri-peri",
-      price: 150,
+      price: 119,
     },
     {
       img: "menu/French Fries/salted french fries.jpg",
@@ -233,7 +233,7 @@ export default function Context({ children }) {
       category: "french fries",
       name: "Salted french frice",
       title: "french frice with salte",
-      price: 100,
+      price: 69,
     },
     {
       img: "menu/French Fries/peri-peri french frice.jpg",
@@ -241,7 +241,7 @@ export default function Context({ children }) {
       category: "french fries",
       name: "Pari-pari french frice",
       title: "french frice with pari-pari",
-      price: 120,
+      price: 99,
     },
     {
       img: "menu/Wraps/Double paneer wrap.jpg",
@@ -249,7 +249,7 @@ export default function Context({ children }) {
       category: "wraps",
       name: "paneer wrap",
       title: "Paneer,onion,corn,tomato",
-      price: 99,
+      price: 89,
     },
     {
       img: "menu/Wraps/Mushrooms chilli.jpg",
@@ -257,7 +257,7 @@ export default function Context({ children }) {
       category: "wraps",
       name: "Mushrooms wraps",
       title: "mushrooms,onion,tomato,corn",
-      price: 150,
+      price: 89,
     },
     {
       img: "menu/Wraps/Mix veg wrap.jpg",
@@ -265,7 +265,7 @@ export default function Context({ children }) {
       category: "wraps",
       name: "mix veg wrap",
       title: "mix all veggies",
-      price: 80,
+      price: 69,
     },
     {
       img: "menu/Wraps/Paneer wrap.jpg",
@@ -273,7 +273,7 @@ export default function Context({ children }) {
       category: "wraps",
       name: "double paneer wrap",
       title: "double Paneer,onion,corn,tomato",
-      price: 150,
+      price: 79,
     },
   ]);
 

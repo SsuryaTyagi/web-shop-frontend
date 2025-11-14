@@ -14,22 +14,22 @@ export default function Home() {
   return (
     <main className=" h-auto overflow-x-hidden no-scrollbar">
       {/* Banner */}
-      <section className="h-auto w-full overflow-hidden relative">
+      <section className="md:h-[35vw]  overflow-hidden relative">
         <img
-          src="Screenshot 2025-10-11 133221.jpg"
+          src="Untitled-1.jpg"
           alt="Banner"
-          className="w-full  object-cover object-center"
+          className="w-full   object-cover object-center"
         />
-        <img
+        {/* <img
           src="text.png"
           alt=""
           className="absolute top-1 right-[55%] w-[50vw]  object-center rotate-[9deg]"
-        />
+        /> */}
         {/* <button
           onClick={scrollToMenu}
           className="mt-6 hover:bg-[#D36D00] bg-red-700 text-white text-1em absolute bottom-16 left-10 lg:bottom-[42%] lg:left-[15%] font-semibold px-2 py-0.5  md:px-12 md:py-1 lg:px-16 lg:py-3 rounded-full shadow-lg transition-all duration-300"
         >
-          Order Now 🍕
+          Order Now 
         </button> */}
       </section>
 

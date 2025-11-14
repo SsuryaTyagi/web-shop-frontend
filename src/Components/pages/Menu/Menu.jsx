@@ -18,7 +18,7 @@ export default function List() {
   return (
      <div className="h-full w-full flex items-center pt-20 justify-center">
       <div className="w-[1200px]">
-        <div className="pt-15">
+        <div className="pt-15 ml-[5vw]">
           <div className="text-[40px] font-sans font-bold">
             <h1>{path}</h1>
           </div>
@@ -26,12 +26,12 @@ export default function List() {
             <p>{dis}</p>
           </div>
         </div>
-        <div className="text-[30px] font-sans font-bold">
-            Restaurants to explore
+        <div className="text-[30px] ml-[5vw] font-sans font-bold">
+            {path} to explore
           </div>
 
         <div className='flex flex-col justify-center items-center '>
-            <div className="grid grid-cols-3 sm:grid-cols-3 mr-2 md:grid-cols-3 gap-6 mt-6 mx-2">
+            <div className="grid grid-cols-3 sm:grid-cols-3  md:grid-cols-3 gap-2 md:gap-6 mx-1 mt-6 ">
             {filteredData.map((item, index) => (
               <Card key={index} {...item} />
             ))}

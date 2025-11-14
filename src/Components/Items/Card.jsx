@@ -81,7 +81,7 @@ export default function Card(props) {
             {["S", "M", "L"].map((s) => (
               <button
                 key={s}
-                className={`px-2 py-1 rounded-full border ${
+                className={`md:px-3 px-2 py-1 rounded-full border ${
                   size === s
                     ? "bg-yellow-500 text-white"
                     : "bg-white text-gray-700"
@@ -98,7 +98,7 @@ export default function Card(props) {
         {!showQuantity ? (
           <button
             onClick={handleOrderNow}
-            className="w-full bg-green-400 active:bg-green-800 md:text-2xl text-[12px] text-white mt-2 rounded-2xl text-center"
+            className="w-full bg-green-400 active:bg-green-800 md:text-2xl text-[12px] text-white mt-6 rounded-2xl text-center"
           >
             Order Now
           </button>
