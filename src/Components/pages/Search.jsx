@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
-import { MyContext } from '../Context';
+import { MenuContext } from '../data/ContexTwo';
 import Card from '../Items/Card';
 
 export default function Search() {
   const[value,setValue]=useState("");
-const {Menu } = useContext(MyContext);
+const {Menu } = useContext(MenuContext);
 
 const filter =Menu.filter((items)=>{
   return(
@@ -12,7 +12,7 @@ const filter =Menu.filter((items)=>{
     items.name.toLowerCase().includes(value.toLowerCase())
   )
 });
-console.log(filter)
+// console.log(filter)
   return (
     <div className='h-screen w-screen pt-30  flex  flex-col gap-5 items-center '>
        <div className='h-[8vw] '>

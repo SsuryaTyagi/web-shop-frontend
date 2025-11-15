@@ -3,102 +3,88 @@ import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 export const MyContext = createContext();
+
 export default function Context({ children }) {
   const navigate = useNavigate();
 
-  const [data, setData] = useState();
-  const [best, setBest] = useState();
-  const [user, setUser] = useState();
+  //STATES
+  const [data, setData] = useState([]);
+  const [best, setBest] = useState([]);
+  const [user, setUser] = useState(null);
+
   const [cartData, setCartData] = useState(() => {
     try {
       const saved = localStorage.getItem("cartData");
-      if (!saved || saved === "undefined" || saved === "null") return [];
-      return JSON.parse(saved);
+      return saved ? JSON.parse(saved) : [];
     } catch (error) {
       console.error("Error parsing cart data:", error);
       return [];
     }
   });
 
-  const menu = async () => {
+  // API CALLS
+  const fetchMenu = async () => {
     try {
       const res = await axios.get("https://web-shop-nine-zeta.vercel.app/menu");
       setData(res.data);
     } catch (error) {
-      console.error("Error fetching API:", error);
+      console.error("Menu fetch error:", error);
     }
   };
-  const Best = async () => {
+
+  const fetchBest = async () => {
     try {
       const res = await axios.get("https://web-shop-nine-zeta.vercel.app/best");
       setBest(res.data);
     } catch (error) {
-      console.error("Error fetching API:", error);
+      console.error("Best fetch error:", error);
     }
   };
+
   const signup = async (userData) => {
     try {
       const res = await axios.post(
         "https://web-shop-nine-zeta.vercel.app/register",
         userData
       );
-      alert("singn up successful ");
-      console.log(res.data.message);
+      alert("Signup successful");
     } catch (error) {
-      console.error("Signup error:", error);
-
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        alert(error.response.data.message);
-      } else {
-        alert("Something went wrong! Please try again.");
-      }
+      const msg = error.response?.data?.message || "Signup failed!";
+      alert(msg);
     }
   };
+
   const login = async (userData) => {
     try {
       const res = await axios.post(
         "https://web-shop-nine-zeta.vercel.app/login",
         userData,
-        { withCredentials: true }
+        { withCredentials: true } 
       );
-      alert("login successful ");
-      console.log(res.data.message);
+
+      alert("Login successful");
       navigate("/");
     } catch (error) {
-      console.error("Signup error:", error);
-
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        alert(error.response.data.message);
-      } else {
-        alert("Something went wrong! Please try again.");
-      }
+      const msg = error.response?.data?.message || "Something went wrong!";
+      alert(msg);
     }
   };
+
   const verify = async () => {
     try {
-      const res = await axios.post(
+      const res = await axios.get(
         "https://web-shop-nine-zeta.vercel.app/verify",
-        { withCredentials: true }
+        { withCredentials: true } 
       );
-      console.log(res.data.message);
+
       setUser(res.data.user);
     } catch (error) {
-      console.error(error.response.data.message);
+      console.error("Verify error:", error.response?.data?.message);
       setUser(null);
     }
   };
-  useEffect(() => {
-    localStorage.setItem("cartData", JSON.stringify(cartData));
-  }, [cartData]);
 
+  //CART HANDLERS
   const addToCart = (item) => {
     setCartData((prev) => [
       ...prev,
@@ -120,17 +106,23 @@ export default function Context({ children }) {
     );
   };
 
-  const clearCart = () => setCartData([]);
-
   const deleteFromCart = (index) => {
     setCartData((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const clearCart = () => setCartData([]);
+
+  //SIDE EFFECTS
   useEffect(() => {
-    menu();
-    Best();
-    // verify();
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+  }, [cartData]);
+
+  useEffect(() => {
+    fetchMenu();
+    fetchBest();
+    verify(); 
   }, []);
+
   return (
     <MyContext.Provider
       value={{
@@ -141,8 +133,8 @@ export default function Context({ children }) {
         addToCart,
         deleteFromCart,
         updateQuantity,
-        login,
         clearCart,
+        login,
         signup,
       }}
     >

@@ -9,8 +9,6 @@ export default function List() {
   
      const loc = useLocation();
   const { path, dis } = loc.state;
-   
-
 
 
    const filteredData = Menu.filter((value) => value.category.toLowerCase() === path.toLowerCase());
