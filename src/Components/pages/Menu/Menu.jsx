@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { useLocation } from 'react-router';
 import Card from '../../Items/Card';
-import { MyContext } from '../../Context';
+import { MenuContext } from '../../data/ContexTwo';
 
 export default function List() {
 
-  const {Menu} =useContext(MyContext);
+  const {Menu} =useContext(MenuContext);
   
      const loc = useLocation();
   const { path, dis } = loc.state;

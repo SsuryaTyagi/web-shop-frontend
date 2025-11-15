@@ -6,7 +6,7 @@ import { FaSearch } from "react-icons/fa";
 import { IoIosContact } from "react-icons/io";
 import { IoHomeOutline } from "react-icons/io5";
 import { Link } from "react-router";
-import { MyContext } from "../Context";
+import { MyContext } from "../data/Context";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);

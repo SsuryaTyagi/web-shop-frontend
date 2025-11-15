@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi"; 
-import { MyContext } from "../../Context";
+import { MyContext } from "../../data/Context";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);

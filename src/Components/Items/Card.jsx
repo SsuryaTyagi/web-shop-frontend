@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { MyContext } from "../Context";
+import { MyContext } from "../data/Context";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { FiMinusCircle } from "react-icons/fi";
 

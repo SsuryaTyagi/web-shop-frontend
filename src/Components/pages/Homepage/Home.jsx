@@ -1,5 +1,5 @@
 import React, { useContext, useRef, lazy, Suspense } from "react";
-import { MyContext } from "../../Context";
+import { MyContext } from "../../data/Context";
 const Card = lazy(() => import("../../Items/Card"));
 import { Link } from "react-router";
 
