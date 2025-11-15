@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
+axios.defaults.withCredentials = true;
 export const MyContext = createContext();
 
 export default function Context({ children }) {
@@ -24,7 +25,7 @@ export default function Context({ children }) {
 
   // API CALLS
   const fetchMenu = async () => {
-    try {
+    try { 
       const res = await axios.get("https://web-shop-nine-zeta.vercel.app/menu");
       setData(res.data);
     } catch (error) {
@@ -64,25 +65,29 @@ export default function Context({ children }) {
 
       alert("Login successful");
       navigate("/");
+     
     } catch (error) {
       const msg = error.response?.data?.message || "Something went wrong!";
       alert(msg);
     }
   };
 
-  const verify = async () => {
-    try {
-      const res = await axios.get(
-        "https://web-shop-nine-zeta.vercel.app/verify",
-        { withCredentials: true } 
-      );
 
-      setUser(res.data.user);
-    } catch (error) {
-      console.error("Verify error:", error.response?.data?.message);
-      setUser(null);
-    }
-  };
+const getProfile = async () => {
+  try {
+    const res = await axios.post(
+      "https://web-shop-nine-zeta.vercel.app/profile",{},
+      { withCredentials: true }
+    );
+
+    console.log("Profile:", res.data.user);
+    setUser(res.data.user);
+
+  } catch (error) {
+    console.error("Profile Error:", error.response?.data || error);
+    return null;
+  }
+};
 
   //CART HANDLERS
   const addToCart = (item) => {
@@ -120,7 +125,7 @@ export default function Context({ children }) {
   useEffect(() => {
     fetchMenu();
     fetchBest();
-    verify(); 
+     getProfile();
   }, []);
 
   return (
