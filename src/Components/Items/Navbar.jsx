@@ -27,14 +27,15 @@ export default function Navbar() {
     <nav className="shadow-xl fixed z-10 w-screen bg-white p-2">
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
         {/* Logo */}
-        <div className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
-          <img
-            src="ChatGPT Image Oct 11, 2025, 02_04_05 PM.png"
-            alt="Logo"
-            className="w-full h-full object-contain"
-          />
-        </div>
-
+        <Link to="/">
+          <div className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
+            <img
+              src="ChatGPT Image Oct 11, 2025, 02_04_05 PM.png"
+              alt="Logo"
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </Link>
         {/* Desktop Links */}
         <ul className="hidden md:flex gap-10 lg:gap-20 text-lg font-medium">
           {links.map((link, idx) => (
@@ -65,7 +66,7 @@ export default function Navbar() {
           {/* DOT only when cart has items AND menu is closed */}
           {cartData.length > 0 && !menuOpen && (
             <GoDotFill
-            onClick={() => setMenuOpen(!menuOpen)}
+              onClick={() => setMenuOpen(!menuOpen)}
               fontSize={28}
               className="text-red-600 absolute -right-2 -top-1 wiggle"
             />

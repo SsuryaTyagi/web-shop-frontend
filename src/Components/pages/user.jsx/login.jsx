@@ -22,7 +22,7 @@ export default function Login() {
     e.preventDefault();
     
   if (isLogin) {
-    console.log("Logging in:", formData);
+    // console.log("Logging in:", formData);
     await login({
       email: formData.email,
       password: formData.password,
@@ -40,12 +40,12 @@ export default function Login() {
     )
   };
 
-  // ✅ Input change
+  //  Input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name.toLowerCase()]: e.target.value });
   };
 
-  // ✅ Inputs
+  //  Inputs
   const inputValue = [
     { name: "name", type: "text", placeholder: "Enter your Name" },
     { name: "number", type: "phone no", placeholder: "Enter your Phone No." },
@@ -53,7 +53,7 @@ export default function Login() {
     { name: "password", type: showPassword ? "text" : "password", placeholder: "Enter your Password" },
   ];
 
-  // ✅ Login form ke liye sirf email & password
+  //  Login form ke liye sirf email & password
   const filterValue = inputValue.filter(
     (value) => value.name === "email" || value.name === "password"
   );

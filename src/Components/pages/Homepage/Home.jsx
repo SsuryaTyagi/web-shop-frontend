@@ -10,7 +10,6 @@ export default function Home() {
   const scrollToMenu = () => {
     menuSectionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-  // console.log("https://web-shop-backend.vercel.app/")
   return (
     <main className=" h-auto overflow-x-hidden no-scrollbar">
       {/* Banner */}
@@ -63,9 +62,9 @@ export default function Home() {
             ))}
           </div>
 
-          <hr className="border-gray-400 mt-2 md:mt-6" />
+          <hr className="border-gray-400  md:mt-6" />
 
-          <div className="text-2xl font-bold mt-2 md:mt-6">
+          <div className="text-2xl font-bold my-6 md:mt-6">
             Our Most Popular Deals!
           </div>
 
