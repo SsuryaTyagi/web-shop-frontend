@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { BASE_URL } from "./Api";
 
 axios.defaults.withCredentials = true;
 export const MyContext = createContext();
@@ -25,8 +26,8 @@ export default function Context({ children }) {
 
   // API CALLS
   const fetchMenu = async () => {
-    try { 
-      const res = await axios.get("https://web-shop-nine-zeta.vercel.app/menu");
+    try {
+      const res = await axios.get(BASE_URL + "/menu");
       setData(res.data);
     } catch (error) {
       console.error("Menu fetch error:", error);
@@ -35,7 +36,7 @@ export default function Context({ children }) {
 
   const fetchBest = async () => {
     try {
-      const res = await axios.get("https://web-shop-nine-zeta.vercel.app/best");
+      const res = await axios.get(BASE_URL + "/best");
       setBest(res.data);
     } catch (error) {
       console.error("Best fetch error:", error);
@@ -44,10 +45,7 @@ export default function Context({ children }) {
 
   const signup = async (userData) => {
     try {
-      const res = await axios.post(
-        "https://web-shop-nine-zeta.vercel.app/register",
-        userData
-      );
+      const res = await axios.post(BASE_URL + "/register", userData);
       alert("Signup successful");
     } catch (error) {
       const msg = error.response?.data?.message || "Signup failed!";
@@ -57,37 +55,29 @@ export default function Context({ children }) {
 
   const login = async (userData) => {
     try {
-      const res = await axios.post(
-        "https://web-shop-nine-zeta.vercel.app/login",
-        userData,
-        { withCredentials: true } 
-      );
+      const res = await axios.post(BASE_URL + "/login", userData, {
+        withCredentials: true,
+      });
 
       alert("Login successful");
       navigate("/");
-     
     } catch (error) {
       const msg = error.response?.data?.message || "Something went wrong!";
       alert(msg);
     }
   };
 
+  const getProfile = async () => {
+    try {
+      const res = await axios.post(BASE_URL + "/profile",{},{ withCredentials: true });
 
-const getProfile = async () => {
-  try {
-    const res = await axios.post(
-      "https://web-shop-nine-zeta.vercel.app/profile",{},
-      { withCredentials: true }
-    );
-
-    console.log("Profile:", res.data.user);
-    setUser(res.data.user);
-
-  } catch (error) {
-    console.error("Profile Error:", error.response?.data || error);
-    return null;
-  }
-};
+      console.log("Profile:", res.data.user);
+      setUser(res.data.user);
+    } catch (error) {
+      console.error("Profile Error:", error.response?.data || error);
+      return null;
+    }
+  };
 
   //CART HANDLERS
   const addToCart = (item) => {
@@ -125,7 +115,7 @@ const getProfile = async () => {
   useEffect(() => {
     fetchMenu();
     fetchBest();
-     getProfile();
+    getProfile();
   }, []);
 
   return (

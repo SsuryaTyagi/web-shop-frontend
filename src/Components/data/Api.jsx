@@ -1,0 +1,1 @@
+export const BASE_URL = "https://web-shop-nine-zeta.vercel.app";
