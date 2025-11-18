@@ -41,17 +41,17 @@ export default function Cart() {
   // ✅ Handle Order
   const handleOrder = () => {
     if (cartData.length === 0) return alert("Cart is empty!");
-    const { name, email, phone, address } = formData;
+    const { name, email, number, address } = formData;
 
-    if (!name || !email || !phone || !address)
+    if (!name || !email || !number || !address)
       return alert("Please fill all the details!");
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email))
       return alert("Please enter a valid email address!");
 
-    const phoneRegex = /^0?[6-9]\d{9}$/;
-    if (!phoneRegex.test(phone))
+    const numberRegex = /^0?[6-9]\d{9}$/;
+    if (!numberRegex.test(number))
       return alert("Please enter a valid 10-digit WhatsApp number!");
 
     if (!navigator.geolocation) {
@@ -76,7 +76,7 @@ export default function Cart() {
 
         const message = encodeURIComponent(`🛒 New Order
 Name: ${name.trim()}
-Phone: ${phone.trim()}
+number: ${number.trim()}
 Email: ${email.trim()}
 Address: ${address.trim()}
 Location: ${locationUrl}
@@ -86,7 +86,7 @@ ${orderText}
 Total: ₹${total}`);
 
         const ownerNumber = "8529503358";
-        const customerNumber = phone.replace(/^0+/, "91");
+        const customerNumber = number.replace(/^0+/, "91");
 
         // Send order to owner
         window.open(`https://wa.me/${ownerNumber}?text=${message}`, "_blank");
@@ -195,7 +195,7 @@ Your location: ${locationUrl}`);
             <input
               className="border p-2 w-full rounded"
               type="text"
-              placeholder="Your Phone (WhatsApp)"
+              placeholder="Your number (WhatsApp)"
               value={formData.number}
               onChange={(e) =>
                 setFormData({ ...formData, number: e.target.value })
