@@ -18,7 +18,7 @@ export default function Cart() {
       setFormData({
         name: user.name || "",
         email: user.email || "",
-        phone: user.number || "",
+        number: user.number || "",
         address: "",
       });
     }
@@ -68,7 +68,7 @@ export default function Cart() {
         const orderText = cartData
           .map(
             (item, i) =>
-              `${i + 1}. ${item.name.trim()} (${item.selectedSize || "S"}) x${
+              `${i + 1}. ${item.name} (${item.selectedSize || "S"}) x${
                 item.quantity || 1
               } - ₹${(item.finalPrice || item.price) * (item.quantity || 1)}`
           )
@@ -85,7 +85,7 @@ ${orderText}
 --------------------------------
 Total: ₹${total}`);
 
-        const ownerNumber = "8529503358"; // 👈 your WhatsApp number
+        const ownerNumber = "8529503358";
         const customerNumber = phone.replace(/^0+/, "91");
 
         // Send order to owner
