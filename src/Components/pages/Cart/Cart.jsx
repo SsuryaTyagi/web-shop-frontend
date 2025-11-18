@@ -9,7 +9,7 @@ export default function Cart() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    number: "",
     address: "",
   });
 
@@ -198,7 +198,7 @@ Your location: ${locationUrl}`);
               placeholder="Your Phone (WhatsApp)"
               value={formData.number}
               onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
+                setFormData({ ...formData, number: e.target.value })
               }
             />
             <textarea
