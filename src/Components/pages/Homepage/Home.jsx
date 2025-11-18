@@ -2,6 +2,7 @@ import React, { useContext, useRef, lazy, Suspense } from "react";
 import { MyContext } from "../../data/Context";
 const Card = lazy(() => import("../../Items/Card"));
 import { Link } from "react-router";
+import { BASE_URL } from "../../data/Api";
 
 export default function Home() {
   const { data = [], best = [] } = useContext(MyContext) || {};
@@ -49,7 +50,7 @@ export default function Home() {
               >
                 <div className="flex-shrink-0 w-32 sm:w-56 h-[220px] bg-white overflow-hidden">
                   <img
-                    src={`https://web-shop-nine-zeta.vercel.app/${value.image}`}
+                    src={`${BASE_URL}/${value.image}`}
                     alt={value.path}
                     loading="lazy"
                     className="w-full md:h-[170px] h-[140px] object-center"
@@ -74,7 +75,7 @@ export default function Home() {
                 <Card
                   key={index}
                   index={index}
-                  img={`https://web-shop-nine-zeta.vercel.app/${value.image}`}
+                  img={`${BASE_URL}/${value.image}`}
                   {...value}
                 />
               ))}

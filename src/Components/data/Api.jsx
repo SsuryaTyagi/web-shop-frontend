@@ -1,1 +1,1 @@
-export const BASE_URL = "web-shop-api.vercel.app";
+export const BASE_URL = "https://web-shop-api.vercel.app";
