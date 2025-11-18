@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../../data/Context";
 import { FiMinusCircle } from "react-icons/fi";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
