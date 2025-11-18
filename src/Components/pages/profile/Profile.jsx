@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { MyContext } from '../../data/Context';
 
 export default function Profile() {
-  const { logout } = useContext(MyContext);
+  const { logout,user } = useContext(MyContext);
   return (
    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
