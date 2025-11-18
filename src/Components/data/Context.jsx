@@ -126,7 +126,7 @@ export default function Context({ children }) {
   useEffect(() => {
     fetchMenu();
     fetchBest();
-    // getProfile();
+    getProfile();
   }, []);
 
   return (
