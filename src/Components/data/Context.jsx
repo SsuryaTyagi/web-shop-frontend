@@ -68,7 +68,7 @@ export default function Context({ children }) {
 
   const getProfile = async () => {
     try {
-      const res = await axios.post(BASE_URL + "/profile",{ withCredentials:true });
+      const res = await axios.post(BASE_URL + "/profile",{},{ withCredentials:true });
 
       console.log("Profile:", res.data.user);
       setUser(res.data.user);
