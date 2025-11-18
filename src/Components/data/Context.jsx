@@ -45,7 +45,7 @@ export default function Context({ children }) {
 
   const signup = async (userData) => {
     try {
-      const res = await axios.post(BASE_URL + "/register", userData);
+      const res = await axios.post(BASE_URL + "/register", userData,{ withCredentials:true });
       alert("Signup successful");
     } catch (error) {
       const msg = error.response?.data?.message || "Signup failed!";
@@ -55,11 +55,10 @@ export default function Context({ children }) {
 
   const login = async (userData) => {
     try {
-      const res = await axios.post(BASE_URL + "/login", userData, {
-        withCredentials: true,
-      });
+      const res = await axios.post(BASE_URL + "/login", userData,{ withCredentials:true });
 
       alert("Login successful");
+      await getProfile();
       navigate("/");
     } catch (error) {
       const msg = error.response?.data?.message || "Something went wrong!";
@@ -69,7 +68,7 @@ export default function Context({ children }) {
 
   const getProfile = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/profile",{},{ withCredentials: true });
+      const res = await axios.post(BASE_URL + "/profile",{ withCredentials:true });
 
       console.log("Profile:", res.data.user);
       setUser(res.data.user);
@@ -78,6 +77,18 @@ export default function Context({ children }) {
       return null;
     }
   };
+  const logout = async () => {
+  try {
+    await axios.post(BASE_URL + "/logout",);
+
+       setUser(null);
+    alert("Logout successful");
+     
+    navigate("/");
+  } catch (error) {
+    console.error("Logout error:", error);
+  }
+};
 
   //CART HANDLERS
   const addToCart = (item) => {
@@ -115,7 +126,7 @@ export default function Context({ children }) {
   useEffect(() => {
     fetchMenu();
     fetchBest();
-    getProfile();
+    // getProfile();
   }, []);
 
   return (
@@ -131,6 +142,7 @@ export default function Context({ children }) {
         clearCart,
         login,
         signup,
+        logout
       }}
     >
       {children}
