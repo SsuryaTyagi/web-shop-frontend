@@ -25,7 +25,7 @@ export default function Footer() {
  <div className="space-y-2 text-[.7em] md:text-[1.5rem]">
       {/* Email */}
       <p>
-        <IoMailSharp className="inline-block mr-1" md:fontSize={25}  />
+        <IoMailSharp className="inline-block mr-1" fontSize={25}  />
         Email:{" "}
         <a href="mailto:at36742@gmail.com" className="hover:text-blue-300">
           at36742@gmail.com
@@ -34,7 +34,7 @@ export default function Footer() {
 
       {/* Phone */}
       <p>
-        <FaPhoneAlt className="inline-block mr-1" md:fontSize={25} />
+        <FaPhoneAlt className="inline-block mr-1" fontSize={25} />
         Phone:{" "}
         <a href="tel:+919354770802" className=" hover:text-blue-300">
           +91 9354770802
@@ -43,7 +43,7 @@ export default function Footer() {
 
       {/* Address (optional clickable link to Google Maps) */}
       <p>
-        <FaAddressCard className="inline-block mr-1" md:fontSize={25} />
+        <FaAddressCard className="inline-block mr-1" fontSize={25} />
         Address:{" "}
         <a
           href="https://www.google.com/maps/search/?api=1&query=Delhi,India"

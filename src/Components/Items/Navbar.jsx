@@ -30,7 +30,7 @@ export default function Navbar() {
         <Link to="/">
           <div className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
             <img
-              src="ChatGPT Image Oct 11, 2025, 02_04_05 PM.png"
+              src="logo_two.png"
               alt="Logo"
               className="w-full h-full object-contain"
             />
