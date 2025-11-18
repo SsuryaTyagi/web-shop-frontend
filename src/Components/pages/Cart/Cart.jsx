@@ -4,7 +4,7 @@ import { FiMinusCircle } from "react-icons/fi";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 
 export default function Cart() {
-  const { cartData, setCartData, clearCart, deleteFromCart, updateQuantity } =
+  const { cartData, setCartData,user, clearCart, deleteFromCart, updateQuantity } =
     useContext(MyContext);
   const [formData, setFormData] = useState({
     name: "",
@@ -12,6 +12,17 @@ export default function Cart() {
     phone: "",
     address: "",
   });
+
+      useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.name || "",
+        email: user.email || "",
+        phone: user.number || "",
+        address: "",
+      });
+    }
+  }, [user]);
 
   // ✅ Delete item
   const removeItem = (index) => {
@@ -33,15 +44,15 @@ export default function Cart() {
     const { name, email, phone, address } = formData;
 
     if (!name || !email || !phone || !address)
-      return alert("⚠️ Please fill all the details!");
+      return alert("Please fill all the details!");
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email))
-      return alert("❌ Please enter a valid email address!");
+      return alert("Please enter a valid email address!");
 
     const phoneRegex = /^0?[6-9]\d{9}$/;
     if (!phoneRegex.test(phone))
-      return alert("❌ Please enter a valid 10-digit WhatsApp number!");
+      return alert("Please enter a valid 10-digit WhatsApp number!");
 
     if (!navigator.geolocation) {
       alert("Geolocation is not supported by your browser");
@@ -167,6 +178,7 @@ Your location: ${locationUrl}`);
               className="border p-2 w-full rounded"
               type="text"
               placeholder="Your Name"
+              value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
@@ -174,6 +186,7 @@ Your location: ${locationUrl}`);
             <input
               className="border p-2 w-full rounded"
               type="email"
+              value={formData.email}
               placeholder="Your Email"
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -183,6 +196,7 @@ Your location: ${locationUrl}`);
               className="border p-2 w-full rounded"
               type="text"
               placeholder="Your Phone (WhatsApp)"
+              value={formData.number}
               onChange={(e) =>
                 setFormData({ ...formData, phone: e.target.value })
               }
