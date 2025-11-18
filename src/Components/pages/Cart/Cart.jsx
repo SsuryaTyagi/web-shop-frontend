@@ -75,11 +75,10 @@ export default function Cart() {
           .join("\n");
 
         const message = encodeURIComponent(`🛒 New Order
-Name: ${name.trim()}
-number: ${number.trim()}
-Email: ${email.trim()}
-Address: ${address.trim()}
-Location: ${locationUrl}
+Name: ${String(name || "").trim()}
+number: ${String(number || "").trim()}
+Email: ${String(email || "").trim()}
+Address: ${String(address || "").trim()}
 --------------------------------
 ${orderText}
 --------------------------------
