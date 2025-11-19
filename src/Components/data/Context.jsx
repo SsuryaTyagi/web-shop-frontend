@@ -4,9 +4,12 @@ import { useNavigate } from "react-router";
 import { BASE_URL } from "./Api";
 
 axios.defaults.withCredentials = true;
+
+// create context
 export const MyContext = createContext();
 
 export default function Context({ children }) {
+
   const navigate = useNavigate();
 
   //STATES
@@ -24,7 +27,7 @@ export default function Context({ children }) {
     }
   });
 
-  // API CALLS
+  // Menu API CALLS
   const fetchMenu = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/menu`);
@@ -34,6 +37,8 @@ export default function Context({ children }) {
     }
   };
 
+
+// best api call
   const fetchBest = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/best`);
@@ -43,6 +48,8 @@ export default function Context({ children }) {
     }
   };
 
+
+// signup api call
   const signup = async (userData) => {
     try {
       const res = await axios.post(`${BASE_URL}/register`, userData,{ withCredentials:true });
@@ -53,6 +60,8 @@ export default function Context({ children }) {
     }
   };
 
+
+// login Api call
   const login = async (userData) => {
     try {
       const res = await axios.post(`${BASE_URL}/login`, userData,{ withCredentials:true });
@@ -66,6 +75,8 @@ export default function Context({ children }) {
     }
   };
 
+
+// profile api call
   const getProfile = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/profile`,{},{ withCredentials:true });
@@ -77,14 +88,16 @@ export default function Context({ children }) {
       return null;
     }
   };
+
+
+  // logout api call
   const logout = async () => {
   try {
     await axios.post(`${BASE_URL}/logout`,);
 
-       setUser("error");
+    setUser(null);
     alert("Logout successful");
-     
-    navigate("/");
+    navigate("/login");
   } catch (error) {
     console.error("Logout error:", error);
   }
@@ -130,21 +143,7 @@ export default function Context({ children }) {
   }, []);
 
   return (
-    <MyContext.Provider
-      value={{
-        data,
-        best,
-        user,
-        cartData,
-        addToCart,
-        deleteFromCart,
-        updateQuantity,
-        clearCart,
-        login,
-        signup,
-        logout
-      }}
-    >
+    <MyContext.Provider value={{ data, best, user, cartData, addToCart, deleteFromCart, updateQuantity, clearCart, login, signup, logout  }} >
       {children}
     </MyContext.Provider>
   );

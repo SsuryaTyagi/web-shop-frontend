@@ -28,22 +28,22 @@ console.log(localStorage.cookies);
         <div className="space-y-3">
           <div className="flex justify-between border-b pb-1">
             <span className="font-semibold text-gray-700">Name:</span>
-            <span>{user.name}</span>
+            <span>{user?.name||"N/A"}</span>
           </div>
 
           <div className="flex justify-between border-b pb-1">
             <span className="font-semibold text-gray-700">Email:</span>
-            <span>{user.email||""}</span>
+            <span>{user?.email||"N/A"}</span>
           </div>
 
           <div className="flex justify-between border-b pb-1">
             <span className="font-semibold text-gray-700">Mobile:</span>
-            <span>{user.number||""}</span>
+            <span>{user?.number||"N/A"}</span>
           </div>
 
           <div className="flex justify-between border-b pb-1">
             <span className="font-semibold text-gray-700">User ID:</span>
-            <span className="text-right break-all">{user._id}</span>
+            <span className="text-right break-all">{user?._id||"N/A"}</span>
           </div>
         </div>
       </div>
