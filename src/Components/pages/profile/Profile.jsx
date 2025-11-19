@@ -1,8 +1,11 @@
 import React, { useContext } from 'react'
 import { MyContext } from '../../data/Context';
 
+
 export default function Profile() {
-  const { logout,user } = useContext(MyContext);
+  const {logout,user } = useContext(MyContext);
+console.log(localStorage.cookies);
+
   return (
    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
@@ -30,12 +33,12 @@ export default function Profile() {
 
           <div className="flex justify-between border-b pb-1">
             <span className="font-semibold text-gray-700">Email:</span>
-            <span>{user.email}</span>
+            <span>{user.email||""}</span>
           </div>
 
           <div className="flex justify-between border-b pb-1">
             <span className="font-semibold text-gray-700">Mobile:</span>
-            <span>{user.number}</span>
+            <span>{user.number||""}</span>
           </div>
 
           <div className="flex justify-between border-b pb-1">

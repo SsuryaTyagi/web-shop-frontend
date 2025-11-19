@@ -25,7 +25,7 @@ export default function Cart() {
         name: user.name || "",
         email: user.email || "",
         number: user.number || "",
-        address: "",
+        address:user.address || ""
       });
     }
   }, [user]);
@@ -65,7 +65,7 @@ export default function Cart() {
       return;
     }
 
-    // ✅ Get customer location
+    //  Get customer location
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -86,6 +86,7 @@ Name: ${String(name || "").trim()}
 number: ${String(number || "").trim()}
 Email: ${String(email || "").trim()}
 Address: ${String(address || "").trim()}
+Location:${locationUrl}
 --------------------------------
 ${orderText}
 --------------------------------
@@ -96,6 +97,11 @@ Total: ₹${total}`);
 
         // Send order to owner
         window.open(`https://wa.me/${ownerNumber}?text=${message}`, "_blank");
+
+        window.addEventListener("blur", () => {
+  console.log("User went to WhatsApp");
+   clearCart();
+});
 
         // Send confirmation to customer
         const confirmMsg = encodeURIComponent(`Hello ${name},
@@ -111,7 +117,7 @@ Your location: ${locationUrl}`);
           "_blank"
         );
 
-        clearCart();
+       
       },
       (error) => {
         alert(
@@ -214,6 +220,7 @@ Your location: ${locationUrl}`);
               <textarea
                 className="border p-2 w-full rounded"
                 placeholder="Your Address"
+                value={formData.address}
                 onChange={(e) =>
                   setFormData({ ...formData, address: e.target.value })
                 }

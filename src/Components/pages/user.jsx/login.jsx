@@ -13,6 +13,7 @@ export default function Login() {
     number: "",
     email: "",
     password: "",
+    address:""
   });
 
   const { signup,login } = useContext(MyContext);
@@ -36,7 +37,9 @@ export default function Login() {
 {    name: "",
     number: "",
     email: "",
-    password: "",}
+    password: "",
+    address:""
+  }
     )
   };
 
@@ -48,6 +51,7 @@ export default function Login() {
   //  Inputs
   const inputValue = [
     { name: "name", type: "text", placeholder: "Enter your Name" },
+    { name: "address", type: "address", placeholder: "Enter your address" },
     { name: "number", type: "phone no", placeholder: "Enter your Phone No." },
     { name: "email", type: "email", placeholder: "Enter your Email" },
     { name: "password", type: showPassword ? "text" : "password", placeholder: "Enter your Password" },

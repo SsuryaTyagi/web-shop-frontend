@@ -81,7 +81,7 @@ export default function Context({ children }) {
   try {
     await axios.post(`${BASE_URL}/logout`,);
 
-       setUser(null);
+       setUser("error");
     alert("Logout successful");
      
     navigate("/");
