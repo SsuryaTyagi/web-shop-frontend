@@ -16,7 +16,6 @@ export default function Navbar() {
   const links = [
     { icon: <IoHomeOutline />, Name: "Home", path: "/" },
     { icon: <FaSearch />, Name: "Search", path: "/search" },
-    // { icon: <CgProfile />, Name: "Profile", path: "/profile" },
     { icon: <CgProfile />, Name: "Sign In", path: "/login" },
     { icon: <BsCart3 />, Name: "Cart", path: "/cart" },
     { icon: <IoIosContact />, Name: "Contact Us", path: "/contact" },

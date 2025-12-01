@@ -104,11 +104,15 @@ export default function Card(props) {
           </button>
         ) : (
           <div className="flex items-center justify-center gap-2 mt-2">
-            <FiMinusCircle className="relative z-10 cursor-pointer" fontSize={40} onClick={handleDecrease} />
+            <button onClick={handleDecrease}>
+              <FiMinusCircle className="relative z-10 cursor-pointer" fontSize={40}  />
+            </button>
             <span className="text-lg font-semibold">
               {cartData[props.index]?.quantity || 1}
             </span>
-           <MdOutlineAddCircleOutline className="relative z-10 cursor-pointer" fontSize={40}  onClick={handleIncrease} />
+           <button onClick={handleIncrease}> 
+            <MdOutlineAddCircleOutline className="relative z-10 cursor-pointer" fontSize={40}   />
+           </button>
           </div>
         )}
       </div>

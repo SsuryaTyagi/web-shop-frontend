@@ -13,7 +13,7 @@ export default function Footer() {
     {/* Logo / Image */}
     <div className=" w-auto h-full mt-20 md:m-0">
       <img 
-        src="logo_two.png.png" 
+        src="logo_two.png" 
         alt="Logo" 
         className=" w-[25vw] object-center"
       />

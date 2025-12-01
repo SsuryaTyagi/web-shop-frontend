@@ -9,13 +9,13 @@ axios.defaults.withCredentials = true;
 export const MyContext = createContext();
 
 export default function Context({ children }) {
-
   const navigate = useNavigate();
 
   //STATES
   const [data, setData] = useState([]);
   const [best, setBest] = useState([]);
   const [user, setUser] = useState(null);
+  const [msg, setMsg] = useState("");
 
   const [cartData, setCartData] = useState(() => {
     try {
@@ -37,8 +37,7 @@ export default function Context({ children }) {
     }
   };
 
-
-// best api call
+  // best api call
   const fetchBest = async () => {
     try {
       const res = await axios.get(`${BASE_URL}/best`);
@@ -48,38 +47,43 @@ export default function Context({ children }) {
     }
   };
 
-
-// signup api call
+  // signup api call
   const signup = async (userData) => {
     try {
-      const res = await axios.post(`${BASE_URL}/register`, userData,{ withCredentials:true });
-      alert("Signup successful");
+      const res = await axios.post(`${BASE_URL}/register`, userData, {
+        withCredentials: true,
+      });
+      setMsg("Signup successful");
     } catch (error) {
       const msg = error.response?.data?.message || "Signup failed!";
-      alert(msg);
+      setMsg(msg);
     }
   };
 
-
-// login Api call
+  // login Api call
   const login = async (userData) => {
     try {
-      const res = await axios.post(`${BASE_URL}/login`, userData,{ withCredentials:true });
+      const res = await axios.post(`${BASE_URL}/login`, userData, {
+        withCredentials: true,
+      });
 
-      alert("Login successful");
+      setMsg("Login successful");
       await getProfile();
       navigate("/");
     } catch (error) {
       const msg = error.response?.data?.message || "Something went wrong!";
-      alert(msg);
+      setMsg(msg);
     }
   };
 
-
-// profile api call
+  // profile api call
   const getProfile = async () => {
     try {
-      const res = await axios.post(`${BASE_URL}/profile`,{},{ withCredentials:true });
+      const res = await axios.post(
+        `${BASE_URL}/profile`,
+        {},
+        { withCredentials: true }
+      );
 
       console.log("Profile:", res.data.user);
       setUser(res.data.user);
@@ -89,19 +93,18 @@ export default function Context({ children }) {
     }
   };
 
-
   // logout api call
   const logout = async () => {
-  try {
-    await axios.post(`${BASE_URL}/logout`,);
+    try {
+      await axios.post(`${BASE_URL}/logout`);
 
-    setUser(null);
-    alert("Logout successful");
-    navigate("/login");
-  } catch (error) {
-    console.error("Logout error:", error);
-  }
-};
+      setUser(null);
+      navigate("/");
+      // setMsg(res.data.message);
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
 
   //CART HANDLERS
   const addToCart = (item) => {
@@ -143,7 +146,22 @@ export default function Context({ children }) {
   }, []);
 
   return (
-    <MyContext.Provider value={{ data, best, user, cartData, addToCart, deleteFromCart, updateQuantity, clearCart, login, signup, logout  }} >
+    <MyContext.Provider
+      value={{
+        data,
+        best,
+        user,
+        msg,
+        cartData,
+        addToCart,
+        deleteFromCart,
+        updateQuantity,
+        clearCart,
+        login,
+        signup,
+        logout,
+      }}
+    >
       {children}
     </MyContext.Provider>
   );

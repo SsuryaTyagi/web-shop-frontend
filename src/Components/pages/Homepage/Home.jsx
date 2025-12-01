@@ -1,4 +1,4 @@
-import React, { useContext, useRef, lazy, Suspense } from "react";
+import React, { useContext, useRef, lazy, Suspense, useEffect } from "react";
 import { MyContext } from "../../data/Context";
 const Card = lazy(() => import("../../Items/Card"));
 import { Link } from "react-router";
@@ -8,9 +8,12 @@ export default function Home() {
   const { data = [], best = [] } = useContext(MyContext) || {};
   const menuSectionRef = useRef(null); 
 
-  const scrollToMenu = () => {
-    menuSectionRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  // const scrollToMenu = () => {
+  //   menuSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+  // };
+  useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   return (
     <main className=" h-auto overflow-x-hidden no-scrollbar">
       {/* Banner */}

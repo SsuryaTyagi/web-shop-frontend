@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router";
 import Footer from "./Components/Items/Footer.jsx";
 import Login from "./Components/pages/user.jsx/login.jsx";
 import Profile from "./Components/pages/profile/Profile.jsx";
+import ScrollToTop from "./Components/Items/ScrollToTop.jsx";
 
 // Lazy imports
 const Home = lazy(() => import("./Components/pages/Homepage/Home"));
@@ -14,7 +15,8 @@ const Search = lazy(() => import("./Components/pages/Search"));
 
 export default function App() {
   return (
-<div className="h-screen sticky bottom-0 overflow-x-hidden ">
+<div className=" no-scrollbar min-h-screen w-full overflow-x-hidden ">
+   <ScrollToTop/>
       <div className=" ">
       <Navbar />
       <Suspense fallback={<div className="text-center mt-10">Loading...</div>}>

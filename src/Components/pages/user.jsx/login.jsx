@@ -16,7 +16,7 @@ export default function Login() {
     address:""
   });
 
-  const { signup,login } = useContext(MyContext);
+  const { signup,login,msg } = useContext(MyContext);
 
   // ✅ Form submit
   const handleSubmit = async (e) => {
@@ -95,7 +95,7 @@ export default function Login() {
             <span className="mx-3 text-gray-500 text-sm">or</span>
             <hr className="flex-grow border-gray-300" />
           </div>
-
+             <p className="mb-1 text-2xl">{msg}</p>
           {/* Form */}
           <form onSubmit={handleSubmit}>
             <div className="mb-4 space-y-4">
