@@ -1,16 +1,112 @@
-# React + Vite
+# 🍕 The Pizza Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive **Food Ordering Web Application** built using **React + Vite**, designed for smooth browsing, fast performance, and clean UI. Users can explore the menu, view categories, choose pizza sizes, add items to the cart, update quantities, search items, and manage their profile — all in one place.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+* 🍕 **Pizza Size Selection (S / M / L)**
+* 🛒 **Add to Cart / Increase & Decrease Quantity**
+* 📂 **Browse by Categories**
+* ⭐ **Ratings & Item Details**
+* 🔎 **Search Food Items**
+* 👤 **User Login & Profile Page**
+* 📱 **Fully Responsive UI**
+* ⚡ **Fast Performance with Vite**
+* 🎨 **Tailwind CSS for Styling**
+* ☁ **Context API for Global State (Cart, Menu)**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📦 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### **Frontend**
+
+* React
+* Vite
+* Tailwind CSS
+* React Router
+* Context API
+* React Icons
+
+### **Backend (API Calls)**
+
+⚠ *Backend API code not included in this project — only API usage is shown below.*
+
+Your project uses `BASE_URL` from `Api.jsx`, something like:
+
+```
+BASE_URL = "http://your-backend-url/api"
+```
+
+### **APIs Used in The Pizza Hub**
+
+| Purpose                      | API Route                   |
+| ---------------------------- | --------------------------- |
+| Fetch menu categories        | `/menu`                     |
+| Fetch best / popular items   | `/best`                     |
+| Fetch individual item images | `${BASE_URL}/${image}`      |
+| User login                   | `/login`                    |
+| User profile                 | `/profile`                  |
+| Cart operations              | Context API (frontend only) |
+
+You can add real backend endpoints here when you link your server.
+
+---
+
+## 📁 Project Structure
+
+```
+WEB_APP/
+│── public/
+│── src/
+│   ├── assets/
+│   ├── Components/
+│   │   ├── Items/ (Navbar, Footer, Card)
+│   │   ├── data/ (Api, Context, ContextTwo)
+│   ├── pages/
+│   │   ├── Homepage/
+│   │   ├── Menu/
+│   │   ├── Cart/
+│   │   ├── Search.jsx
+│   │   ├── user.jsx/
+│   │   ├── profile/
+│   ├── App.jsx
+│   ├── main.jsx
+│── index.html
+│── package.json
+│── README.md
+```
+
+---
+
+## ⚙️ Installation & Usage
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Start Development Server
+
+```bash
+npm run dev
+```
+
+### 3. Build for Production
+
+```bash
+npm run build
+```
+
+### 4. Preview Production Build
+
+```bash
+npm run preview
+```
+
+---
+
+## ❤️ Made with love for The Pizza Hub
