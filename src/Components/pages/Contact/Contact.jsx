@@ -34,7 +34,7 @@ export default function ContactPage() {
   };
     
   return (
-    <div className="w-full min-h-screen bg-gray-50 ">
+    <div className="w-full min-h-screen bg-gray-50 pt-[80px] ">
       {/* Top Banner */}
       <div
         className="w-full h-[35vh] bg-cover bg-center flex items-center justify-center"

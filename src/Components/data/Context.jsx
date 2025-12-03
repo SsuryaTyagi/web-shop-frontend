@@ -87,6 +87,7 @@ export default function Context({ children }) {
 
       // console.log("Profile:", res.data.user);
       setUser(res.data.user);
+      setMsg("");
     } catch (error) {
       console.error("Profile Error:", error.response?.data || error);
       return null;
