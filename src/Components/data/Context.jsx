@@ -85,7 +85,7 @@ export default function Context({ children }) {
         { withCredentials: true }
       );
 
-      console.log("Profile:", res.data.user);
+      // console.log("Profile:", res.data.user);
       setUser(res.data.user);
     } catch (error) {
       console.error("Profile Error:", error.response?.data || error);

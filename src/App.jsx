@@ -5,6 +5,8 @@ import Footer from "./Components/Items/Footer.jsx";
 import Login from "./Components/pages/user.jsx/login.jsx";
 import Profile from "./Components/pages/profile/Profile.jsx";
 import ScrollToTop from "./Components/Items/ScrollToTop.jsx";
+import ContactPage from "./Components/pages/Contact/Contact.jsx";
+
 
 // Lazy imports
 const Home = lazy(() => import("./Components/pages/Homepage/Home"));
@@ -27,6 +29,8 @@ export default function App() {
            <Route path="/login" element={<Login/>} />
            <Route path="/profile" element={<Profile/>} />
           <Route path="/search" element={<Search />} />
+          <Route path="/contact" element={<ContactPage/>} />
+
         </Routes>
       </Suspense>
       
