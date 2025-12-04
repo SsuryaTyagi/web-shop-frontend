@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
+import { MyContext } from "../../data/Context";
 
 export default function ContactPage() {
     const [msg , useMsg] = useState({
@@ -8,15 +9,17 @@ export default function ContactPage() {
         subject:"",
         message:""
     })
-  
+  const {Contact} = useContext(MyContext)
 
     const handleChange = (e)=>{
         useMsg({...msg ,[e.target.name]:e.target.value});
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form Data:", msg);
+
+      await Contact(msg);
     
   Swal.fire({
     title: "Message Sent!",

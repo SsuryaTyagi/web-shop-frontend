@@ -33,8 +33,8 @@ export default function Login() {
     await signup(formData);
   }
    
-    setFormData(
-{    name: "",
+    setFormData({   
+    name: "",
     number: "",
     email: "",
     password: "",

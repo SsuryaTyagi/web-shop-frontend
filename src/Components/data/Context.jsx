@@ -76,6 +76,19 @@ export default function Context({ children }) {
     }
   };
 
+    // Contact Api call
+  const Contact = async (userInfo) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/contact`, userInfo, {
+        withCredentials: true,
+      });
+    } catch (error) {
+      const msg = error.response?.data?.message || "Something went wrong!";
+      console.log(msg);
+      
+    }
+  };
+
   // profile api call
   const getProfile = async () => {
     try {
@@ -161,6 +174,7 @@ export default function Context({ children }) {
         login,
         signup,
         logout,
+        Contact,
       }}
     >
       {children}
