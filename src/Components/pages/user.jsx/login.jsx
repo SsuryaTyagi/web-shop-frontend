@@ -43,6 +43,24 @@ export default function Login() {
     )
   };
 
+
+  const handleGoogleLogin = () => {
+  try {
+    const mode = isLogin ? "login" : "register";
+
+    console.log("🔵 Google Login Started");
+    console.log("👉 Mode:", mode);
+
+    const url = `https://web-shop-api.vercel.app/auth/google?mode=${mode}`;
+
+    console.log("🌐 Redirecting to:", url);
+
+    window.location.href = url;
+  } catch (error) {
+    console.error("❌ Google Login Error:", error);
+  }
+};
+
   //  Input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name.toLowerCase()]: e.target.value });
@@ -84,7 +102,9 @@ export default function Login() {
           </h2>
 
           {/* Google Button */}
-          <button className="w-full flex items-center justify-center border rounded-lg py-2 mb-4 hover:bg-gray-100 transition">
+          <button 
+           onClick={handleGoogleLogin}
+          className="w-full flex items-center justify-center border rounded-lg py-2 mb-4 hover:bg-gray-100 transition">
             <FcGoogle className="text-2xl mr-2" />
             Continue with Google
           </button>
