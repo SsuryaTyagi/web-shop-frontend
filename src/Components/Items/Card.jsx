@@ -29,6 +29,7 @@ export default function Card(props) {
 
   const handleIncrease = () => {
     updateQuantity(props.index, (cartData[props.index]?.quantity || 1) + 1);
+      console.log("chal gya");
   };
 
   const handleDecrease = () => {
@@ -40,6 +41,9 @@ export default function Card(props) {
     } else {
       updateQuantity(props.index, newQty);
     }
+
+  console.log("chal gya");
+  
   };
   // console.log(props.index);
 
@@ -103,15 +107,15 @@ export default function Card(props) {
             Order Now
           </button>
         ) : (
-          <div className="flex items-center justify-center gap-2 mt-2">
-            <button onClick={handleDecrease}>
-              <FiMinusCircle className="relative z-10 cursor-pointer" fontSize={40}  />
+          <div className="flex items-center justify-center gap-4 mt-2">
+            <button onClick={handleDecrease} className="bg-amber-400">
+              <FiMinusCircle  fontSize={40}/>
             </button>
-            <span className="text-lg font-semibold">
+            <span className="text-lg font-semibold z-10">
               {cartData[props.index]?.quantity || 1}
             </span>
-           <button onClick={handleIncrease}> 
-            <MdOutlineAddCircleOutline className="relative z-10 cursor-pointer" fontSize={40}   />
+           <button onClick={handleIncrease} className="bg-amber-400 z-10"> 
+            <MdOutlineAddCircleOutline  fontSize={40}   />
            </button>
           </div>
         )}

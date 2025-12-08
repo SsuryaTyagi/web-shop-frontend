@@ -3,6 +3,7 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi"; 
 import { MyContext } from "../../data/Context";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -24,12 +25,14 @@ export default function Login() {
     
   if (isLogin) {
     // console.log("Logging in:", formData);
+    if (formData.email === "" && formData.password === "") return toast.error("Enter full details...")
     await login({
       email: formData.email,
       password: formData.password,
     });
   } else {
-    console.log("Registering:", formData);
+    // console.log("Registering:", formData);
+   if (formData.email === "" && formData.password === "") return toast.error("Enter full details...")
     await signup(formData);
   }
    
@@ -48,8 +51,8 @@ export default function Login() {
   try {
     const mode = isLogin ? "login" : "register";
 
-    console.log("🔵 Google Login Started");
-    console.log("👉 Mode:", mode);
+    console.log("Google Login Started");
+    console.log("Mode:", mode);
 
     const url = `https://web-shop-api.vercel.app/auth/google?mode=${mode}`;
 
@@ -81,6 +84,8 @@ export default function Login() {
   );
 
   return (
+    <>
+        <ToastContainer position="top-right" autoClose={2000} />
     <div className="min-h-screen flex bg-gray-50">
       {/* Left Section */}
       <div className="hidden md:flex w-1/2 bg-[url('https://i.imgur.com/Zf7Xk3Q.png')] bg-cover bg-center relative">
@@ -179,5 +184,6 @@ export default function Login() {
         </p>
       </div>
     </div>
+    </>
   );
 }

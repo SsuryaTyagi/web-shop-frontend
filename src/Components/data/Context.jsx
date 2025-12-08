@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { BASE_URL } from "./Api";
+import { ToastContainer, toast } from 'react-toastify';
 
 axios.defaults.withCredentials = true;
 
@@ -53,10 +54,10 @@ export default function Context({ children }) {
       const res = await axios.post(`${BASE_URL}/register`, userData, {
         withCredentials: true,
       });
-      setMsg("Signup successful");
+      toast.success("Signup successful!");
     } catch (error) {
       const msg = error.response?.data?.message || "Signup failed!";
-      setMsg(msg);
+      toast.error(msg);
     }
   };
 
@@ -66,13 +67,12 @@ export default function Context({ children }) {
       const res = await axios.post(`${BASE_URL}/login`, userData, {
         withCredentials: true,
       });
-
-      setMsg("Login successful");
       await getProfile();
       navigate("/");
+      // toast.success("Login Successful!", { autoClose: true }) ;
     } catch (error) {
       const msg = error.response?.data?.message || "Something went wrong!";
-      setMsg(msg);
+      toast.error(msg);
     }
   };
 
@@ -84,8 +84,7 @@ export default function Context({ children }) {
       });
     } catch (error) {
       const msg = error.response?.data?.message || "Something went wrong!";
-      console.log(msg);
-      
+      // console.log(msg);
     }
   };
 
@@ -100,7 +99,6 @@ export default function Context({ children }) {
 
       // console.log("Profile:", res.data.user);
       setUser(res.data.user);
-      setMsg("");
     } catch (error) {
       console.error("Profile Error:", error.response?.data || error);
       return null;
@@ -113,7 +111,9 @@ export default function Context({ children }) {
       await axios.post(`${BASE_URL}/logout`);
 
       setUser(null);
+
       navigate("/");
+      
       // setMsg(res.data.message);
     } catch (error) {
       console.error("Logout error:", error);
@@ -156,10 +156,16 @@ export default function Context({ children }) {
   useEffect(() => {
     fetchMenu();
     fetchBest();
-    getProfile();
+    getProfile()
   }, []);
 
   return (
+  <>
+
+<ToastContainer
+  position="top-right"
+  autoClose={2000}
+/>
     <MyContext.Provider
       value={{
         data,
@@ -179,5 +185,6 @@ export default function Context({ children }) {
     >
       {children}
     </MyContext.Provider>
+  </>
   );
 }

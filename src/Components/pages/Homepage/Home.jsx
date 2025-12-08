@@ -3,6 +3,8 @@ import { MyContext } from "../../data/Context";
 const Card = lazy(() => import("../../Items/Card"));
 import { Link } from "react-router";
 import { BASE_URL } from "../../data/Api";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 export default function Home() {
   const { data = [], best = [] } = useContext(MyContext) || {};
@@ -15,6 +17,11 @@ export default function Home() {
   window.scrollTo(0, 0);
 }, []);
   return (
+<>
+<ToastContainer
+  position="top-right"
+  autoClose={2000}
+/>
     <main className=" h-auto overflow-x-hidden no-scrollbar">
       {/* Banner */}
       <section className="md:h-[35vw]  overflow-hidden relative">
@@ -87,5 +94,6 @@ export default function Home() {
         </div>
       </section>
     </main>
+</>
   );
 }

@@ -12,7 +12,7 @@ export default function ContactPage() {
   const {Contact} = useContext(MyContext)
 
     const handleChange = (e)=>{
-        useMsg({...msg ,[e.target.name]:e.target.value});
+        useMsg({...msg ,[e.targekt.name]:e.target.value});
     }
 
     const handleSubmit = async (e) => {

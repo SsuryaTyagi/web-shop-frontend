@@ -8,6 +8,7 @@ import ScrollToTop from "./Components/Items/ScrollToTop.jsx";
 import ContactPage from "./Components/pages/Contact/Contact.jsx";
 
 
+
 // Lazy imports
 const Home = lazy(() => import("./Components/pages/Homepage/Home"));
 const List = lazy(() => import("./Components/pages/Menu/Menu"));
@@ -17,6 +18,8 @@ const Search = lazy(() => import("./Components/pages/Search"));
 
 export default function App() {
   return (
+<>
+
 <div className=" no-scrollbar min-h-screen w-full overflow-x-hidden ">
    <ScrollToTop/>
       <div className=" ">
@@ -37,6 +40,7 @@ export default function App() {
     </div>
     <Footer/>
 </div>
+</>
   );
 }
 
