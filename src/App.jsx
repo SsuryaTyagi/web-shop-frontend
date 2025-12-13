@@ -6,7 +6,7 @@ import Login from "./Components/pages/user.jsx/login.jsx";
 import Profile from "./Components/pages/profile/Profile.jsx";
 import ScrollToTop from "./Components/Items/ScrollToTop.jsx";
 import ContactPage from "./Components/pages/Contact/Contact.jsx";
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 // Lazy imports
@@ -17,6 +17,11 @@ const Search = lazy(() => import("./Components/pages/Search"));
 
 
 export default function App() {
+  // const GoogleAuthWrapper=()=>{
+  //    return(<GoogleOAuthProvider clientId="458729259938-k96hkqub9s9qcqava42fhpvm5e60r0na.apps.googleusercontent.com">
+  //     <Login/>
+  //   </GoogleOAuthProvider>)
+  // }
   return (
 <>
 

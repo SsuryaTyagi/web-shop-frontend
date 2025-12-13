@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { MenuContext } from '../data/ContexTwo';
-import Card from '../Items/Card';
+import Card from '../Items/card/Card';
 
 export default function Search() {
   const[value,setValue]=useState("");

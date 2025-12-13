@@ -17,6 +17,7 @@ export default function Context({ children }) {
   const [best, setBest] = useState([]);
   const [user, setUser] = useState(null);
   const [msg, setMsg] = useState("");
+  const [loading, setloading] = useState(true)
 
   const [cartData, setCartData] = useState(() => {
     try {
@@ -45,6 +46,8 @@ export default function Context({ children }) {
       setBest(res.data);
     } catch (error) {
       console.error("Best fetch error:", error);
+    }finally{
+      setloading(false)
     }
   };
 
@@ -172,6 +175,7 @@ export default function Context({ children }) {
         best,
         user,
         msg,
+        loading,
         cartData,
         addToCart,
         deleteFromCart,

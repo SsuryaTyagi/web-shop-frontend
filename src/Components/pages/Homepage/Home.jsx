@@ -1,13 +1,14 @@
 import React, { useContext, useRef, lazy, Suspense, useEffect } from "react";
 import { MyContext } from "../../data/Context";
-const Card = lazy(() => import("../../Items/Card"));
+const Card = lazy(() => import("../../Items/card/Card"));
 import { Link } from "react-router";
 import { BASE_URL } from "../../data/Api";
 import { ToastContainer, toast } from 'react-toastify';
+import SkeletonGrid from "../../Items/card/SkeletonGrid";
 
 
 export default function Home() {
-  const { data = [], best = [] } = useContext(MyContext) || {};
+  const { data = [], best = [],loading } = useContext(MyContext) || {};
   const menuSectionRef = useRef(null); 
 
   // const scrollToMenu = () => {
@@ -79,8 +80,8 @@ export default function Home() {
             Our Most Popular Deals!
           </div>
 
-          <Suspense fallback={<div>Loading cards...</div>}>
-            <div className="grid grid-cols-3 sm:grid-cols-3 mr-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:mt-3">
+          {loading ?(<SkeletonGrid/>):
+            (<div className="grid grid-cols-3 sm:grid-cols-3 mr-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:mt-3">
               {best.map((value, index) => (
                 <Card
                   key={index}
@@ -89,8 +90,7 @@ export default function Home() {
                   {...value}
                 />
               ))}
-            </div>
-          </Suspense>
+            </div>)}
         </div>
       </section>
     </main>

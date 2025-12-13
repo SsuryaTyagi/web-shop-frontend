@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { MyContext } from "../data/Context";
+import { MyContext } from "../../data/Context";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { FiMinusCircle } from "react-icons/fi";
 
@@ -104,7 +104,7 @@ export default function Card(props) {
             onClick={handleOrderNow}
             className="w-full bg-green-400 active:bg-green-800 md:text-2xl text-[12px] text-white mt-6 rounded-2xl text-center"
           >
-            Order Now
+            Add to cart
           </button>
         ) : (
           <div className="flex items-center justify-center gap-4 mt-2">

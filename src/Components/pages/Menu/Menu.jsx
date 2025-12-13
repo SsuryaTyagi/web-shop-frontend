@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useLocation } from 'react-router';
-import Card from '../../Items/Card';
+import Card from '../../Items/card/Card';
 import { MenuContext } from '../../data/ContexTwo';
 
 export default function List() {

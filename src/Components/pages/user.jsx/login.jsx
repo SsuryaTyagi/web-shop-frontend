@@ -4,6 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi"; 
 import { MyContext } from "../../data/Context";
 import { ToastContainer, toast } from 'react-toastify';
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -46,6 +47,21 @@ export default function Login() {
     )
   };
 
+//   const ResponseGoogle = (authResult)=>{
+//       try {
+//         console.log(authResult);
+        
+//       } catch (error) {
+//         console.log(error);
+        
+//       }
+//   }
+
+//   const userGoogleLogin = GoogleLogin({
+//   onSuccess:ResponseGoogle,
+//   onError:ResponseGoogle,
+//   flow:"auth-code"
+// });
 
   const handleGoogleLogin = () => {
   try {

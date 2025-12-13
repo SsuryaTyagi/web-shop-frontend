@@ -183,6 +183,7 @@ Your location: ${locationUrl}`);
                   </button>
                 </div>
               </div>
+              
             ))}
 
             {/* ✅ Total */}
