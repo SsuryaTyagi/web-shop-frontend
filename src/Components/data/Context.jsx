@@ -162,6 +162,13 @@ export default function Context({ children }) {
     getProfile()
   }, []);
 
+    // ✅ Total price (size + quantity ke hisaab se)
+  const total = cartData.reduce(
+    (acc, item) =>
+      acc + (item.finalPrice || item.price || 0) * (item.quantity || 1),
+    0
+  );
+
   return (
   <>
 
@@ -185,6 +192,7 @@ export default function Context({ children }) {
         signup,
         logout,
         Contact,
+        total,
       }}
     >
       {children}

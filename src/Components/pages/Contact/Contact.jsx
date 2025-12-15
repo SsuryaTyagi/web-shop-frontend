@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
-import { MyContext } from "../../data/Context";
+import {Contact} from "../Contact/ContactApi"
 
 export default function ContactPage() {
     const [msg , useMsg] = useState({
@@ -9,7 +9,6 @@ export default function ContactPage() {
         subject:"",
         message:""
     })
-  const {Contact} = useContext(MyContext)
 
     const handleChange = (e)=>{
         useMsg({...msg ,[e.targekt.name]:e.target.value});

@@ -223,7 +223,7 @@ export default function ContexTwo({ children }) {
   category: "garlic bread",
   name: "Garlic Bread Stick",
   title: "Crispy garlic-flavored bread sticks",
-  price: 69,
+  price: 1,
 },
 {
   img: "menu/Garlic Bread/Stuffed_Garlic_bread.jpeg",
