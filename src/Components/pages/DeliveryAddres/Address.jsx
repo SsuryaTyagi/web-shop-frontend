@@ -5,13 +5,8 @@ import Checkout from "../Checkout";
 import { useNavigate } from "react-router";
 
 export default function Address() {
-  const { user, cartData, total } = useContext(MyContext);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    number: "",
-    address: "",
-  });
+  const { user, cartData, total,formData,setFormData } = useContext(MyContext);
+
   useEffect(() => {
     if (user) {
       setFormData({
@@ -26,7 +21,7 @@ export default function Address() {
 const navigate = useNavigate();
 
 const handlePaymentSuccess = (paymentResponse) => {
-  navigate("/cart/address/order-success", {
+  navigate("/order-success", {
     state: {
       payment: paymentResponse,
       cartData,

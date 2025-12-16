@@ -1,14 +1,21 @@
 import React, { useContext } from "react";
 import { createOrder } from "../../services/payment";
 import { MyContext } from "../data/Context";
+import { validateForm } from "../../Components/pages/DeliveryAddres/orderValidation";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const Checkout = ({ onPaymentSuccess }) => {
-const {total} = useContext(MyContext)
+
+  const { total,cartData,formData } = useContext(MyContext);
   const handlePayment = async () => {
 
+    const error = validateForm(formData, cartData);
 
-        // 🛑 Safety check
+    if (error) return toast.error(error);
+
+ 
+    // 🛑 Safety check
     if (!window.Razorpay) {
       alert("Razorpay SDK load failed");
       return;
@@ -32,11 +39,19 @@ const {total} = useContext(MyContext)
 
     const rzp = new window.Razorpay(options);
     rzp.open();
-
   };
 
-  return  <button onClick={handlePayment} className="bg-green-600 text-white px-6 py-3 rounded-lg mt-5 w-full">Confirm Order</button>
-
+  return (
+    <>
+          <ToastContainer position="top-right" autoClose={2000} />
+    <button
+      onClick={handlePayment}
+      className="bg-green-600 text-white px-6 py-3 rounded-lg mt-5 w-full"
+    >
+      Confirm Order
+    </button>
+    </>
+  );
 };
 
 export default Checkout;

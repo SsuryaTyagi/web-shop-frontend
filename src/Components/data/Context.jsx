@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { BASE_URL } from "./Api";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 
 axios.defaults.withCredentials = true;
 
@@ -15,9 +15,10 @@ export default function Context({ children }) {
   //STATES
   const [data, setData] = useState([]);
   const [best, setBest] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
+  const [order, setOrder] = useState([]);
   const [msg, setMsg] = useState("");
-  const [loading, setloading] = useState(true)
+  const [loading, setloading] = useState(true);
 
   const [cartData, setCartData] = useState(() => {
     try {
@@ -27,6 +28,12 @@ export default function Context({ children }) {
       console.error("Error parsing cart data:", error);
       return [];
     }
+  });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    number: "",
+    address: "",
   });
 
   // Menu API CALLS
@@ -46,8 +53,8 @@ export default function Context({ children }) {
       setBest(res.data);
     } catch (error) {
       console.error("Best fetch error:", error);
-    }finally{
-      setloading(false)
+    } finally {
+      setloading(false);
     }
   };
 
@@ -79,7 +86,7 @@ export default function Context({ children }) {
     }
   };
 
-    // Contact Api call
+  // Contact Api call
   const Contact = async (userInfo) => {
     try {
       const res = await axios.post(`${BASE_URL}/contact`, userInfo, {
@@ -116,10 +123,27 @@ export default function Context({ children }) {
       setUser(null);
 
       navigate("/");
-      
+
       // setMsg(res.data.message);
     } catch (error) {
       console.error("Logout error:", error);
+    }
+  };
+  const getorder = async () => {
+    try {
+      //  safety check
+      if (!user?.email) return;
+
+      const res = await axios.post(
+        `${BASE_URL}/orderDetails`,
+        { email: user.email },
+        { withCredentials: true }
+      );
+
+      // ✅ ONLY order array set karo
+      setOrder(res.data.order);
+    } catch (error) {
+      console.error("Order Error:", error.response?.data || error);
     }
   };
 
@@ -159,10 +183,14 @@ export default function Context({ children }) {
   useEffect(() => {
     fetchMenu();
     fetchBest();
-    getProfile()
+    getProfile();
+    getorder();
   }, []);
+  useEffect(() => {
+    getorder();
+  }, [user]);
 
-    // ✅ Total price (size + quantity ke hisaab se)
+  // ✅ Total price (size + quantity ke hisaab se)
   const total = cartData.reduce(
     (acc, item) =>
       acc + (item.finalPrice || item.price || 0) * (item.quantity || 1),
@@ -170,33 +198,32 @@ export default function Context({ children }) {
   );
 
   return (
-  <>
-
-<ToastContainer
-  position="top-right"
-  autoClose={2000}
-/>
-    <MyContext.Provider
-      value={{
-        data,
-        best,
-        user,
-        msg,
-        loading,
-        cartData,
-        addToCart,
-        deleteFromCart,
-        updateQuantity,
-        clearCart,
-        login,
-        signup,
-        logout,
-        Contact,
-        total,
-      }}
-    >
-      {children}
-    </MyContext.Provider>
-  </>
+    <>
+      <ToastContainer position="top-right" autoClose={2000} />
+      <MyContext.Provider
+        value={{
+          data,
+          best,
+          user,
+          msg,
+          loading,
+          cartData,
+          order,
+          addToCart,
+          deleteFromCart,
+          updateQuantity,
+          clearCart,
+          login,
+          signup,
+          logout,
+          Contact,
+          total,
+          formData,
+          setFormData,
+        }}
+      >
+        {children}
+      </MyContext.Provider>
+    </>
   );
 }

@@ -17,6 +17,7 @@ const order = ()=>{
     navigate("/cart/address")
   }
 }
+// console.log(cartData);
 
   return (
     <>

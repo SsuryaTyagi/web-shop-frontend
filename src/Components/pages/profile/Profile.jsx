@@ -1,52 +1,43 @@
-import React, { useContext } from 'react'
-import { MyContext } from '../../data/Context';
-
+import React, { useContext, useState } from "react";
+import { MyContext } from "../../data/Context";
+import Sidebar from "./Side";
+import AccountDetails from "./AccountDetails";
+import YouOrder from "./Order";
+import Terms from "./Terms";
 
 export default function Profile() {
-  const {logout,user } = useContext(MyContext);
-console.log(localStorage.cookies);
+  const { user } = useContext(MyContext);
+
+  // 🔥 default = account
+  const [activeTab, setActiveTab] = useState("account");
 
   return (
-   <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
-        {/* Logout Button */}
-        <button
-          onClick={logout}
-          className="absolute top-3 right-3 text-white bg-red-500 hover:bg-red-600 px-3 py-1 rounded-full text-sm"
-        >
-          Logout
-        </button>
+    <div className="bg-gray-100 flex justify-center py-24 px-[3vw]">
+      <div className="w-full max-w-[60rem] bg-white rounded-[1.5rem] shadow-xl overflow-hidden">
 
-        {/* App Name */}
-        <h2 className="text-2xl font-bold text-center mb-1">
-          Food Delivery App
-        </h2>
-
-        <p className="text-center text-gray-500 mb-6">User Profile</p>
-
-        {/* Profile Details */}
-        <div className="space-y-3">
-          <div className="flex justify-between border-b pb-1">
-            <span className="font-semibold text-gray-700">Name:</span>
-            <span>{user?.name||"N/A"}</span>
+        {/* HEADER */}
+        <div className="bg-gradient-to-r from-black to-gray-800 text-white p-[2rem] flex items-center gap-[1.5rem]">
+          <img
+            src={`https://ui-avatars.com/api/?name=${user?.name || "User"}&background=0D8ABC&color=fff&size=128`}
+            className="w-[5.5rem] h-[5.5rem] rounded-full border-[3px] border-white"
+          />
+          <div>
+            <h2 className="text-[1.5rem] font-semibold">{user?.name}</h2>
+            <p className="text-[0.9rem] opacity-80">{user?.email}</p>
           </div>
+        </div>
 
-          <div className="flex justify-between border-b pb-1">
-            <span className="font-semibold text-gray-700">Email:</span>
-            <span>{user?.email||"N/A"}</span>
-          </div>
+        {/* BODY */}
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-          <div className="flex justify-between border-b pb-1">
-            <span className="font-semibold text-gray-700">Mobile:</span>
-            <span>{user?.number||"N/A"}</span>
-          </div>
-
-          <div className="flex justify-between border-b pb-1">
-            <span className="font-semibold text-gray-700">User ID:</span>
-            <span className="text-right break-all">{user?._id||"N/A"}</span>
+          <div className="md:col-span-2 p-[2rem]">
+            {activeTab === "account" && <AccountDetails user={user} />}
+            {activeTab === "orders" && <YouOrder/>}
+            {activeTab === "terms" && <Terms />}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
