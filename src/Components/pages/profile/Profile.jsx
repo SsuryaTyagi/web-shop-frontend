@@ -8,7 +8,7 @@ import Terms from "./Terms";
 export default function Profile() {
   const { user } = useContext(MyContext);
 
-  // 🔥 default = account
+  // default = account
   const [activeTab, setActiveTab] = useState("account");
 
   return (

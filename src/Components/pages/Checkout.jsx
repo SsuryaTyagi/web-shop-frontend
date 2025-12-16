@@ -4,7 +4,6 @@ import { MyContext } from "../data/Context";
 import { validateForm } from "../../Components/pages/DeliveryAddres/orderValidation";
 import { toast, ToastContainer } from "react-toastify";
 
-
 const Checkout = ({ onPaymentSuccess }) => {
 
   const { total,cartData,formData } = useContext(MyContext);
@@ -17,7 +16,7 @@ const Checkout = ({ onPaymentSuccess }) => {
  
     // 🛑 Safety check
     if (!window.Razorpay) {
-      alert("Razorpay SDK load failed");
+      toast.error("Razorpay SDK load failed");
       return;
     }
 
@@ -26,7 +25,7 @@ const Checkout = ({ onPaymentSuccess }) => {
 
     // 2️⃣ Razorpay popup
     const options = {
-      key: "rzp_live_RrmnR5Ik7IYBoM",
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
       amount: order.amount,
       currency: order.currency,
       order_id: order.id,
