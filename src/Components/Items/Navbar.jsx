@@ -83,7 +83,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {menuOpen && (
         <ul className="md:hidden flex flex-col bg-white w-full mt-2 shadow-lg text-lg font-medium">
-          {links.map((link, idx) => (
+          {(user === null ? links : links2).map((link, idx) => (
             <Link key={idx} to={link.path}>
               {link.Name === "Cart" && cartData.length > 0 ? (
                 <div className="relative flex items-center px-3 py-2">
