@@ -27,7 +27,7 @@ export default function Home() {
       {/* Banner */}
       <section className="md:h-[35vw]  overflow-hidden relative">
         <img
-          src="Untitled-1.jpg"
+          src="Untitled-1_Nero_AI_Image_Upscaler_Iris_Face.jpeg"
           alt="Banner"
           className="w-full   object-cover object-center"
         />
