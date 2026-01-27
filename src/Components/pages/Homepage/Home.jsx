@@ -5,6 +5,11 @@ import { Link } from "react-router";
 import { BASE_URL } from "../../data/Api";
 import { ToastContainer, toast } from 'react-toastify';
 import SkeletonGrid from "../../Items/card/SkeletonGrid";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
 
 
 export default function Home() {
@@ -14,6 +19,13 @@ export default function Home() {
   // const scrollToMenu = () => {
   //   menuSectionRef.current?.scrollIntoView({ behavior: "smooth" });
   // };
+
+  const img = [
+    "/image-1.jpg",
+    "/image-2.jpg",
+    "/image-3.jpg",
+  ];
+
   useEffect(() => {
   window.scrollTo(0, 0);
 }, []);
@@ -25,24 +37,41 @@ export default function Home() {
 />
     <main className=" h-auto overflow-x-hidden no-scrollbar">
       {/* Banner */}
-      <section className="md:h-[35vw]  overflow-hidden relative">
-        <img
-          src="Untitled-1_Nero_AI_Image_Upscaler_Iris_Face.jpeg"
-          alt="Banner"
-          className="w-full   object-cover object-center"
-        />
-        {/* <img
-          src="text.png"
-          alt=""
-          className="absolute top-1 right-[55%] w-[50vw]  object-center rotate-[9deg]"
-        /> */}
-        {/* <button
-          onClick={scrollToMenu}
-          className="mt-6 hover:bg-[#D36D00] bg-red-700 text-white text-1em absolute bottom-16 left-10 lg:bottom-[42%] lg:left-[15%] font-semibold px-2 py-0.5  md:px-12 md:py-1 lg:px-16 lg:py-3 rounded-full shadow-lg transition-all duration-300"
-        >
-          Order Now 
-        </button> */}
-      </section>
+    <section className="md:h-[35vw] h-[60vh] relative">
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        loop={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        pagination={{ clickable: true }}
+        className="h-full"
+      >
+        {img.map((item, index) => (
+          <SwiperSlide key={index}>
+            <div className="relative h-full">
+              <img
+                src={item}
+                alt="Banner"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+    <div className="text-center text-white">
+      <h1 className="text-4xl md:text-9xl font-bold">
+        Free Delivery 
+      </h1>
+      <p className="mt-3 text-lg md:text-2xl">
+        Hot & Fresh Food At Your Doorstep
+      </p>
+    </div>
+  </div>
+    </section>
 
       {/* What's on your mind */}
       <section

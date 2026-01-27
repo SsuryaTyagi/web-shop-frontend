@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import {Contact} from "../Contact/ContactApi"
+import { toast, ToastContainer } from "react-toastify";
 
 export default function ContactPage() {
     const [msg , useMsg] = useState({
@@ -11,12 +12,19 @@ export default function ContactPage() {
     })
 
     const handleChange = (e)=>{
-        useMsg({...msg ,[e.targekt.name]:e.target.value});
+         useMsg({
+    ...msg,
+    [e.target.name]: e.target.value
+  });
     }
 
     const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form Data:", msg);
+      if (!msg.email || !msg.subject || !msg.message) {
+    toast.error("Enter full details...");
+    return;
+  }
 
       await Contact(msg);
     
@@ -34,8 +42,11 @@ export default function ContactPage() {
     message: ""
   });
   };
+  
     
   return (
+    <>
+      <ToastContainer position="top-right" autoClose={2000} />
     <div className="w-full min-h-screen bg-gray-50 pt-[80px] ">
       {/* Top Banner */}
       <div
@@ -163,5 +174,6 @@ export default function ContactPage() {
         ></iframe>
       </div>
     </div>
+    </>
   );
 }

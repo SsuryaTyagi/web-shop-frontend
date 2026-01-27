@@ -111,6 +111,7 @@ export default function Context({ children }) {
       setUser(res.data.user);
     } catch (error) {
       console.error("Profile Error:", error.response?.data || error);
+      setUser(null)
       return null;
     }
   };
