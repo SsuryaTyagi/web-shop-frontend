@@ -32,7 +32,7 @@ export default function Navbar() {
         <Link to="/">
           <div className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px]">
             <img
-              src="logo_two.png"
+              src="https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/logo/logo_two.png"
               alt="Logo"
               className="w-full h-full object-contain"
             />

@@ -1,226 +1,87 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { BASE_URL } from "./Api";
 import { ToastContainer, toast } from "react-toastify";
+
+// Services
+import { login as loginService, signup as signupService, logout as logoutService, getProfile } from "./services/authService";
+import { fetchMenu, fetchBest } from "./services/menuService";
+import { getorder } from "./services/orderService";
+import { Contact } from "./services/contactService";
+
+// Hook
+import useCart from "./hooks/useCart";
 
 axios.defaults.withCredentials = true;
 
-// create context
 export const MyContext = createContext();
 
 export default function Context({ children }) {
   const navigate = useNavigate();
 
-  //STATES
   const [data, setData] = useState([]);
   const [best, setBest] = useState([]);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
   const [order, setOrder] = useState([]);
-  const [msg, setMsg] = useState("");
   const [loading, setloading] = useState(true);
-
-  const [cartData, setCartData] = useState(() => {
-    try {
-      const saved = localStorage.getItem("cartData");
-      return saved ? JSON.parse(saved) : [];
-    } catch (error) {
-      console.error("Error parsing cart data:", error);
-      return [];
-    }
-  });
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    number: "",
-    address: "",
+    name: "", email: "", number: "", address: "",
   });
 
-  // Menu API CALLS
-  const fetchMenu = async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}/menu`);
-      setData(res.data);
-    } catch (error) {
-      console.error("Menu fetch error:", error);
-    }
-  };
+  const { cartData, addToCart, updateQuantity, deleteFromCart, clearCart, total } = useCart();
 
-  // best api call
-  const fetchBest = async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}/best`);
-      setBest(res.data);
-    } catch (error) {
-      console.error("Best fetch error:", error);
-    } finally {
-      setloading(false);
-    }
-  };
+  // Auth functions
+  const signup = (userData) => signupService(userData, toast);
 
-  // signup api call
-  const signup = async (userData) => {
-    try {
-      const res = await axios.post(`${BASE_URL}/register`, userData, {
-        withCredentials: true,
-      });
-      toast.success("Signup successful!");
-    } catch (error) {
-      const msg = error.response?.data?.message || "Signup failed!";
-      toast.error(msg);
-    }
-  };
-
-  // login Api call
   const login = async (userData) => {
-    try {
-      const res = await axios.post(`${BASE_URL}/login`, userData, {
-        withCredentials: true,
-      });
-      await getProfile();
+    const result = await loginService(userData, toast);
+    if (result) {
+      const profile = await getProfile();
+      setUser(profile);
       navigate("/");
-      // toast.success("Login Successful!", { autoClose: true }) ;
-    } catch (error) {
-      const msg = error.response?.data?.message || "Something went wrong!";
-      toast.error(msg);
     }
   };
 
-  // Contact Api call
-  const Contact = async (userInfo) => {
-    try {
-      const res = await axios.post(`${BASE_URL}/contact`, userInfo, {
-        withCredentials: true,
-      });
-    } catch (error) {
-      const msg = error.response?.data?.message || "Something went wrong!";
-      // console.log(msg);
-    }
-  };
-
-  // profile api call
-  const getProfile = async () => {
-    try {
-      const res = await axios.post(
-        `${BASE_URL}/profile`,
-        {},
-        { withCredentials: true }
-      );
-
-      // console.log("Profile:", res.data.user);
-      setUser(res.data.user);
-    } catch (error) {
-      console.error("Profile Error:", error.response?.data || error);
-      setUser(null)
-      return null;
-    }
-  };
-
-  // logout api call
   const logout = async () => {
-    try {
-      await axios.post(`${BASE_URL}/logout`);
-
-      setUser(null);
-
-      navigate("/");
-
-      // setMsg(res.data.message);
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
-  };
-  const getorder = async () => {
-    try {
-      //  safety check
-      if (!user?.email) return;
-
-      const res = await axios.post(
-        `${BASE_URL}/orderDetails`,
-        { email: user.email },
-        { withCredentials: true }
-      );
-
-      // ✅ ONLY order array set karo
-      setOrder(res.data.order);
-    } catch (error) {
-      console.error("Order Error:", error.response?.data || error);
-    }
+    await logoutService();
+    setUser(null);
+    navigate("/");
   };
 
-  //CART HANDLERS
-  const addToCart = (item) => {
-    setCartData((prev) => [
-      ...prev,
-      { ...item, quantity: 1, basePrice: item.price },
-    ]);
-  };
-
-  const updateQuantity = (index, newQty) => {
-    setCartData((prev) =>
-      prev.map((item, i) =>
-        i === index
-          ? {
-              ...item,
-              quantity: newQty,
-              price: (item.basePrice || item.price) * newQty,
-            }
-          : item
-      )
-    );
-  };
-
-  const deleteFromCart = (index) => {
-    setCartData((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const clearCart = () => setCartData([]);
-
-  //SIDE EFFECTS
+  // Data fetch
   useEffect(() => {
-    localStorage.setItem("cartData", JSON.stringify(cartData));
-  }, [cartData]);
-
-  useEffect(() => {
-    fetchMenu();
-    fetchBest();
-    getProfile();
-    getorder();
+    const loadData = async () => {
+      const [menuData, bestData, profileData] = await Promise.all([
+        fetchMenu(),
+        fetchBest(),
+        getProfile(),
+      ]);
+      setData(menuData);
+      setBest(bestData);
+      setUser(profileData);
+      setloading(false);
+    };
+    loadData();
   }, []);
-  useEffect(() => {
-    getorder();
-  }, [user]);
 
-  // ✅ Total price (size + quantity ke hisaab se)
-  const total = cartData.reduce(
-    (acc, item) =>
-      acc + (item.finalPrice || item.price || 0) * (item.quantity || 1),
-    0
-  );
+  // Orders
+  useEffect(() => {
+    const loadOrders = async () => {
+      const orders = await getorder(user?.email);
+      setOrder(orders);
+    };
+    loadOrders();
+  }, [user]);
 
   return (
     <>
       <ToastContainer position="top-right" autoClose={2000} />
       <MyContext.Provider
         value={{
-          data,
-          best,
-          user,
-          msg,
-          loading,
-          cartData,
-          order,
-          addToCart,
-          deleteFromCart,
-          updateQuantity,
-          clearCart,
-          login,
-          signup,
-          logout,
-          Contact,
-          total,
-          formData,
-          setFormData,
+          data, best, user, loading, cartData, order,
+          addToCart, deleteFromCart, updateQuantity, clearCart,
+          login, signup, logout, Contact,
+          total, formData, setFormData,
         }}
       >
         {children}

@@ -13,7 +13,7 @@ export default function Footer() {
     {/* Logo / Image */}
     <div className=" w-auto h-full mt-20 md:m-0">
       <img 
-        src="logo_two.png" 
+        src="https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/logo/logo_two.png" 
         alt="Logo" 
         className=" w-[25vw] object-center"
       />

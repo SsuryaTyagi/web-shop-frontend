@@ -41,8 +41,6 @@ export default function Card(props) {
     } else {
       updateQuantity(props.index, newQty);
     }
-
-  console.log("chal gya");
   
   };
   // console.log(props.index);

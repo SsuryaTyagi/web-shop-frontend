@@ -21,9 +21,9 @@ export default function Home() {
   // };
 
   const img = [
-    "/image-1.jpg",
-    "/image-2.jpg",
-    "/image-3.jpg",
+    "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Banner/image-1.jpg",
+    "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Banner/image-2.jpg",
+    "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Banner/image-3.jpg",
   ];
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function Home() {
               >
                 <div className="flex-shrink-0 w-32 sm:w-56 h-[220px] bg-white overflow-hidden">
                   <img
-                    src={`${BASE_URL}/${value.image}`}
+                    src={value.image}
                     alt={value.path}
                     loading="lazy"
                     className="w-full md:h-[170px] h-[140px] object-center"
@@ -115,7 +115,7 @@ export default function Home() {
                 <Card
                   key={index}
                   index={index}
-                  img={`${BASE_URL}/${value.image}`}
+                  img={value.image}
                   {...value}
                 />
               ))}

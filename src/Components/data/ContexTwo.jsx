@@ -4,7 +4,7 @@ export const MenuContext = createContext();
 export default function ContexTwo({ children }) {
   const [Menu] = useState([
     {
-      img: "menu/margarita-pizza.png",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pizza/margarita-pizza.png",
       rating: 4.9,
       category: "Pizza",
       name: "Double Cheese Margarita",
@@ -14,7 +14,7 @@ export default function ContexTwo({ children }) {
       price_l: 349,
     },
     {
-      img: "menu/Fresh veggie.png",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pizza/Fresh%20veggie.png",
       rating: 4.8,
       category: "Pizza",
       name: "Fresh Veggie",
@@ -24,7 +24,7 @@ export default function ContexTwo({ children }) {
       price_l: 349,
     },
     {
-      img: "menu/Exotica.png",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pizza/Exotica.png",
       rating: 4.7,
       category: "Pizza",
       name: "Exotica",
@@ -34,7 +34,7 @@ export default function ContexTwo({ children }) {
       price_l: 399,
     },
     {
-      img: "menu/Framhouse.png",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pizza/Framhouse.png",
       rating: 4.9,
       category: "Pizza",
       name: "Farmhouse",
@@ -44,7 +44,7 @@ export default function ContexTwo({ children }) {
       price_l: 399,
     },
     {
-      img: "menu/veg Supreme.png",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pizza/veg%20Supreme.png",
       rating: 4.8,
       category: "Pizza",
       name: "Veg Supreme",
@@ -54,7 +54,7 @@ export default function ContexTwo({ children }) {
       price_l: 399,
     },
     {
-      img: "menu/Deluxe Veggie.png",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pizza/Deluxe%20Veggie.png",
       rating: 4.7,
       category: "Pizza",
       name: "Deluxe Veggie",
@@ -64,7 +64,7 @@ export default function ContexTwo({ children }) {
       price_l: 399,
     },
     {
-      img: "menu/Duble paneer.jpg",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pizza/Duble%20paneer.jpg",
       rating: 4.9,
       category: "Pizza",
       name: "Double Paneer Supreme",
@@ -74,7 +74,7 @@ export default function ContexTwo({ children }) {
       price_l: 450,
     },
     {
-      img: "menu/Corn.png",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pizza/Corn.png",
       rating: 4.5,
       category: "Pizza",
       name: "Cheese & Corn Pizza",
@@ -84,7 +84,7 @@ export default function ContexTwo({ children }) {
       price_l: 249,
     },
     {
-      img: "menu/onion Pizza.jpg",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pizza/onion%20Pizza.jpg",
       rating: 4.8,
       category: "Pizza",
       name: "Cheese & Onion Pizza",
@@ -94,7 +94,7 @@ export default function ContexTwo({ children }) {
       price_l: 249,
     },
     {
-      img: "menu/Peppy paneer.png",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pizza/Peppy%20paneer.png",
       rating: 4.7,
       category: "Pizza",
       name: "Cheese & Paneer Pizza",
@@ -104,7 +104,7 @@ export default function ContexTwo({ children }) {
       price_l: 299,
     },
     {
-      img: "menu/Capsicum.png",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pizza/Capsicum.png",
       rating: 4.6,
       category: "Pizza",
       name: "Cheese & Capsicum Pizza",
@@ -114,7 +114,7 @@ export default function ContexTwo({ children }) {
       price_l: 249,
     },
     {
-      img: "menu/Burger/Aloo tikki.jpg",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Burger/Aloo%20tikki.jpg?updatedAt=1778756445317",
       rating: 4.6,
       category: "Burger",
       name: "Aloo Tikki Burger",
@@ -122,7 +122,7 @@ export default function ContexTwo({ children }) {
       price: 39,
     },
     {
-      img: "menu/Burger/paneer burger.jpg",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Burger/paneer%20burger.jpg?updatedAt=1778756437978",
       rating: 4.8,
       category: "Burger",
       name: "Spicy Paneer with cheese ",
@@ -130,7 +130,7 @@ export default function ContexTwo({ children }) {
       price: 79,
     },
     {
-      img: "menu/Burger/Veg Cheese.jpg",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Burger/Veg%20Cheese.jpg?updatedAt=1778756441527",
       rating: 4.8,
       category: "Burger",
       name: "Veg Cheese",
@@ -138,7 +138,7 @@ export default function ContexTwo({ children }) {
       price: 49,
     },
     {
-      img: "menu/Burger/veggie King Double cheese.jpg",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Burger/veggie%20King%20Double%20cheese.jpg?updatedAt=1778756437971",
       rating: 4.9,
       category: "Burger",
       name: "Veggie king double cheese Burger",
@@ -146,7 +146,7 @@ export default function ContexTwo({ children }) {
       price: 99,
     },
     {
-      img: "menu/French Fries/cheese french frice.jpg",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/French%20Fries/cheese%20french%20frice.jpg?updatedAt=1778756940463",
       rating: 4.9,
       category: "french fries",
       name: "Cheese french frice",
@@ -154,7 +154,7 @@ export default function ContexTwo({ children }) {
       price: 119,
     },
     {
-      img: "menu/French Fries/salted french fries.jpg",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/French%20Fries/salted%20french%20fries.jpg?updatedAt=1778756940575",
       rating: 4.6,
       category: "french fries",
       name: "Salted french frice",
@@ -162,7 +162,7 @@ export default function ContexTwo({ children }) {
       price: 69,
     },
     {
-      img: "menu/French Fries/peri-peri french frice.jpg",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/French%20Fries/peri-peri%20french%20frice.jpg?updatedAt=1778756940544",
       rating: 4.8,
       category: "french fries",
       name: "Pari-pari french frice",
@@ -170,7 +170,7 @@ export default function ContexTwo({ children }) {
       price: 99,
     },
     {
-      img: "menu/Wraps/Double paneer wrap.jpg",
+      img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Wraps/Double%20paneer%20wrap.jpg?updatedAt=1778756485400",
       rating: 4.9,
       category: "wraps",
       name: "paneer wrap",
@@ -178,7 +178,7 @@ export default function ContexTwo({ children }) {
       price: 89,
     },
 {
-  img: "menu/Wraps/Mushrooms chilli.jpg",
+  img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Wraps/Mushrooms%20chilli.jpg?updatedAt=1778756485740",
   rating: 4.8,
   category: "wraps",
   name: "Mushroom Wrap",
@@ -186,7 +186,7 @@ export default function ContexTwo({ children }) {
   price: 89,
 },
 {
-  img: "menu/Wraps/Mix veg wrap.jpg",
+  img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Wraps/Mix%20veg%20wrap.jpg?updatedAt=1778756485392",
   rating: 4.6,
   category: "wraps",
   name: "Mix Veg Wrap",
@@ -194,7 +194,7 @@ export default function ContexTwo({ children }) {
   price: 69,
 },
 {
-  img: "menu/Wraps/Paneer wrap.jpg",
+  img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Wraps/Paneer%20wrap.jpg?updatedAt=1778756485692",
   rating: 4.9,
   category: "wraps",
   name: "Double Paneer Wrap",
@@ -202,7 +202,7 @@ export default function ContexTwo({ children }) {
   price: 79,
 },
 {
-  img: "menu/Beverages/cold coffee.webp",
+  img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Beverages/cold%20coffee.webp?updatedAt=1778756717605",
   rating: 4.9,
   category: "beverages",
   name: "Cold Coffee",
@@ -210,7 +210,7 @@ export default function ContexTwo({ children }) {
   price: 79,
 },
 {
-  img: "menu/cho/Chocolava.jpeg",
+  img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/chocolava/Chocolava.jpeg?updatedAt=1778756970027",
   rating: 4.7,
   category:"chocolava",
   name: "Choco Lava",
@@ -218,7 +218,7 @@ export default function ContexTwo({ children }) {
   price: 69,
 },
 {
-  img: "menu/Garlic Bread/garlic_bread_stick.jpeg",
+  img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Garlic%20Bread/garlic_bread_stick.jpeg?updatedAt=1778756895743",
   rating: 4.8,
   category: "garlic bread",
   name: "Garlic Bread Stick",
@@ -226,7 +226,7 @@ export default function ContexTwo({ children }) {
   price: 1,
 },
 {
-  img: "menu/Garlic Bread/Stuffed_Garlic_bread.jpeg",
+  img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Garlic%20Bread/Stuffed_Garlic_bread.jpeg?updatedAt=1778756895762",
   rating: 4.9,
   category: "garlic bread",
   name: "Stuffed Garlic Bread",
@@ -234,7 +234,7 @@ export default function ContexTwo({ children }) {
   price: 120,
 },
 {
-  img: "menu/Pasta/Veg_panne_pasta.png",
+  img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Pasta/Veg_panne_pasta.png?updatedAt=1778756868437",
   rating: 4.7,
   category: "pasta",
   name: "Veg Penne Pasta",
@@ -242,7 +242,7 @@ export default function ContexTwo({ children }) {
   price: 90,
 },
 {
-  img: "menu/Sandwich/panner_Sandwich.avif",
+  img: "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Menu/Sandwich/panner_Sandwich.avif?updatedAt=1778756843033",
   rating: 4.9,
   category: "sandwich",
   name: "Paneer Sandwich",
