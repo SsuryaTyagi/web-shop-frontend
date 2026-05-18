@@ -36,7 +36,7 @@ export const logout = async () => {
 
 export const getProfile = async () => {
   try {
-    const res = await axios.post(
+    const res = await axios.get(
       `${BASE_URL}/profile`,
       {},
       { withCredentials: true }
