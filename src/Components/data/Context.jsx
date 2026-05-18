@@ -49,20 +49,21 @@ export default function Context({ children }) {
   };
 
   // Data fetch
-  useEffect(() => {
-    const loadData = async () => {
-      const [menuData, bestData, profileData] = await Promise.all([
-        fetchMenu(),
-        fetchBest(),
-        getProfile(),
-      ]);
-      setData(menuData);
-      setBest(bestData);
-      setUser(profileData);
-      setloading(false);
-    };
-    loadData();
-  }, []);
+useEffect(() => {
+  const loadData = async () => {
+    const [menuData, bestData, profileData] = await Promise.all([
+      fetchMenu(),
+      fetchBest(),
+      getProfile(),
+    ]);
+
+    setData(Array.isArray(menuData) ? menuData : []);   // ✅ array check
+    setBest(Array.isArray(bestData) ? bestData : []);   // ✅ array check
+    setUser(profileData || null);
+    setloading(false);
+  };
+  loadData();
+}, []);
 
   // Orders
   useEffect(() => {
