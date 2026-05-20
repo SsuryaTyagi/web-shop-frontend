@@ -40,17 +40,15 @@ export const getProfile = async () => {
   try {
     const token = localStorage.getItem("token");
 
-    if (!token) return null;
-
     const res = await axios.get(`${BASE_URL}/profile`, {
-      headers: {
-        Authorization: `Bearer ${token}`, 
-      },
+      withCredentials: true, // ← Google cookie
+      headers: token
+        ? { Authorization: `Bearer ${token}` } // ← normal login token
+        : {},
     });
 
-    return res.data.user;
+    return res.data.user || res.data;
   } catch (error) {
-    console.error("Profile Error:", error.response?.data || error);
-    return null;
+    return null; // logged out hai
   }
 };

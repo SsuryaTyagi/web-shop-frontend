@@ -3,13 +3,14 @@ import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 
-// Services
-import { login as loginService, signup as signupService, logout as logoutService, getProfile } from "./services/authService";
+import {
+  login as loginService,
+  signup as signupService,
+  logout as logoutService,
+} from "./services/authService";
 import { fetchMenu, fetchBest } from "./services/menuService";
 import { getorder } from "./services/orderService";
 import { Contact } from "./services/contactService";
-
-// Hook
 import useCart from "./hooks/useCart";
 
 axios.defaults.withCredentials = true;
@@ -19,25 +20,36 @@ export const MyContext = createContext();
 export default function Context({ children }) {
   const navigate = useNavigate();
 
-  const [data, setData] = useState([]);
-  const [best, setBest] = useState([]);
-  const [user, setUser] = useState(null);
-  const [order, setOrder] = useState([]);
-  const [loading, setloading] = useState(true);
+  const [data, setData]     = useState([]);
+  const [best, setBest]     = useState([]);
+  const [user, setUser]     = useState(null);
+  const [order, setOrder]   = useState([]);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: "", email: "", number: "", address: "",
   });
 
-  const { cartData, addToCart, updateQuantity, deleteFromCart, clearCart, total } = useCart();
+  const { cartData, addToCart, updateQuantity,
+          deleteFromCart, clearCart, total } = useCart();
 
-  // Auth functions
+  // ✅ Ek hi auth check function — cookie se user lo
+  const checkAuth = async () => {
+    try {
+      const res = await axios.get("https://web-shop-api.vercel.app/profile");
+      setUser(res.data);
+      return res.data;
+    } catch {
+      setUser(null);
+      return null;
+    }
+  };
+
   const signup = (userData) => signupService(userData, toast);
 
   const login = async (userData) => {
     const result = await loginService(userData, toast);
     if (result) {
-      const profile = await getProfile();
-      setUser(profile);
+      await checkAuth(); // ← login ke baad user fetch karo
       navigate("/");
     }
   };
@@ -48,27 +60,29 @@ export default function Context({ children }) {
     navigate("/");
   };
 
-  // Data fetch
-useEffect(() => {
-  const loadData = async () => {
-    const [menuData, bestData, profileData] = await Promise.all([
-      fetchMenu(),
-      fetchBest(),
-      getProfile(),
-    ]);
-
-    setData(Array.isArray(menuData) ? menuData : []);   // ✅ array check
-    setBest(Array.isArray(bestData) ? bestData : []);   // ✅ array check
-    setUser(profileData || null);
-    setloading(false);
-  };
-  loadData();
-}, []);
-
-  // Orders
+  // ✅ Page load / Google redirect ke baad — auth + data ek saath
   useEffect(() => {
+    const loadData = async () => {
+      const [menuData, bestData] = await Promise.all([
+        fetchMenu(),
+        fetchBest(),
+      ]);
+
+      setData(Array.isArray(menuData) ? menuData : []);
+      setBest(Array.isArray(bestData) ? bestData : []);
+
+      await checkAuth(); // ← Google redirect ke baad bhi yahi chalega
+      setLoading(false);
+    };
+
+    loadData();
+  }, []);
+
+  // Orders — user change hone pe
+  useEffect(() => {
+    if (!user?.email) return;
     const loadOrders = async () => {
-      const orders = await getorder(user?.email);
+      const orders = await getorder(user.email);
       setOrder(orders);
     };
     loadOrders();
@@ -79,10 +93,14 @@ useEffect(() => {
       <ToastContainer position="top-right" autoClose={2000} />
       <MyContext.Provider
         value={{
-          data, best, user, loading, cartData, order,
-          addToCart, deleteFromCart, updateQuantity, clearCart,
-          login, signup, logout, Contact,
-          total, formData, setFormData,
+          data, best, user, loading,
+          cartData, order,
+          addToCart, deleteFromCart, updateQuantity,
+          clearCart, total,
+          login, signup, logout,
+          checkAuth,  // ← expose karo
+          Contact,
+          formData, setFormData,
         }}
       >
         {children}
