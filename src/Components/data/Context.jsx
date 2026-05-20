@@ -60,9 +60,9 @@ export default function Context({ children }) {
     navigate("/");
   };
 
-  // ✅ Page load / Google redirect ke baad — auth + data ek saath
-  useEffect(() => {
-    const loadData = async () => {
+ useEffect(() => {
+  const loadData = async () => {
+    try {
       const [menuData, bestData] = await Promise.all([
         fetchMenu(),
         fetchBest(),
@@ -71,12 +71,17 @@ export default function Context({ children }) {
       setData(Array.isArray(menuData) ? menuData : []);
       setBest(Array.isArray(bestData) ? bestData : []);
 
-      await checkAuth(); // ← Google redirect ke baad bhi yahi chalega
-      setLoading(false);
-    };
+      await checkAuth();
 
-    loadData();
-  }, []);
+    } catch (err) {
+      console.error("Load error:", err);
+    } finally {
+      setLoading(false); 
+    }
+  };
+
+  loadData();
+}, []);
 
   // Orders — user change hone pe
   useEffect(() => {

@@ -46,6 +46,7 @@ export const getProfile = async () => {
         ? { Authorization: `Bearer ${token}` } // ← normal login token
         : {},
     });
+    console.log("✅ Profile data:", res.data);
 
     return res.data.user || res.data;
   } catch (error) {
