@@ -18,6 +18,7 @@ export const login = async (userData, toast) => {
     const res = await axios.post(`${BASE_URL}/login`, userData, {
       withCredentials: true,
     });
+    localStorage.setItem("token", res.data.token);
     return res.data;
   } catch (error) {
     const msg = error.response?.data?.message || "Something went wrong!";
@@ -28,6 +29,7 @@ export const login = async (userData, toast) => {
 
 export const logout = async () => {
   try {
+    localStorage.removeItem("token");
     await axios.post(`${BASE_URL}/logout`, {}, { withCredentials: true });
   } catch (error) {
     console.error("Logout error:", error);
@@ -36,11 +38,16 @@ export const logout = async () => {
 
 export const getProfile = async () => {
   try {
-    const res = await axios.get(
-      `${BASE_URL}/profile`,
-      {},
-      { withCredentials: true }
-    );
+    const token = localStorage.getItem("token");
+
+    if (!token) return null;
+
+    const res = await axios.get(`${BASE_URL}/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`, 
+      },
+    });
+
     return res.data.user;
   } catch (error) {
     console.error("Profile Error:", error.response?.data || error);
