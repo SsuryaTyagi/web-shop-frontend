@@ -7,6 +7,7 @@ import {
   login as loginService,
   signup as signupService,
   logout as logoutService,
+  getProfile
 } from "./services/authService";
 import { fetchMenu, fetchBest } from "./services/menuService";
 import { getorder } from "./services/orderService";
@@ -32,7 +33,6 @@ export default function Context({ children }) {
   const { cartData, addToCart, updateQuantity,
           deleteFromCart, clearCart, total } = useCart();
 
-  // ✅ Ek hi auth check function — cookie se user lo
   const checkAuth = async () => {
     try {
       const res = await axios.get("https://web-shop-api.vercel.app/profile");
@@ -49,7 +49,7 @@ export default function Context({ children }) {
   const login = async (userData) => {
     const result = await loginService(userData, toast);
     if (result) {
-      await checkAuth(); // ← login ke baad user fetch karo
+      await checkAuth(); 
       navigate("/");
     }
   };
@@ -60,30 +60,33 @@ export default function Context({ children }) {
     navigate("/");
   };
 
- useEffect(() => {
+useEffect(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const googleToken = urlParams.get("token");
+
+  if (googleToken) {
+    localStorage.setItem("token", googleToken);
+    window.history.replaceState({}, "", window.location.pathname);
+  }
+
   const loadData = async () => {
-    try {
-      const [menuData, bestData] = await Promise.all([
-        fetchMenu(),
-        fetchBest(),
-      ]);
+    const [menuData, bestData] = await Promise.all([
+      fetchMenu(),
+      fetchBest(),
+    ]);
+    setData(Array.isArray(menuData) ? menuData : []);
+    setBest(Array.isArray(bestData) ? bestData : []);
 
-      setData(Array.isArray(menuData) ? menuData : []);
-      setBest(Array.isArray(bestData) ? bestData : []);
-
-      await checkAuth();
-
-    } catch (err) {
-      console.error("Load error:", err);
-    } finally {
-      setLoading(false); 
-    }
+   
+    const profileData = await getProfile();
+    setUser(profileData || null);
+    setLoading(false);
   };
 
   loadData();
 }, []);
 
-  // Orders — user change hone pe
+
   useEffect(() => {
     if (!user?.email) return;
     const loadOrders = async () => {
