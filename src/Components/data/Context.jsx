@@ -46,13 +46,14 @@ export default function Context({ children }) {
 
   const signup = (userData) => signupService(userData, toast);
 
-  const login = async (userData) => {
-    const result = await loginService(userData, toast);
-    if (result) {
-      await checkAuth(); 
-      navigate("/");
-    }
-  };
+const login = async (userData) => {
+  const result = await loginService(userData, toast);
+  if (result) {
+    const profileData = await getProfile();
+    setUser(profileData || null);
+    navigate("/");
+  }
+};
 
   const logout = async () => {
     await logoutService();

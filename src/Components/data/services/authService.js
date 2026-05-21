@@ -15,10 +15,12 @@ export const signup = async (userData, toast) => {
 
 export const login = async (userData, toast) => {
   try {
-    const res = await axios.post(`${BASE_URL}/login`, userData, {
-      withCredentials: true,
-    });
+    const res = await axios.post(`${BASE_URL}/login`, userData);
+    
+   
     localStorage.setItem("token", res.data.token);
+    
+    toast.success("Login successful!");
     return res.data;
   } catch (error) {
     const msg = error.response?.data?.message || "Something went wrong!";
