@@ -10,6 +10,7 @@ import Checkout from "./Components/pages/Checkout.jsx";
 import Address from "./Components/pages/DeliveryAddres/Address.jsx";
 import OrderSuccess from "./Components/pages/DeliveryAddres/OrderSucces.jsx";
 import YouOrder from "./Components/pages/profile/Order.jsx";
+import VerifyEmail from "./Components/pages/VerifyEmail.jsx";
 
 
 // Lazy imports
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/cart/address" element={<Address/>}/>
           <Route path="/order-success" element={<OrderSuccess />} />
           <Route path="/order" element={<YouOrder/>} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
         </Routes>
       </Suspense>
       
