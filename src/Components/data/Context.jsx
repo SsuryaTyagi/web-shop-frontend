@@ -33,16 +33,15 @@ export default function Context({ children }) {
   const { cartData, addToCart, updateQuantity,
           deleteFromCart, clearCart, total } = useCart();
 
-  const checkAuth = async () => {
-    try {
-      const res = await axios.get("https://web-shop-api.vercel.app/profile");
-      setUser(res.data);
-      return res.data;
-    } catch {
-      setUser(null);
-      return null;
-    }
-  };
+const checkAuth = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+  const res = await axios.get("https://web-shop-api.vercel.app/profile", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  setUser(res.data.user);
+  return res.data.user;
+};
 
   const signup = (userData) => signupService(userData, toast);
 
