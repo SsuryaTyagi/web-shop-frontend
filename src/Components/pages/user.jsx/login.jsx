@@ -83,7 +83,7 @@ export default function Login() {
   const inputValue = [
     { name: "name", type: "text", placeholder: "Enter your Name" },
     { name: "address", type: "text", placeholder: "Enter your address" },
-    { name: "number", type: "number", placeholder: "Enter your Phone No." },
+    { name: "number", type: "tel", placeholder: "Enter your Phone No." },
     { name: "email", type: "email", placeholder: "Enter your Email" },
     {
       name: "password",
