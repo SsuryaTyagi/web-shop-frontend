@@ -8,8 +8,6 @@ const Checkout = ({ onPaymentSuccess }) => {
   const { total, cartData, formData, user, clearCart } = useContext(MyContext);
 
   const handlePayment = async () => {
-
-    // ─── Validation ───────────────────────────────────────
     const error = validateForm(formData, cartData);
     if (error) return toast.error(error);
 
@@ -18,40 +16,41 @@ const Checkout = ({ onPaymentSuccess }) => {
     }
 
     try {
-      // ─── Step 1: Backend se order banao ─────────────────
+      // Step 1 — order banao
       const order = await createOrder(total);
+      console.log("Order created:", order); // ✅ debug
 
-      // ─── Step 2: Razorpay popup ──────────────────────────
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-        amount: order.amount,
-        currency: order.currency,
-        order_id: order.id,
-        name: "The Pizza Hub",
+        key:       import.meta.env.VITE_RAZORPAY_KEY_ID,
+        amount:    order.amount,
+        currency:  order.currency,
+        order_id:  order.id,
+        name:      "The Pizza Hub",
         description: "Food Order Payment",
-
         prefill: {
           name:  user?.name  || "",
           email: user?.email || "",
         },
-
         theme: { color: "#E33B32" },
 
-        // ─── Step 3: Payment success ─────────────────────
         handler: async (response) => {
+          console.log("Razorpay response:", response); // ✅ debug
+
           try {
-            // ✅ Backend pe verify karo
+            // Step 3 — verify karo
             const verified = await verifyPayment({
-              razorpay_order_id:   response.razorpay_order_id,
+              razorpay_order_id:   response.razorpay_order_id || order.id, // ✅ fallback
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature:  response.razorpay_signature,
             });
+
+            console.log("Verified:", verified); // ✅ debug
 
             if (!verified.success) {
               return toast.error("Payment verification failed!");
             }
 
-            // ✅ Verified — order save karo
+            // Step 4 — order save karo
             await saveOrder({
               user: {
                 name:    user?.name    || formData.name,
@@ -61,11 +60,11 @@ const Checkout = ({ onPaymentSuccess }) => {
               },
               items:       cartData,
               order_total: total,
-              payment_id:  response.razorpay_payment_id, // ✅ verified id
+              payment_id:  response.razorpay_payment_id,
             });
 
-            clearCart(); // ✅ cart clear karo
-            onPaymentSuccess(response); // ✅ parent ko batao
+            clearCart();
+            onPaymentSuccess(response);
 
           } catch (err) {
             toast.error("Something went wrong after payment!");
@@ -75,12 +74,9 @@ const Checkout = ({ onPaymentSuccess }) => {
       };
 
       const rzp = new window.Razorpay(options);
-
-      // ─── Payment fail handle karo ────────────────────────
       rzp.on("payment.failed", (response) => {
         toast.error(`Payment failed: ${response.error.description}`);
       });
-
       rzp.open();
 
     } catch (err) {
