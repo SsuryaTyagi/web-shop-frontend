@@ -106,7 +106,7 @@ useEffect(() => {
           addToCart, deleteFromCart, updateQuantity,
           clearCart, total,
           login, signup, logout,
-          checkAuth,  // ← expose karo
+          checkAuth,  
           Contact,
           formData, setFormData,
         }}

@@ -86,8 +86,7 @@ export default function Login() {
     { name: "number", type: "tel", placeholder: "Enter your Phone No." },
     { name: "email", type: "email", placeholder: "Enter your Email" },
     {
-      name: "password",
-      type: showPassword ? "text" : "password",
+      name: "password",type: showPassword ? "text" : "password",
       placeholder: "Enter your Password",
     },
   ];
