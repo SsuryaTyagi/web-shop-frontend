@@ -11,15 +11,15 @@ A modern, fully responsive food ordering web application built with React and Vi
 ## Screenshots
 
 ### Homepage
-![Homepage](./screenshots/homepage.png)
+![Homepage](https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/website%20photo/Screenshot%202026-05-24%20035933.png)
 > Hero banner with food categories, clean navigation — Home, Search, Profile, Cart, Contact Us
 
 ### Contact Page
-![Contact Us](./screenshots/contact.png)
+![Contact Us](https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/website%20photo/Screenshot%202026-05-24%20035946.png)
 > Contact form with name, email, subject, message fields and business info
 
 ### Live Razorpay Payment
-![Razorpay Payment](./screenshots/razorpay.png)
+![Razorpay Payment](https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/website%20photo/Screenshot%202026-05-24%20040018.png)
 > Real Razorpay payment modal in action — UPI, Cards, Netbanking, Wallet, Pay Later — **Live mode, not test**
 
 ---
