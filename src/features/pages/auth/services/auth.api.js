@@ -1,0 +1,56 @@
+import { BASE_URL } from "../../../data/Api";
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true,
+});
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+export const register = async (userData) => {
+  try {
+    const res = await api.post("/register", userData);
+    return res.data;
+  } catch (error) {
+    throw error.response?.data?.message || "Signup failed!";
+  }
+};
+
+export const login = async (userData) => {
+  try {
+    const res = await api.post("/login", userData);
+    localStorage.setItem("token", res.data.token);
+    return res.data;
+  } catch (error) {
+    throw error.response?.data?.message || "Login failed!";
+  }
+};
+
+export const getMe = async () => {
+  try {
+    const res = await api.get("/get-Me");
+    return res.data;
+  } catch (error) {
+    throw error.response?.data?.message || "Failed to fetch user";
+  }
+};
+export const googleLogin = (mode) => {
+  const url = `https://web-shop-api.vercel.app/auth/google?mode=${mode}`;
+  window.location.href = url;
+};
+
+export const logout = async () => {
+  try {
+    localStorage.removeItem("token");
+    await api.post("/logout", {});
+  } catch (error) {
+    throw error.response?.data?.message || "Logout failed!";
+  }
+};

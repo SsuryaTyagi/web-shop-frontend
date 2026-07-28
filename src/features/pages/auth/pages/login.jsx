@@ -1,10 +1,8 @@
-import { useContext, useState } from "react";
-import React from "react";
+import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { MyContext } from "../../data/Context";
 import { ToastContainer, toast } from "react-toastify";
-import { GoogleLogin } from "@react-oauth/google";
+import useAuth from "../hooks/useAuth.js";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -18,22 +16,27 @@ export default function Login() {
     address: "",
   });
 
-  const { signup, login, msg } = useContext(MyContext);
+  const {
+    handleRegister,
+    handleLogin,
+    handleGoogleLogin,
+    user,
+    loading,
+    message,
+    error,
+  } = useAuth();
 
-  // ✅ Form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (isLogin) {
-      // console.log("Logging in:", formData);
       if (!formData.email || !formData.password)
         return toast.error("Enter full details...");
-      await login({
+      await handleLogin({
         email: formData.email,
         password: formData.password,
       });
     } else {
-      // console.log("Registering:", formData);
       if (
         !formData.name ||
         !formData.number ||
@@ -43,9 +46,7 @@ export default function Login() {
       ) {
         return toast.error("All fields are required");
       }
-      if (formData.email === "" && formData.password === "")
-        return toast.error("Enter full details...");
-      await signup(formData);
+      await handleRegister(formData);
     }
 
     setFormData({
@@ -57,41 +58,29 @@ export default function Login() {
     });
   };
 
-  const handleGoogleLogin = () => {
-    try {
-      const mode = isLogin ? "login" : "register";
-
-      console.log("Google Login Started");
-      console.log("Mode:", mode);
-
-      const url = `https://web-shop-api.vercel.app/auth/google?mode=${mode}`;
-
-      console.log("🌐 Redirecting to:", url);
-
-      window.location.href = url;
-    } catch (error) {
-      console.error("❌ Google Login Error:", error);
-    }
+  const handleGoogleLoginClick = () => {
+    handleGoogleLogin(isLogin);
   };
 
-  //  Input change
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name.toLowerCase()]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name.toLowerCase()]: e.target.value,
+    });
   };
 
-  //  Inputs
   const inputValue = [
     { name: "name", type: "text", placeholder: "Enter your Name" },
     { name: "address", type: "text", placeholder: "Enter your address" },
     { name: "number", type: "tel", placeholder: "Enter your Phone No." },
     { name: "email", type: "email", placeholder: "Enter your Email" },
     {
-      name: "password",type: showPassword ? "text" : "password",
+      name: "password",
+      type: showPassword ? "text" : "password",
       placeholder: "Enter your Password",
     },
   ];
 
-  //  Login form ke liye sirf email & password
   const filterValue = inputValue.filter(
     (value) => value.name === "email" || value.name === "password",
   );
@@ -100,7 +89,6 @@ export default function Login() {
     <>
       <ToastContainer position="top-right" autoClose={2000} />
       <div className="min-h-screen flex bg-gray-50">
-        {/* Left Section */}
         <div className="hidden md:flex w-1/2 bg-[url('https://i.imgur.com/Zf7Xk3Q.png')] bg-cover bg-center relative">
           <div className="absolute inset-0 bg-black/50"></div>
           <div className="z-10 text-white p-10 flex flex-col justify-center h-full">
@@ -114,30 +102,28 @@ export default function Login() {
           </div>
         </div>
 
-        {/*  Right Section  */}
         <div className="w-full mt-20 md:w-1/2 flex flex-col justify-center items-center px-6 sm:px-12">
           <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
             <h2 className="text-2xl font-semibold mb-6 text-gray-800">
               {isLogin ? "Sign In" : "Create Account"}
             </h2>
 
-            {/* Google Button */}
             <button
-              onClick={handleGoogleLogin}
+              onClick={handleGoogleLoginClick}
               className="w-full flex items-center justify-center border rounded-lg py-2 mb-4 hover:bg-gray-100 transition"
             >
               <FcGoogle className="text-2xl mr-2" />
               Continue with Google
             </button>
 
-            {/* Divider */}
             <div className="flex items-center mb-4">
               <hr className="flex-grow border-gray-300" />
               <span className="mx-3 text-gray-500 text-sm">or</span>
               <hr className="flex-grow border-gray-300" />
             </div>
-            <p className="mb-1 text-2xl">{msg}</p>
-            {/* Form */}
+
+            {message && <p className="mb-1 text-2xl">{message}</p>}
+
             <form onSubmit={handleSubmit}>
               <div className="mb-4 space-y-4">
                 {(isLogin ? filterValue : inputValue).map((value, index) => (
@@ -180,16 +166,15 @@ export default function Login() {
                 ))}
               </div>
 
-              {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-[#E33B32] text-white py-2 rounded-lg hover:bg-[#cf312a] transition"
+                disabled={loading}
+                className="w-full bg-[#E33B32] text-white py-2 rounded-lg hover:bg-[#cf312a] transition disabled:opacity-60"
               >
-                {isLogin ? "Sign In" : "Sign Up"}
+                {loading ? "Please wait..." : isLogin ? "Sign In" : "Sign Up"}
               </button>
             </form>
 
-            {/* Toggle Between Sign In / Up */}
             <p className="text-center mt-6 text-gray-600 text-sm">
               {isLogin ? "New to our app?" : "Already have an account?"}{" "}
               <button

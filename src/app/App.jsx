@@ -2,7 +2,7 @@
 import Navbar from "../features/Items/Navbar.jsx";
 import { Route, Routes } from "react-router";
 import Footer from "../features/Items/Footer.jsx";
-import Login from "../features/pages/user.jsx/login.jsx";
+import Login from "../features/pages/auth/pages/login.jsx";
 import Profile from "../features/pages/profile/Profile.jsx";
 import ScrollToTop from "../features/Items/ScrollToTop.jsx";
 import ContactPage from "../features/pages/Contact/Contact.jsx";

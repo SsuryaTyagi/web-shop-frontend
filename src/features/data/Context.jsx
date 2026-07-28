@@ -4,9 +4,6 @@ import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 
 import {
-  login as loginService,
-  signup as signupService,
-  logout as logoutService,
   getProfile
 } from "./services/authService";
 import { getorder } from "./services/orderService";
@@ -39,23 +36,6 @@ const checkAuth = async () => {
   setUser(res.data.user);
   return res.data.user;
 };
-
-  const signup = (userData) => signupService(userData, toast);
-
-const login = async (userData) => {
-  const result = await loginService(userData, toast);
-  if (result) {
-    const profileData = await getProfile();
-    setUser(profileData || null);
-    navigate("/");
-  }
-};
-
-  const logout = async () => {
-    await logoutService();
-    setUser(null);
-    navigate("/");
-  };
 
 useEffect(() => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -94,7 +74,6 @@ useEffect(() => {
           cartData, order,
           addToCart, deleteFromCart, updateQuantity,
           clearCart, total,
-          login, signup, logout,
           checkAuth,  
           Contact,
           formData, setFormData,

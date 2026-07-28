@@ -7,11 +7,12 @@ import { IoIosContact } from "react-icons/io";
 import { IoHomeOutline } from "react-icons/io5";
 import { Link } from "react-router";
 import { MyContext } from "../data/Context";
+import useAuth from "../pages/auth/hooks/useAuth";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const { user, cartData } = useContext(MyContext);
+  const { user } = useAuth();
+  const { cartData } = useContext(MyContext);
 
   const links = [
     { icon: <IoHomeOutline />, Name: "Home", path: "/" },
@@ -20,11 +21,15 @@ export default function Navbar() {
     { icon: <BsCart3 />, Name: "Cart", path: "/cart" },
     { icon: <IoIosContact />, Name: "Contact Us", path: "/contact" },
   ];
-    
-  const links2 = links.filter((val)=> val.Name !== "Sign In")
-  
- links2.splice(2, 0, { icon: <CgProfile />, Name: "Profile", path: "/profile" });
-  
+
+  const links2 = links.filter((val) => val.Name !== "Sign In");
+
+  links2.splice(2, 0, {
+    icon: <CgProfile />,
+    Name: "Profile",
+    path: "/profile",
+  });
+
   return (
     <nav className="shadow-xl fixed z-10 w-screen bg-white p-2">
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
@@ -40,7 +45,7 @@ export default function Navbar() {
         </Link>
         {/* Desktop Links */}
         <ul className="hidden md:flex gap-10 lg:gap-20 text-lg font-medium">
-          {(user === null?links:links2).map((link, idx) => (
+          {(user === null ? links : links2).map((link, idx) => (
             <Link key={idx} to={link.path}>
               {link.Name === "Cart" && cartData.length > 0 ? (
                 <div className="relative flex items-center px-3 py-2">
