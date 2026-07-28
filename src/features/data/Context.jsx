@@ -9,7 +9,6 @@ import {
   logout as logoutService,
   getProfile
 } from "./services/authService";
-import { fetchMenu, fetchBest } from "./services/menuService";
 import { getorder } from "./services/orderService";
 import { Contact } from "./services/contactService";
 import useCart from "./hooks/useCart";
@@ -21,8 +20,6 @@ export const MyContext = createContext();
 export default function Context({ children }) {
   const navigate = useNavigate();
 
-  const [data, setData]     = useState([]);
-  const [best, setBest]     = useState([]);
   const [user, setUser]     = useState(null);
   const [order, setOrder]   = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,15 +66,7 @@ useEffect(() => {
     window.history.replaceState({}, "", window.location.pathname);
   }
 
-  const loadData = async () => {
-    const [menuData, bestData] = await Promise.all([
-      fetchMenu(),
-      fetchBest(),
-    ]);
-    setData(Array.isArray(menuData) ? menuData : []);
-    setBest(Array.isArray(bestData) ? bestData : []);
-
-   
+  const loadData = async () => {   
     const profileData = await getProfile();
     setUser(profileData || null);
     setLoading(false);
@@ -101,7 +90,7 @@ useEffect(() => {
       <ToastContainer position="top-right" autoClose={2000} />
       <MyContext.Provider
         value={{
-          data, best, user, loading,
+           user, loading,
           cartData, order,
           addToCart, deleteFromCart, updateQuantity,
           clearCart, total,

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import Card from "../../../Items/card/Card";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -8,13 +8,15 @@ export default function List() {
   const { handleMenu, data, error, loading } = useMenu();
   const navigator = useNavigate();
   const loc = useLocation();
-  const { path, dis } = loc.state;
+  const { path, dis } = loc.state || {};
 
-  const handleSubmit = async () => {
-    await handleMenu(path);
-    console.log(data);
-  };
-  handleSubmit();
+const handleSubmit = async () => {
+  await handleMenu(path);
+};
+  useEffect(() => {
+    handleSubmit();
+  }, [path]);
+
 
   return (
     <div className=" w-full flex pt-20 justify-center flex-col">
@@ -36,7 +38,7 @@ export default function List() {
 
         <div className="flex flex-col justify-center  ">
           <div className="grid grid-cols-3 sm:grid-cols-3  md:grid-cols-3 gap-2 md:gap-6 mx-1 mt-6 ">
-            {filteredData.map((item, index) => (
+            {data.map((item, index) => (
               <Card key={index} {...item} />
             ))}
           </div>
