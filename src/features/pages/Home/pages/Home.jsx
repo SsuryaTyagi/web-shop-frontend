@@ -1,13 +1,12 @@
 import React, { useContext, useRef, lazy, Suspense, useEffect } from "react";
-import { MyContext } from "../../data/Context";
-const Card = lazy(() => import("../../Items/card/Card"));
+import { MyContext } from "../../../data/Context";
+const Card = lazy(() => import("../../../Items/card/Card"));
 import { Link } from "react-router";
-import { BASE_URL } from "../../data/Api";
+import { BASE_URL } from "../../../data/Api";
 import { ToastContainer, toast } from 'react-toastify';
-import SkeletonGrid from "../../Items/card/SkeletonGrid";
+import SkeletonGrid from "../../../Items/card/SkeletonGrid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -16,9 +15,6 @@ export default function Home() {
   const { data = [], best = [],loading } = useContext(MyContext) || {};
   const menuSectionRef = useRef(null); 
 
-  // const scrollToMenu = () => {
-  //   menuSectionRef.current?.scrollIntoView({ behavior: "smooth" });
-  // };
 
   const img = [
     "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Banner/image-1.jpg",

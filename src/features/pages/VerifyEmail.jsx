@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import axios from "axios";
-import { BASE_URL } from "../../Components/data/Api";
+import { BASE_URL } from "../../features/data/Api.js";
 
 export default function VerifyEmail() {
   const { token } = useParams();           

@@ -20,17 +20,6 @@ export default function OrderSuccess() {
   const { payment, cartData, total, formData } = state;
 
   function clear() {
-Order({
-  user: {
-    name: formData.name,
-    email: formData.email,
-    number: formData.number,
-    address: formData.address,
-  },
-  items: cartData,         
-  order_total: total,
-  payment_id: payment.razorpay_payment_id,
-});
     clearCart();
   }
   console.log(cartData);

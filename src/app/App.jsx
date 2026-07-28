@@ -1,23 +1,23 @@
  import React, { Suspense, lazy } from "react";
-import Navbar from "./Components/Items/Navbar";
+import Navbar from "../features/Items/Navbar.jsx";
 import { Route, Routes } from "react-router";
-import Footer from "./Components/Items/Footer.jsx";
-import Login from "./Components/pages/user.jsx/login.jsx";
-import Profile from "./Components/pages/profile/Profile.jsx";
-import ScrollToTop from "./Components/Items/ScrollToTop.jsx";
-import ContactPage from "./Components/pages/Contact/Contact.jsx";
-import Checkout from "./Components/pages/Checkout.jsx";
-import Address from "./Components/pages/DeliveryAddres/Address.jsx";
-import OrderSuccess from "./Components/pages/DeliveryAddres/OrderSucces.jsx";
-import YouOrder from "./Components/pages/profile/Order.jsx";
-import VerifyEmail from "./Components/pages/VerifyEmail.jsx";
+import Footer from "../features/Items/Footer.jsx";
+import Login from "../features/pages/user.jsx/login.jsx";
+import Profile from "../features/pages/profile/Profile.jsx";
+import ScrollToTop from "../features/Items/ScrollToTop.jsx";
+import ContactPage from "../features/pages/Contact/Contact.jsx";
+import Checkout from "../features/pages/Checkout.jsx";
+import Address from "../features/pages/DeliveryAddres/Address.jsx";
+import OrderSuccess from "../features/pages/DeliveryAddres/OrderSucces.jsx";
+import YouOrder from "../features/pages/profile/Order.jsx";
+import VerifyEmail from "../features/pages/VerifyEmail.jsx";
 
 
 // Lazy imports
-const Home = lazy(() => import("./Components/pages/Homepage/Home"));
-const List = lazy(() => import("./Components/pages/Menu/Menu"));
-const Cart = lazy(() => import("./Components/pages/Cart/Cart"));
-const Search = lazy(() => import("./Components/pages/Search"));
+const Home = lazy(() => import("../features/pages/Home/pages/Home.jsx"));
+const List = lazy(() => import("../features/pages/Home/components/Menu.jsx"));
+const Cart = lazy(() => import("../features/pages/Cart/Cart.jsx"));
+const Search = lazy(() => import("../features/pages/Search.jsx"));
 
 
 export default function App() {

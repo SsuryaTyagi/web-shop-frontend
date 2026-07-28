@@ -1,26 +1,25 @@
 import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router";
-import Card from "../../Items/card/Card";
-import { MenuContext } from "../../data/ContexTwo";
+import Card from "../../../Items/card/Card";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { useMenu } from "../hooks/useMenu";
 
 export default function List() {
-  const { Menu } = useContext(MenuContext);
+  const { handleMenu, data, error, loading } = useMenu();
   const navigator = useNavigate();
   const loc = useLocation();
   const { path, dis } = loc.state;
 
-  const filteredData = Menu.filter(
-    (value) => value.category.toLowerCase() === path.toLowerCase()
-  );
+  const handleSubmit = async () => {
+    await handleMenu(path);
+    console.log(data);
+  };
+  handleSubmit();
 
   return (
     <div className=" w-full flex pt-20 justify-center flex-col">
       <div className="w-full max-w-[1200px] mx-auto mt-[60px]">
-        <span
-          className=" bg-amber-200 "
-          onClick={() => navigator(-1)}
-        >
+        <span className=" bg-amber-200 " onClick={() => navigator(-1)}>
           <IoMdArrowRoundBack fontSize={50} />
         </span>
         <div className=" ml-[3vw]">

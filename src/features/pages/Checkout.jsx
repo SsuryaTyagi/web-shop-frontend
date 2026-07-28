@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { createOrder, verifyPayment, saveOrder } from "../../services/payment";
 import { MyContext } from "../data/Context";
-import { validateForm } from "../../Components/pages/DeliveryAddres/orderValidation";
+import { validateForm } from "../../features/pages/DeliveryAddres/orderValidation";
 import { toast, ToastContainer } from "react-toastify";
 
 const Checkout = ({ onPaymentSuccess }) => {
