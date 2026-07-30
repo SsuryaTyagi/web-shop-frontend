@@ -3,13 +3,13 @@ import Navbar from "../features/Items/Navbar.jsx";
 import { Route, Routes } from "react-router";
 import Footer from "../features/Items/Footer.jsx";
 import Login from "../features/pages/auth/pages/login.jsx";
-import Profile from "../features/pages/profile/Profile.jsx";
+import Profile from "../features/pages/Profile/pages/Profile.jsx";
 import ScrollToTop from "../features/Items/ScrollToTop.jsx";
 import ContactPage from "../features/pages/Contact/Contact.jsx";
 import Checkout from "../features/pages/Checkout.jsx";
 import Address from "../features/pages/DeliveryAddres/Address.jsx";
 import OrderSuccess from "../features/pages/DeliveryAddres/OrderSucces.jsx";
-import YouOrder from "../features/pages/profile/Order.jsx";
+import YouOrder from "../features/pages/profile/components/Order.jsx";
 import VerifyEmail from "../features/pages/VerifyEmail.jsx";
 
 

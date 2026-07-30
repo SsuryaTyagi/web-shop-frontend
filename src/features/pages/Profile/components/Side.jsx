@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { MyContext } from "../../data/Context";
+import { MyContext } from "../../../data/Context";
 import {
   FaUser,
   FaShoppingBag,

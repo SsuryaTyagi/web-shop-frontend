@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { MyContext } from "../../data/Context";
+import { MyContext } from "../../../data/Context";
 
 export default function YouOrder() {
   const { order } = useContext(MyContext);
-  console.log(order);
 
   if (!order || order.length === 0) {
     return (

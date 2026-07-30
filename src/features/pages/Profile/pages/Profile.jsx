@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
-import { MyContext } from "../../data/Context";
-import Sidebar from "./Side";
-import AccountDetails from "./AccountDetails";
-import YouOrder from "./Order";
-import Terms from "./Terms";
+import { MyContext } from "../../../data/Context";
+import Sidebar from "../components/Side";
+import AccountDetails from "../components/AccountDetails";
+import YouOrder from "../components/Order";
+import Terms from "../components/Terms";
+import useAuth from "../../auth/hooks/useAuth";
 
 export default function Profile() {
-  const { user } = useContext(MyContext);
+ const {user} = useAuth();
 
   // default = account
   const [activeTab, setActiveTab] = useState("account");
