@@ -6,10 +6,13 @@ import {
   FaFileAlt,
   FaSignOutAlt,
 } from "react-icons/fa";
+import useAuth from "../../auth/hooks/useAuth";
 
 export default function Sidebar({ activeTab, setActiveTab }) {
-  const { logout } = useContext(MyContext);
-
+  const {handleLogout} = useAuth()
+const Logout = async()=>{
+  await handleLogout()
+}
   const itemStyle = (tab) =>
     `flex items-center gap-[0.7rem] p-[0.7rem] rounded-lg cursor-pointer
      ${activeTab === tab ? "bg-gray-200 font-semibold" : "hover:bg-gray-100"}`;
@@ -29,11 +32,11 @@ export default function Sidebar({ activeTab, setActiveTab }) {
       </div>
 
       <button
-        onClick={logout}
+        onClick={Logout}
         className="flex items-center gap-[0.7rem] text-red-600 mt-[1.5rem]"
       >
         <FaSignOutAlt /> Logout
       </button>
-    </div>
+    </div>  
   );
 }

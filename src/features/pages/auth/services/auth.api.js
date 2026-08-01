@@ -49,7 +49,8 @@ export const googleLogin = (mode) => {
 export const logout = async () => {
   try {
     localStorage.removeItem("token");
-    await api.post("/logout", {});
+    const res = await api.post("/logout");
+    return res.data;
   } catch (error) {
     throw error.response?.data?.message || "Logout failed!";
   }

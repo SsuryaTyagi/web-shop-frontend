@@ -20,7 +20,7 @@ const profileSlice = createSlice({
   },
 });
 
-export const {setOrder, setError, setLoading}= profileSlice.actions;
+export const {setOrder, setError, setLoading}= profileSlice.actions ;
 export default profileSlice.reducer
 
 

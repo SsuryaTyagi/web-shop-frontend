@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { ToastContainer, toast } from "react-toastify";
 import useAuth from "../hooks/useAuth.js";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-
   const [formData, setFormData] = useState({
     name: "",
     number: "",
@@ -16,22 +14,13 @@ export default function Login() {
     address: "",
   });
 
-  const {
-    handleRegister,
-    handleLogin,
-    handleGoogleLogin,
-    user,
-    loading,
-    message,
-    error,
-  } = useAuth();
+  const { handleRegister, handleLogin, handleGoogleLogin, user, loading } =
+    useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (isLogin) {
-      if (!formData.email || !formData.password)
-        return toast.error("Enter full details...");
       await handleLogin({
         email: formData.email,
         password: formData.password,
@@ -87,7 +76,6 @@ export default function Login() {
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={2000} />
       <div className="min-h-screen flex bg-gray-50">
         <div className="hidden md:flex w-1/2 bg-[url('https://i.imgur.com/Zf7Xk3Q.png')] bg-cover bg-center relative">
           <div className="absolute inset-0 bg-black/50"></div>
@@ -121,9 +109,6 @@ export default function Login() {
               <span className="mx-3 text-gray-500 text-sm">or</span>
               <hr className="flex-grow border-gray-300" />
             </div>
-
-            {message && <p className="mb-1 text-2xl">{message}</p>}
-
             <form onSubmit={handleSubmit}>
               <div className="mb-4 space-y-4">
                 {(isLogin ? filterValue : inputValue).map((value, index) => (
@@ -138,6 +123,7 @@ export default function Login() {
                           value={formData[value.name]}
                           onChange={handleChange}
                           type={value.type}
+                          required
                           className="w-full border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-orange-500"
                           placeholder={value.placeholder}
                         />
@@ -158,6 +144,7 @@ export default function Login() {
                         value={formData[value.name]}
                         onChange={handleChange}
                         type={value.type}
+                        required
                         className="w-full border rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-orange-500"
                         placeholder={value.placeholder}
                       />
