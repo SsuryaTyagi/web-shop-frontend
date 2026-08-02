@@ -19,9 +19,9 @@ export const fetchMenuItem = async () => {
   }
 };
 
-export const fetchPopular = async () => {
+export const fetchPopular = async (popular) => {
   try {
-    const res = await axios.get(`${BASE_URL}/api/menu?popular=true`);
+    const res = await axios.get(`${BASE_URL}/api/menu?popular=${popular}`);
     return res.data;
   } catch (error) {
     console.error("Best fetch error:", error);

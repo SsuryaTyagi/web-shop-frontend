@@ -14,12 +14,7 @@ export default function Context({ children }) {
   const { user } = useAuth();
 
   const [order, setOrder] = useState([]);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    number: "",
-    address: "",
-  });
+
 
   const {
     cartData,
@@ -30,15 +25,7 @@ export default function Context({ children }) {
     total,
   } = useCart();
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const googleToken = urlParams.get("token");
 
-    if (googleToken) {
-      localStorage.setItem("token", googleToken);
-      window.history.replaceState({}, "", window.location.pathname);
-    }
-  }, []);
 
   useEffect(() => {
     if (!user?.email) return;
@@ -51,7 +38,6 @@ export default function Context({ children }) {
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={2000} />
       <MyContext.Provider
         value={{
           cartData,
@@ -61,8 +47,6 @@ export default function Context({ children }) {
           updateQuantity,
           clearCart,
           total,
-          formData,
-          setFormData,
         }}
       >
         {children}

@@ -41,10 +41,10 @@ export const useMenu = () => {
       dispatch(setLoading(false));
     }
   };
-  const handlePopularItem = async () => {
+  const handlePopularItem = async (popular) => {
     try {
       dispatch(setLoading(true));
-      const res = await fetchPopular(true);
+      const res = await fetchPopular(popular);
       dispatch(setPopularItem(res));
     } catch (error) {
       dispatch(setError(error.message || "Something went wrong"));
@@ -55,7 +55,6 @@ export const useMenu = () => {
 
   useEffect(() => {
     handleMenuItem();
-    handlePopularItem();
   }, []);
 
   return {

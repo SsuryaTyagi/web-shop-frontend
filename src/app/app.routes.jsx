@@ -13,7 +13,7 @@ import VerifyEmail from "../features/pages/VerifyEmail.jsx";
 const Home = lazy(() => import("../features/pages/Home/pages/Home.jsx"));
 const List = lazy(() => import("../features/pages/Home/components/Menu.jsx"));
 const Cart = lazy(() => import("../features/pages/Cart/Cart.jsx"));
-const Search = lazy(() => import("../features/pages/Search.jsx"));
+const Search = lazy(() => import("../features/pages/Home/components/Search.jsx"));
 
 export default function AppRoutes() {
   return (

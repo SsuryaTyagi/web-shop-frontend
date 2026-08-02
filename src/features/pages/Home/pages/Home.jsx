@@ -11,8 +11,11 @@ import "swiper/css/pagination";
 import { useMenu } from "../hooks/useMenu";
 
 export default function Home() {
-  const { menuItem,popularItem,  loading } = useMenu();
+  const { handlePopularItem, menuItem, popularItem, loading } = useMenu();
   const menuSectionRef = useRef(null);
+useEffect(() => {
+    handlePopularItem(true);
+  }, []);
 
   const img = [
     "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/Banner/image-1.jpg",
