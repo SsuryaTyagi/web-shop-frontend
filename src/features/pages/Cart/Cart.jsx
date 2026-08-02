@@ -3,7 +3,7 @@ import { MyContext } from "../../data/Context";
 import { FiMinusCircle } from "react-icons/fi";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { Link, useNavigate } from "react-router";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function Cart() {
   const { cartData, deleteFromCart, updateQuantity, total,user } = useContext(MyContext);
@@ -21,7 +21,6 @@ const order = ()=>{
 
   return (
     <>
-    <ToastContainer position="top-right" autoClose={2000} />
     <div className="w-screen flex justify-center">
       <div className="p-6 pt-32 w-[95vw] min-h-[70vh] ">
         <h2 className="text-2xl font-bold mb-4">🛍 Your Cart</h2>

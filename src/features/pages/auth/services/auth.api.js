@@ -15,31 +15,19 @@ api.interceptors.request.use((config) => {
 });
 
 export const register = async (userData) => {
-  try {
-    const res = await api.post("/register", userData);
-    return res.data;
-  } catch (error) {
-    throw error.response?.data?.message || "Signup failed!";
-  }
+  const res = await api.post("/register", userData);
+  return res.data;
 };
 
 export const login = async (userData) => {
-  try {
-    const res = await api.post("/login", userData);
-    localStorage.setItem("token", res.data.token);
-    return res.data;
-  } catch (error) {
-    throw error.response?.data?.message || "Login failed!";
-  }
+  const res = await api.post("/login", userData);
+  localStorage.setItem("token", res.data.token);
+  return res.data;
 };
 
 export const getMe = async () => {
-  try {
-    const res = await api.get("/get-Me");
-    return res.data;
-  } catch (error) {
-    throw error.response?.data?.message || "Failed to fetch user";
-  }
+  const res = await api.get("/get-Me");
+  return res.data;
 };
 export const googleLogin = (mode) => {
   const url = `https://web-shop-api.vercel.app/auth/google?mode=${mode}`;
@@ -47,11 +35,8 @@ export const googleLogin = (mode) => {
 };
 
 export const logout = async () => {
-  try {
     localStorage.removeItem("token");
     const res = await api.post("/logout");
     return res.data;
-  } catch (error) {
-    throw error.response?.data?.message || "Logout failed!";
-  }
+
 };

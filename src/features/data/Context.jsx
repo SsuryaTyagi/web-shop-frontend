@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 import { getorder } from "./services/orderService";
-import { Contact } from "./services/contactService";
 import useCart from "./hooks/useCart";
 import useAuth from "../pages/auth/hooks/useAuth";
 
@@ -13,7 +11,6 @@ export const MyContext = createContext();
 
 
 export default function Context({ children }) {
-  const navigate = useNavigate();
   const { user } = useAuth();
 
   const [order, setOrder] = useState([]);
@@ -64,7 +61,6 @@ export default function Context({ children }) {
           updateQuantity,
           clearCart,
           total,
-          Contact,
           formData,
           setFormData,
         }}

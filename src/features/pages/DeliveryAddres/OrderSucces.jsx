@@ -26,7 +26,6 @@ export default function OrderSuccess() {
   
   return (
     <>
-      <ToastContainer position="top-right" autoClose={2000} />
       <div className="min-h-screen pt-32 bg-gray-100 flex justify-center items-start">
         <div className="bg-white w-full max-w-md mt-10 p-5 rounded-xl shadow-lg">
           {/* ✅ SUCCESS HEADER */}

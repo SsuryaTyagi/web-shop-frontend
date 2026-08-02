@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import useAuth from "../hooks/useAuth.js";
+import { toast } from "react-toastify";
+
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -14,7 +16,7 @@ export default function Login() {
     address: "",
   });
 
-  const { handleRegister, handleLogin, handleGoogleLogin, user, loading } =
+  const { handleRegister, handleLogin, handleGoogleLogin, user, loading,error, message } =
     useAuth();
 
   const handleSubmit = async (e) => {

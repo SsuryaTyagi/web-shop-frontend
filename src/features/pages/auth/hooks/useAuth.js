@@ -21,10 +21,11 @@ export default function useAuth() {
       dispatch(setLoading(true));
       const res = await register(userData);
       dispatch(setMessage(res.message));
-      toast.success(message);
+      toast.success(res.message, { toastId: "register-success" });
     } catch (error) {
-      dispatch(setError(error));
-      toast.error(error);
+      const errMsg = error?.response?.data?.message || error?.message || "Registration failed";
+      dispatch(setError(errMsg));
+      toast.error(errMsg, { toastId: "register-error" });
     } finally {
       dispatch(setLoading(false));
     }
@@ -34,15 +35,15 @@ export default function useAuth() {
     try {
       dispatch(setLoading(true));
       const res = await login(userData);
-      console.log(res);
-      
+
       dispatch(setMessage(res.message));
-      dispatch(setUser(res));
-      toast.success(message);
+      dispatch(setUser(res.user ?? null));
+      toast.success(res.message, { toastId: "login-success" });
       navigate("/");
     } catch (error) {
-      dispatch(setError(error));
-      toast.error(error);
+      const errMsg = error?.response?.data?.message || error?.message || "Login failed";
+      dispatch(setError(errMsg));
+      toast.error(errMsg, { toastId: "login-error" });
     } finally {
       dispatch(setLoading(false));
     }
@@ -53,10 +54,9 @@ export default function useAuth() {
       dispatch(setLoading(true));
       const res = await getMe();
       dispatch(setUser(res.user));
-      toast.success(message);
     } catch (error) {
-      dispatch(setError(error));
-      toast.error(error);
+      const errMsg = error?.response?.data?.message || error?.message || "Failed to fetch user";
+      dispatch(setError(errMsg));
     } finally {
       dispatch(setLoading(false));
     }
@@ -67,28 +67,33 @@ export default function useAuth() {
       const mode = isLogin ? "login" : "register";
       googleLogin(mode);
     } catch (error) {
-      dispatch(setError(error.message || "Google login failed"));
-      toast.error(error);
+      const errMsg = error?.message || "Google login failed";
+      dispatch(setError(errMsg));
+      toast.error(errMsg, { toastId: "google-login-error" });
     }
   };
+
   const handleLogout = async () => {
     try {
       dispatch(setLoading(true));
       const res = await logout();
-      await handleGetMe();
-      navigate("/");
       dispatch(setMessage(res.message));
-      toast.success(message);
+      dispatch(setUser(null));
+      toast.success(res.message, { toastId: "logout-success" });
+      navigate("/");
     } catch (error) {
-      dispatch(setError(error));
-      toast.error(error);
+      const errMsg = error?.response?.data?.message || error?.message || "Logout failed";
+      dispatch(setError(errMsg));
+      toast.error(errMsg, { toastId: "logout-error" });
     } finally {
       dispatch(setLoading(false));
     }
   };
+
   useEffect(() => {
     handleGetMe();
   }, []);
+
   return {
     handleRegister,
     handleLogin,

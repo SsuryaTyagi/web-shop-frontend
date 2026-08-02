@@ -18,7 +18,6 @@ const Checkout = ({ onPaymentSuccess }) => {
     try {
       // Step 1 — order banao
       const order = await createOrder(total);
-      console.log("Order created:", order); // ✅ debug
 
       const options = {
         key:       import.meta.env.VITE_RAZORPAY_KEY_ID,
@@ -34,7 +33,7 @@ const Checkout = ({ onPaymentSuccess }) => {
         theme: { color: "#E33B32" },
 
         handler: async (response) => {
-          console.log("Razorpay response:", response); // ✅ debug
+
 
           try {
             // Step 3 — verify karo
@@ -43,8 +42,6 @@ const Checkout = ({ onPaymentSuccess }) => {
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature:  response.razorpay_signature,
             });
-
-            console.log("Verified:", verified); // ✅ debug
 
             if (!verified.success) {
               return toast.error("Payment verification failed!");
@@ -68,7 +65,6 @@ const Checkout = ({ onPaymentSuccess }) => {
 
           } catch (err) {
             toast.error("Something went wrong after payment!");
-            console.error("Verify/Save Error:", err);
           }
         },
       };
@@ -81,13 +77,11 @@ const Checkout = ({ onPaymentSuccess }) => {
 
     } catch (err) {
       toast.error("Payment initiation failed!");
-      console.error("Payment Error:", err);
     }
   };
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={2000} />
       <button
         onClick={handlePayment}
         className="bg-green-600 text-white px-6 py-3 rounded-lg mt-5 w-full"

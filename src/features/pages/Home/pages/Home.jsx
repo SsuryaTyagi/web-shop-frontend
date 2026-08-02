@@ -1,9 +1,8 @@
 import React, { useContext, useRef, lazy, Suspense, useEffect } from "react";
-import { MyContext } from "../../../data/Context";
 const Card = lazy(() => import("../../../Items/card/Card"));
 import { Link } from "react-router";
 import { BASE_URL } from "../../../data/Api";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import SkeletonGrid from "../../../Items/card/SkeletonGrid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -13,7 +12,6 @@ import { useMenu } from "../hooks/useMenu";
 
 export default function Home() {
   const { menuItem,popularItem,  loading } = useMenu();
-  const {best = [] } = useContext(MyContext) || {};
   const menuSectionRef = useRef(null);
 
   const img = [
@@ -27,7 +25,6 @@ export default function Home() {
   }, []);
   return (
     <>
-      <ToastContainer position="top-right" autoClose={2000} />
       <main className=" h-auto overflow-x-hidden no-scrollbar">
         {/* Banner */}
         <section className="md:h-[35vw] h-[60vh] relative">

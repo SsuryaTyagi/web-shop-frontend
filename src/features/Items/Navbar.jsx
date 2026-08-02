@@ -12,7 +12,7 @@ import useAuth from "../pages/auth/hooks/useAuth";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user } = useAuth();
-  const { cartData } = useContext(MyContext);
+  const { cartData=[] } = useContext(MyContext);
 
   const links = [
     { icon: <IoHomeOutline />, Name: "Home", path: "/" },

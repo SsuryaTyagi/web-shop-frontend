@@ -29,7 +29,6 @@ export default function Card(props) {
 
   const handleIncrease = () => {
     updateQuantity(props.index, (cartData[props.index]?.quantity || 1) + 1);
-      console.log("chal gya");
   };
 
   const handleDecrease = () => {
@@ -43,7 +42,6 @@ export default function Card(props) {
     }
   
   };
-  // console.log(props.index);
 
   return (
     <div className="w-[32vw] flex flex-col justify-between max-w-[320px] bg-white mb-4 rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl duration-300">

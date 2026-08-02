@@ -35,8 +35,6 @@ export default function Address() {
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={2000} />
-
       <div className="w-full  bg-gray-50 flex justify-center py-28 px-4">
         
         <div className="w-full max-w-[1200px] bg-white rounded-xl shadow-sm p-6 md:p-8">
