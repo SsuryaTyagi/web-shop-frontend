@@ -1,9 +1,9 @@
 import React, { useContext, useRef, lazy, Suspense, useEffect } from "react";
-const Card = lazy(() => import("../../../Items/card/Card"));
+const Card = lazy(() => import("../../../shared/cards/Card"));
 import { Link } from "react-router";
 import { BASE_URL } from "../../../data/Api";
 import { toast } from "react-toastify";
-import SkeletonGrid from "../../../Items/card/SkeletonGrid";
+import SkeletonGrid from "../../../shared/cards/SkeletonGrid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";

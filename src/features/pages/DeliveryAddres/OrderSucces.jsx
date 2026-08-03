@@ -22,7 +22,6 @@ export default function OrderSuccess() {
   function clear() {
     clearCart();
   }
-  console.log(cartData);
   
   return (
     <>

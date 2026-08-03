@@ -6,13 +6,13 @@ import { FaSearch } from "react-icons/fa";
 import { IoIosContact } from "react-icons/io";
 import { IoHomeOutline } from "react-icons/io5";
 import { Link } from "react-router";
-import { MyContext } from "../data/Context";
-import useAuth from "../pages/auth/hooks/useAuth";
+import useCart from "../../pages/Cart/hooks/useCart";
+import useAuth from "../../pages/auth/hooks/useAuth";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user } = useAuth();
-  const { cartData=[] } = useContext(MyContext);
+  const { cartData } = useCart();
 
   const links = [
     { icon: <IoHomeOutline />, Name: "Home", path: "/" },

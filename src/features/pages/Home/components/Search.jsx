@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useMenu } from "../hooks/useMenu";
-import Card from "../../../Items/card/Card";
+import Card from "../../../shared/cards/Card";
 
 export default function Search() {
   const [value, setValue] = useState("");

@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../features/Items/Navbar.jsx";
-import Footer from "../features/Items/Footer.jsx";
-import ScrollToTop from "../features/Items/ScrollToTop.jsx";
+import Navbar from "../features/shared/components/Navbar.jsx";
+import Footer from "../features/shared/components/Footer.jsx";
+import ScrollToTop from "../features/shared/components/ScrollToTop.jsx";
 import { ToastContainer } from "react-toastify";
 import AppRoutes from "./app.routes.jsx";
 

@@ -1,51 +1,52 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { MyContext } from "../../data/Context";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { FiMinusCircle } from "react-icons/fi";
+import { toast } from "react-toastify";
+import useCart from "../../pages/Cart/hooks/useCart";
 
 export default function Card(props) {
   const [size, setSize] = useState("S");
-  const [showQuantity, setShowQuantity] = useState(false);
+  const { addToCart, updateQuantity, cartData } = useCart();
 
-  const { addToCart, updateQuantity, cartData } = useContext(MyContext);
-
-  // Get price based on size
   const getPrice = () => {
     if (size === "S") return props.price;
     if (size === "M") return props.price_m;
     if (size === "L") return props.price_l;
   };
 
-  const handleOrderNow = () => {
+  // 🔑 derive from real cart data — matches on _id + selectedSize
+  const cartIndex = cartData.findIndex(
+    (item) => item._id === props._id && item.selectedSize === size
+  );
+  const isInCart = cartIndex !== -1;
+  const currentQty = isInCart ? cartData[cartIndex].quantity : 0;
+
+  const handleAddToCart = () => {
     addToCart({
       ...props,
       selectedSize: size,
       finalPrice: getPrice(),
       quantity: 1,
     });
-    setShowQuantity(true);
+    toast.success(`${props.name} added to cart!`);
   };
 
   const handleIncrease = () => {
-    updateQuantity(props.index, (cartData[props.index]?.quantity || 1) + 1);
+    updateQuantity(cartIndex, currentQty + 1);
   };
 
   const handleDecrease = () => {
-    const newQty = (cartData[props.index]?.quantity || 1) - 1;
+    const newQty = currentQty - 1;
     if (newQty <= 0) {
-      setShowQuantity(false);
-      // Optional: remove from cart if quantity 0
-      updateQuantity(props.index, 0);
+      updateQuantity(cartIndex, 0);
     } else {
-      updateQuantity(props.index, newQty);
+      updateQuantity(cartIndex, newQty);
     }
-  
   };
 
   return (
     <div className="w-[32vw] flex flex-col justify-between max-w-[320px] bg-white mb-4 rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl duration-300">
-      {/* Image Section */}
       <div className="relative group">
         <img
           src={props.img}
@@ -55,7 +56,6 @@ export default function Card(props) {
         />
       </div>
 
-      {/* Content Section */}
       <div className="p-2 sm:p-3">
         <div className="flex justify-between">
           <h3 className="text-sm sm:text-base md:text-lg font-bold truncate">
@@ -81,11 +81,12 @@ export default function Card(props) {
             {["S", "M", "L"].map((s) => (
               <button
                 key={s}
+                disabled={isInCart}
                 className={`md:px-3 px-2 py-1 rounded-full border ${
                   size === s
                     ? "bg-yellow-500 text-white"
                     : "bg-white text-gray-700"
-                }`}
+                } ${isInCart ? "opacity-50 cursor-not-allowed" : ""}`}
                 onClick={() => setSize(s)}
               >
                 {s}
@@ -94,34 +95,24 @@ export default function Card(props) {
           </div>
         )}
 
-        {/* Conditional rendering */}
-        {/* {!showQuantity ? ( */}
-<button
-  onClick={handleOrderNow}
-  disabled={showQuantity}
-  className={`w-full mt-6 rounded-2xl text-center md:text-2xl text-[12px] text-white
-    ${
-      showQuantity
-        ? "bg-gray-300 cursor-not-allowed"
-        : "bg-green-400 active:bg-green-800"
-    }
-  `}
->
-  {showQuantity ? "Added to Cart" : "Add to Cart"}
-</button>
-        {/* // ) : (
-          // <div className="flex items-center justify-center gap-4 mt-2">
-          //   <button onClick={handleDecrease} className="bg-amber-400">
-          //     <FiMinusCircle  fontSize={40}/>
-          //   </button>
-          //   <span className="text-lg font-semibold z-10">
-          //     {cartData[props.index]?.quantity || 1}
-          //   </span>
-          //  <button onClick={handleIncrease} className="bg-amber-400 z-10"> 
-          //   <MdOutlineAddCircleOutline  fontSize={40}   />
-          //  </button>
-          // </div> */}
-        {/* )} */}
+        {!isInCart ? (
+          <button
+            onClick={handleAddToCart}
+            className="w-full mt-6 rounded-2xl text-center md:text-2xl text-[12px] text-white bg-green-400 active:bg-green-800"
+          >
+            Add to Cart
+          </button>
+        ) : (
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <button onClick={handleDecrease} className="bg-amber-400 rounded-full p-1">
+              <FiMinusCircle fontSize={30} />
+            </button>
+            <span className="text-lg font-semibold">{currentQty}</span>
+            <button onClick={handleIncrease} className="bg-amber-400 rounded-full p-1">
+              <MdOutlineAddCircleOutline fontSize={30} />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
