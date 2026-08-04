@@ -10,7 +10,7 @@ export default function Address() {
     number: "",
     address: "",
   });
-  const { user, cartData, total} = useCart()
+  const { user, cartData, total } = useCart();
 
   const navigate = useNavigate();
 
@@ -40,10 +40,7 @@ export default function Address() {
   return (
     <>
       <div className="w-full  bg-gray-50 flex justify-center py-28 px-4">
-        
         <div className="w-full max-w-[1200px] bg-white rounded-xl shadow-sm p-6 md:p-8">
-
-
           <div className="mb-8">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
               Delivery Details
@@ -53,9 +50,7 @@ export default function Address() {
             </p>
           </div>
 
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
             <div>
               <label className="text-sm font-medium text-gray-700">
                 Full Name
@@ -115,19 +110,18 @@ export default function Address() {
                 }
               />
             </div>
-
           </div>
-
 
           <p className="text-sm text-gray-500 mt-6">
             ✔ Your details are safe and used only for delivery
           </p>
 
-
           <div className="mt-8 max-w-[420px]">
-            <Checkout onPaymentSuccess={handlePaymentSuccess} />
+            <Checkout
+              onPaymentSuccess={handlePaymentSuccess}
+              formData={formData}
+            />
           </div>
-
         </div>
       </div>
     </>
