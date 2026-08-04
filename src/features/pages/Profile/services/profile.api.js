@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../../../data/Api.js";
+import { BASE_URL } from "../../../Api.js";
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -23,7 +23,7 @@ export const getProfile = async () => {
   }
 };
 
-export const getorder = async () => {
+export const getOrder = async () => {
   try {
     const res = await api.post(`/orderDetails`);
     return res.data.order;

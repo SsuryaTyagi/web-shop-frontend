@@ -14,6 +14,7 @@ const Home = lazy(() => import("../features/pages/Home/pages/Home.jsx"));
 const List = lazy(() => import("../features/pages/Home/components/Menu.jsx"));
 const Cart = lazy(() => import("../features/pages/Cart/pages/Cart.jsx"));
 const Search = lazy(() => import("../features/pages/Home/components/Search.jsx"));
+const AdminRoutes = lazy(() => import("./admin.routes.jsx"));
 
 export default function AppRoutes() {
   return (
@@ -31,7 +32,8 @@ export default function AppRoutes() {
         <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/order" element={<YouOrder />} />
         <Route path="/verify-email/:token" element={<VerifyEmail />} />
+        <Route path="/admin/*" element={<AdminRoutes />} />
       </Routes>
     </Suspense>
   );
-}
+}

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../../src/features/data/Api.js";
+import { BASE_URL } from "../features/Api.js";
 
 export const Order = async (order) => {
   const res = await axios.post(

@@ -1,12 +1,16 @@
-import React, { useContext, useEffect } from "react";
-import { MyContext } from "../../data/Context";
-import { ToastContainer } from "react-toastify";
+import React, { useContext, useEffect, useState } from "react";
 import Checkout from "../Checkout";
 import { useNavigate } from "react-router";
+import useCart from "../Cart/hooks/useCart";
 
 export default function Address() {
-  const { user, cartData, total, formData, setFormData } =
-    useContext(MyContext);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    number: "",
+    address: "",
+  });
+  const { user, cartData, total} = useCart()
 
   const navigate = useNavigate();
 

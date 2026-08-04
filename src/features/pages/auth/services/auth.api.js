@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../../data/Api";
+import { BASE_URL } from "../../../Api";
 import axios from "axios";
 
 const api = axios.create({

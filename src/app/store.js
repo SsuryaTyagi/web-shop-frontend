@@ -4,6 +4,7 @@ import authSlice from "../features/pages/auth/auth.Slice";
 import profileSlice from "../features/pages/Profile/profile.Slice";
 import contactSlice from "../features/pages/Contact/contact.Slice";
 import cartReducer from "../features/pages/Cart/cart.Slice.js";
+import adminReducer from "../features/admin/admin.Slice.js";
 import { saveCart } from "../features/pages/Cart/service/cartStorage.js";
 
 export const store = configureStore({
@@ -13,10 +14,9 @@ export const store = configureStore({
     profile: profileSlice,
     contact: contactSlice,
     cart: cartReducer,
+    admin: adminReducer,
   },
 });
-
-
 
 let previousCart = store.getState().cart.items;
 store.subscribe(() => {
@@ -25,4 +25,4 @@ store.subscribe(() => {
     saveCart(currentCart);
     previousCart = currentCart;
   }
-});
+});

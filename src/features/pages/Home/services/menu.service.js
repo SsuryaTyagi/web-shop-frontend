@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../../../data/Api";
+import { BASE_URL } from "../../../Api";
 
 export const fetchMenu = async (category) => {
   try {

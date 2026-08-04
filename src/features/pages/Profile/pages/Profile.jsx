@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { MyContext } from "../../../data/Context";
 import Sidebar from "../components/Side";
 import AccountDetails from "../components/AccountDetails";
 import YouOrder from "../components/Order";

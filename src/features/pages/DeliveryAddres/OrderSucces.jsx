@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
 import { getLocation } from "./location";
 import { buildOrderText } from "./orderText";
-
 import { useLocation, useNavigate } from "react-router-dom";
-import { MyContext } from "../../data/Context";
+import useCart from "../Cart/hooks/useCart";
 import { ToastContainer } from "react-toastify";
 import { Order } from "../../../services/orderCreate";
 
 export default function OrderSuccess() {
-  const { clearCart } = useContext(MyContext);
+  const { clearCart } = useCart();
   const { state } = useLocation();
   const navigate = useNavigate();
 

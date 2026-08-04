@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
-import Card from "../../../Items/card/Card";
+import Card from "../../../shared/cards/Card";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useMenu } from "../hooks/useMenu";
 
