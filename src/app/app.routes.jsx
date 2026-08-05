@@ -7,7 +7,7 @@ import ContactPage from "../features/pages/Contact/pages/Contact.jsx";
 import Checkout from "../features/pages/Checkout.jsx";
 import Address from "../features/pages/DeliveryAddres/Address.jsx";
 import OrderSuccess from "../features/pages/DeliveryAddres/OrderSucces.jsx";
-import YouOrder from "../features/pages/profile/components/Order.jsx";
+import YouOrder from "../features/pages/Profile/components/Order.jsx";
 import VerifyEmail from "../features/pages/VerifyEmail.jsx";
 
 const Home = lazy(() => import("../features/pages/Home/pages/Home.jsx"));
@@ -36,4 +36,4 @@ export default function AppRoutes() {
       </Routes>
     </Suspense>
   );
-}
+}
