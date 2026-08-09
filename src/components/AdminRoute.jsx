@@ -1,44 +1,33 @@
 // src/components/AdminRoute.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { login } from "../features/pages/auth/services/auth.api.js"; // adjust path to your actual auth.api.js
+import  useAuth  from "../features/pages/auth/hooks/useAuth.js"; 
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/pages/auth/auth.Slice.js"; // adjust path
 import { toast } from "react-toastify";
 import { ShieldCheck, ArrowRight, Pizza } from "lucide-react";
 
 export default function AdminRoute({ children }) {
-  const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+const {handleLogin, user, loading, messages, error} = useAuth();
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [formError, setFormError] = useState("");
+
 
   const handleAdminLogin = async (e) => {
     e.preventDefault();
-    setFormError("");
-    setLoading(true);
-    try {
-      const res = await login({ email, password });
 
-      if (res.user?.role !== "admin") {
-        setFormError("This account does not have admin access.");
-        setLoading(false);
+   await handleLogin({ email, password })
+
+      if (user?.role !== "admin") {
+        toast.error("This account does not have admin access.", { toastId: "admin-login-error" }  );
         return;
       }
 
-      dispatch(setUser(res.user));
       toast.success("Welcome back, Admin", { toastId: "admin-login-success" });
-    } catch (err) {
-      const msg = err?.response?.data?.message || "Login failed";
-      setFormError(msg);
-      toast.error(msg, { toastId: "admin-login-error" });
-    } finally {
-      setLoading(false);
-    }
   };
+
 
   // Not logged in, or logged in but not an admin → show login form
   if (!user || user.role !== "admin") {
@@ -80,8 +69,8 @@ export default function AdminRoute({ children }) {
               />
             </div>
 
-            {formError && (
-              <p className="text-sm text-red-500 font-medium">{formError}</p>
+            {error && (
+              <p className="text-sm text-red-500 font-medium">{error}</p>
             )}
 
             <button
