@@ -1,8 +1,8 @@
 // src/features/admin/services/admin.api.js
 
-const LOCAL_STORAGE_KEY = "pizza_hub_admin_data_v1";
+export const LOCAL_STORAGE_KEY = "pizza_hub_admin_data_v1";
 
-const initialData = {
+export const initialData = {
   stats: {
     totalOrdersToday: 142,
     totalOrdersChange: 12.5, // % vs yesterday
@@ -29,7 +29,8 @@ const initialData = {
       category: "Pizza",
       price: 499,
       ordersCount: 384,
-      image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=300&auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=300&auto=format&fit=crop&q=80",
       rating: 4.9,
     },
     {
@@ -38,7 +39,8 @@ const initialData = {
       category: "Pizza",
       price: 549,
       ordersCount: 298,
-      image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&auto=format&fit=crop&q=80",
       rating: 4.8,
     },
     {
@@ -47,7 +49,8 @@ const initialData = {
       category: "Sides",
       price: 199,
       ordersCount: 275,
-      image: "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=300&auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=300&auto=format&fit=crop&q=80",
       rating: 4.7,
     },
     {
@@ -56,7 +59,8 @@ const initialData = {
       category: "Pizza",
       price: 459,
       ordersCount: 242,
-      image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=300&auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=300&auto=format&fit=crop&q=80",
       rating: 4.6,
     },
     {
@@ -65,7 +69,8 @@ const initialData = {
       category: "Desserts",
       price: 179,
       ordersCount: 219,
-      image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=300&auto=format&fit=crop&q=80",
+      image:
+        "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=300&auto=format&fit=crop&q=80",
       rating: 4.9,
     },
   ],
@@ -77,10 +82,16 @@ const initialData = {
       itemsCount: 3,
       itemsList: [
         { name: "Super Pepperoni Feast", size: "Large", qty: 1, price: 599 },
-        { name: "Garlic Cheesy Stuffed Breadstick", size: "Regular", qty: 1, price: 199 },
+        {
+          name: "Garlic Cheesy Stuffed Breadstick",
+          size: "Regular",
+          qty: 1,
+          price: 199,
+        },
         { name: "Chilled Mango Fizz", size: "Medium", qty: 1, price: 129 },
       ],
-      deliveryAddress: "Flat 402, Sunshine Heights, Sector 18, Gurugram, Haryana - 122018",
+      deliveryAddress:
+        "Flat 402, Sunshine Heights, Sector 18, Gurugram, Haryana - 122018",
       paymentId: "PAY-882319412",
       paymentMethod: "UPI (Google Pay)",
       totalAmount: 927,
@@ -94,8 +105,18 @@ const initialData = {
       customerPhone: "+91 98123 76543",
       itemsCount: 2,
       itemsList: [
-        { name: "Truffle Mushroom Supreme", size: "Medium", qty: 1, price: 549 },
-        { name: "Double Chocolate Lava Cake", size: "Single", qty: 2, price: 358 },
+        {
+          name: "Truffle Mushroom Supreme",
+          size: "Medium",
+          qty: 1,
+          price: 549,
+        },
+        {
+          name: "Double Chocolate Lava Cake",
+          size: "Single",
+          qty: 2,
+          price: 358,
+        },
       ],
       deliveryAddress: "House 14, Rosewood Colony, MG Road, Bengaluru - 560001",
       paymentId: "PAY-882319300",
@@ -111,7 +132,12 @@ const initialData = {
       customerPhone: "+91 97654 12399",
       itemsCount: 4,
       itemsList: [
-        { name: "Spicy Paneer Tikka Blast", size: "Large", qty: 2, price: 1100 },
+        {
+          name: "Spicy Paneer Tikka Blast",
+          size: "Large",
+          qty: 2,
+          price: 1100,
+        },
         { name: "Crispy Peri Peri Wings", size: "6 Pcs", qty: 1, price: 289 },
         { name: "Classic Iced Cold Coffee", size: "Large", qty: 1, price: 159 },
       ],
@@ -129,9 +155,15 @@ const initialData = {
       customerPhone: "+91 99887 11223",
       itemsCount: 1,
       itemsList: [
-        { name: "Classic Margherita Deluxe", size: "Medium", qty: 1, price: 379 },
+        {
+          name: "Classic Margherita Deluxe",
+          size: "Medium",
+          qty: 1,
+          price: 379,
+        },
       ],
-      deliveryAddress: "Apartment 102, Green Glen Layout, Bellandur, Bengaluru - 560103",
+      deliveryAddress:
+        "Apartment 102, Green Glen Layout, Bellandur, Bengaluru - 560103",
       paymentId: "PAY-882318450",
       paymentMethod: "Cash on Delivery",
       totalAmount: 379,
@@ -145,10 +177,16 @@ const initialData = {
       customerPhone: "+91 91234 56789",
       itemsCount: 2,
       itemsList: [
-        { name: "BBQ Smoked Chicken Special", size: "Large", qty: 1, price: 649 },
+        {
+          name: "BBQ Smoked Chicken Special",
+          size: "Large",
+          qty: 1,
+          price: 649,
+        },
         { name: "Cheesy Dip", size: "Standard", qty: 2, price: 78 },
       ],
-      deliveryAddress: "3rd Floor, Tech Park Residency, Electronic City, Bengaluru - 560100",
+      deliveryAddress:
+        "3rd Floor, Tech Park Residency, Electronic City, Bengaluru - 560100",
       paymentId: "PAY-882317901",
       paymentMethod: "Net Banking",
       totalAmount: 727,
@@ -163,8 +201,18 @@ const initialData = {
       itemsCount: 3,
       itemsList: [
         { name: "Four Cheese Gourmet", size: "Medium", qty: 1, price: 499 },
-        { name: "Garlic Cheesy Stuffed Breadstick", size: "Regular", qty: 1, price: 199 },
-        { name: "Double Chocolate Lava Cake", size: "Single", qty: 1, price: 179 },
+        {
+          name: "Garlic Cheesy Stuffed Breadstick",
+          size: "Regular",
+          qty: 1,
+          price: 199,
+        },
+        {
+          name: "Double Chocolate Lava Cake",
+          size: "Single",
+          qty: 1,
+          price: 179,
+        },
       ],
       deliveryAddress: "Flat 701, Lotus Towers, Baner, Pune - 411045",
       paymentId: "PAY-882316550",
@@ -180,8 +228,10 @@ const initialData = {
       id: "m1",
       name: "Super Pepperoni Feast",
       category: "Pizza",
-      description: "Loaded with double crispy pepperoni slices, molten mozzarella, and signature herb tomato sauce.",
-      image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&auto=format&fit=crop&q=80",
+      description:
+        "Loaded with double crispy pepperoni slices, molten mozzarella, and signature herb tomato sauce.",
+      image:
+        "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&auto=format&fit=crop&q=80",
       prices: { Small: 349, Medium: 499, Large: 649 },
       isVeg: false,
       isPopular: true,
@@ -192,8 +242,10 @@ const initialData = {
       id: "m2",
       name: "Truffle Mushroom Supreme",
       category: "Pizza",
-      description: "Wild sauteed mushrooms, black truffle oil drizzle, caramelized onions, and fresh parmesan.",
-      image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format&fit=crop&q=80",
+      description:
+        "Wild sauteed mushrooms, black truffle oil drizzle, caramelized onions, and fresh parmesan.",
+      image:
+        "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format&fit=crop&q=80",
       prices: { Small: 399, Medium: 549, Large: 699 },
       isVeg: true,
       isPopular: true,
@@ -204,8 +256,10 @@ const initialData = {
       id: "m3",
       name: "Spicy Paneer Tikka Blast",
       category: "Pizza",
-      description: "Marinated tandoori paneer, red capsicum, crisp onions, green chillies, and mint drizzle.",
-      image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&auto=format&fit=crop&q=80",
+      description:
+        "Marinated tandoori paneer, red capsicum, crisp onions, green chillies, and mint drizzle.",
+      image:
+        "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&auto=format&fit=crop&q=80",
       prices: { Small: 319, Medium: 459, Large: 599 },
       isVeg: true,
       isPopular: true,
@@ -216,8 +270,10 @@ const initialData = {
       id: "m4",
       name: "BBQ Smoked Chicken Special",
       category: "Pizza",
-      description: "Smoky grilled chicken, hickory BBQ swirl, red onions, sweet corn, and sharp cheddar.",
-      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&auto=format&fit=crop&q=80",
+      description:
+        "Smoky grilled chicken, hickory BBQ swirl, red onions, sweet corn, and sharp cheddar.",
+      image:
+        "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&auto=format&fit=crop&q=80",
       prices: { Small: 369, Medium: 519, Large: 669 },
       isVeg: false,
       isPopular: false,
@@ -228,8 +284,10 @@ const initialData = {
       id: "m5",
       name: "Classic Margherita Deluxe",
       category: "Pizza",
-      description: "San Marzano tomato sauce, fresh buffalo mozzarella, fresh basil leaves, and extra virgin olive oil.",
-      image: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=500&auto=format&fit=crop&q=80",
+      description:
+        "San Marzano tomato sauce, fresh buffalo mozzarella, fresh basil leaves, and extra virgin olive oil.",
+      image:
+        "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=500&auto=format&fit=crop&q=80",
       prices: { Small: 249, Medium: 379, Large: 499 },
       isVeg: true,
       isPopular: false,
@@ -240,8 +298,10 @@ const initialData = {
       id: "m6",
       name: "Garlic Cheesy Stuffed Breadstick",
       category: "Sides",
-      description: "Fresh baked garlic breadsticks overflowing with melted mozzarella cheese and oregano butter.",
-      image: "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=500&auto=format&fit=crop&q=80",
+      description:
+        "Fresh baked garlic breadsticks overflowing with melted mozzarella cheese and oregano butter.",
+      image:
+        "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?w=500&auto=format&fit=crop&q=80",
       prices: { Small: 149, Medium: 199, Large: 249 },
       isVeg: true,
       isPopular: true,
@@ -252,8 +312,10 @@ const initialData = {
       id: "m7",
       name: "Crispy Peri Peri Wings",
       category: "Sides",
-      description: "Juicy chicken wings tossed in spicy African bird's eye chili peri peri glaze.",
-      image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=500&auto=format&fit=crop&q=80",
+      description:
+        "Juicy chicken wings tossed in spicy African bird's eye chili peri peri glaze.",
+      image:
+        "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=500&auto=format&fit=crop&q=80",
       prices: { Small: 199, Medium: 289, Large: 399 },
       isVeg: false,
       isPopular: false,
@@ -264,8 +326,10 @@ const initialData = {
       id: "m8",
       name: "Chilled Mango Fizz",
       category: "Beverages",
-      description: "Refreshing sparkling Alphonso mango cooler with a dash of lime and fresh mint.",
-      image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=500&auto=format&fit=crop&q=80",
+      description:
+        "Refreshing sparkling Alphonso mango cooler with a dash of lime and fresh mint.",
+      image:
+        "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=500&auto=format&fit=crop&q=80",
       prices: { Small: 99, Medium: 129, Large: 159 },
       isVeg: true,
       isPopular: false,
@@ -276,8 +340,10 @@ const initialData = {
       id: "m9",
       name: "Double Chocolate Lava Cake",
       category: "Desserts",
-      description: "Warm molten chocolate cake with a gushing gooey fudge center.",
-      image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&auto=format&fit=crop&q=80",
+      description:
+        "Warm molten chocolate cake with a gushing gooey fudge center.",
+      image:
+        "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&auto=format&fit=crop&q=80",
       prices: { Small: 129, Medium: 179, Large: 229 },
       isVeg: true,
       isPopular: true,
@@ -360,7 +426,8 @@ const initialData = {
       email: "kabir.roy@gmail.com",
       phone: "+91 98450 99887",
       subject: "Inquiry about Bulk Catering for Corporate Event",
-      message: "Hi Pizza Hub Team, We are hosting an IT tech summit next Friday with 120 guests and would like to place a bulk order for pizzas and sides. Do you offer corporate discount packages and live tracking for bulk delivery?",
+      message:
+        "Hi Pizza Hub Team, We are hosting an IT tech summit next Friday with 120 guests and would like to place a bulk order for pizzas and sides. Do you offer corporate discount packages and live tracking for bulk delivery?",
       timestamp: "Today at 10:15 AM",
       isRead: false,
     },
@@ -370,7 +437,8 @@ const initialData = {
       email: "meera.nair@outlook.com",
       phone: "+91 97312 44556",
       subject: "Feedback on Truffle Mushroom Supreme Pizza",
-      message: "Just ordered the Truffle Mushroom Supreme for dinner tonight and it was absolutely exquisite! The crust was perfectly crispy and cheese was so fresh. Compliments to your head chef!",
+      message:
+        "Just ordered the Truffle Mushroom Supreme for dinner tonight and it was absolutely exquisite! The crust was perfectly crispy and cheese was so fresh. Compliments to your head chef!",
       timestamp: "Yesterday at 7:40 PM",
       isRead: true,
     },
@@ -380,7 +448,8 @@ const initialData = {
       email: "sid.rao@techhub.io",
       phone: "+91 99001 22334",
       subject: "Franchise Inquiry for North Bengaluru Location",
-      message: "Hello Management, I am an experienced F&B franchisee interested in launching a new franchise store of The Pizza Hub in Yelahanka. Please share your franchise deck and contact information of your business development manager.",
+      message:
+        "Hello Management, I am an experienced F&B franchisee interested in launching a new franchise store of The Pizza Hub in Yelahanka. Please share your franchise deck and contact information of your business development manager.",
       timestamp: "Aug 02, 2026",
       isRead: false,
     },
@@ -390,7 +459,8 @@ const initialData = {
       email: "deepika.singh@yahoo.com",
       phone: "+91 98860 11992",
       subject: "Delivery Delay Inquiry for Order #ORD-9750",
-      message: "Hi, my order yesterday took around 45 minutes to arrive. The pizza was warm but I would suggest improving delivery dispatch speed during peak hours. Thank you!",
+      message:
+        "Hi, my order yesterday took around 45 minutes to arrive. The pizza was warm but I would suggest improving delivery dispatch speed during peak hours. Thank you!",
       timestamp: "Jul 31, 2026",
       isRead: true,
     },
@@ -399,12 +469,13 @@ const initialData = {
     name: "Chef Marco V.",
     role: "General Operations Manager",
     email: "admin@pizzahub.com",
-    avatar: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150&auto=format&fit=crop&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150&auto=format&fit=crop&q=80",
     isLoggedIn: true,
   },
 };
 
-function getStoredData() {
+export function getStoredData() {
   try {
     const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (!raw) {
@@ -418,118 +489,10 @@ function getStoredData() {
   }
 }
 
-function saveStoredData(data) {
+export function saveStoredData(data) {
   try {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
   } catch (err) {
     console.error("Error saving localStorage admin data:", err);
   }
 }
-
-export const adminApi = {
-  getInitialData: async () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getStoredData());
-      }, 150);
-    });
-  },
-
-  updateOrderStatus: async (orderId, newStatus) => {
-    return new Promise((resolve) => {
-      const data = getStoredData();
-      const updatedOrders = data.orders.map((o) =>
-        o.id === orderId ? { ...o, status: newStatus } : o
-      );
-
-      // Adjust pending count if needed
-      const pendingCount = updatedOrders.filter((o) => o.status === "Pending").length;
-      data.orders = updatedOrders;
-      data.stats.pendingOrders = pendingCount;
-      saveStoredData(data);
-
-      setTimeout(() => {
-        resolve({ orderId, newStatus, pendingCount });
-      }, 100);
-    });
-  },
-
-  saveMenuItem: async (itemData) => {
-    return new Promise((resolve) => {
-      const data = getStoredData();
-      if (itemData.id) {
-        // Edit existing
-        data.menuItems = data.menuItems.map((m) => (m.id === itemData.id ? { ...m, ...itemData } : m));
-      } else {
-        // Create new
-        const newItem = {
-          ...itemData,
-          id: `m_${Date.now()}`,
-          rating: 4.8,
-          inStock: true,
-        };
-        data.menuItems.unshift(newItem);
-      }
-      saveStoredData(data);
-      setTimeout(() => resolve(data.menuItems), 100);
-    });
-  },
-
-  deleteMenuItem: async (itemId) => {
-    return new Promise((resolve) => {
-      const data = getStoredData();
-      data.menuItems = data.menuItems.filter((m) => m.id !== itemId);
-      saveStoredData(data);
-      setTimeout(() => resolve(itemId), 100);
-    });
-  },
-
-  toggleItemAvailability: async (itemId) => {
-    return new Promise((resolve) => {
-      const data = getStoredData();
-      data.menuItems = data.menuItems.map((m) =>
-        m.id === itemId ? { ...m, inStock: !m.inStock } : m
-      );
-      saveStoredData(data);
-      setTimeout(() => resolve(itemId), 100);
-    });
-  },
-
-  toggleUserStatus: async (userId) => {
-    return new Promise((resolve) => {
-      const data = getStoredData();
-      data.users = data.users.map((u) =>
-        u.id === userId ? { ...u, isVerified: !u.isVerified } : u
-      );
-      saveStoredData(data);
-      setTimeout(() => resolve(userId), 100);
-    });
-  },
-
-  markMessageRead: async (messageId) => {
-    return new Promise((resolve) => {
-      const data = getStoredData();
-      data.messages = data.messages.map((msg) =>
-        msg.id === messageId ? { ...msg, isRead: true } : msg
-      );
-      saveStoredData(data);
-      setTimeout(() => resolve(messageId), 100);
-    });
-  },
-
-  deleteMessage: async (messageId) => {
-    return new Promise((resolve) => {
-      const data = getStoredData();
-      data.messages = data.messages.filter((msg) => msg.id !== messageId);
-      saveStoredData(data);
-      setTimeout(() => resolve(messageId), 100);
-    });
-  },
-
-  resetDemoData: async () => {
-    return new Promise((resolve) => {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(initialData));
-      setTimeout(() => resolve(initialData), 100);
-    });
-  },
-};

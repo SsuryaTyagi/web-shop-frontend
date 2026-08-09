@@ -1,11 +1,11 @@
 // src/features/admin/admin.Slice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { adminApi } from "./services/admin.api";
+import { api } from "./Apiclient";
 
 export const fetchAdminData = createAsyncThunk(
   "admin/fetchAdminData",
   async () => {
-    const data = await adminApi.getInitialData();
+    const data = await api.getInitialData();
     return data;
   }
 );
@@ -13,7 +13,7 @@ export const fetchAdminData = createAsyncThunk(
 export const updateOrderStatusThunk = createAsyncThunk(
   "admin/updateOrderStatus",
   async ({ orderId, newStatus }) => {
-    const res = await adminApi.updateOrderStatus(orderId, newStatus);
+    const res = await api.updateOrderStatus(orderId, newStatus);
     return res;
   }
 );
@@ -21,7 +21,7 @@ export const updateOrderStatusThunk = createAsyncThunk(
 export const saveMenuItemThunk = createAsyncThunk(
   "admin/saveMenuItem",
   async (itemData) => {
-    const updatedMenuItems = await adminApi.saveMenuItem(itemData);
+    const updatedMenuItems = await api.saveMenuItem(itemData);
     return updatedMenuItems;
   }
 );
@@ -29,7 +29,7 @@ export const saveMenuItemThunk = createAsyncThunk(
 export const deleteMenuItemThunk = createAsyncThunk(
   "admin/deleteMenuItem",
   async (itemId) => {
-    await adminApi.deleteMenuItem(itemId);
+    await api.deleteMenuItem(itemId);
     return itemId;
   }
 );
@@ -37,7 +37,7 @@ export const deleteMenuItemThunk = createAsyncThunk(
 export const toggleItemAvailabilityThunk = createAsyncThunk(
   "admin/toggleItemAvailability",
   async (itemId) => {
-    await adminApi.toggleItemAvailability(itemId);
+    await api.toggleItemAvailability(itemId);
     return itemId;
   }
 );
@@ -45,7 +45,7 @@ export const toggleItemAvailabilityThunk = createAsyncThunk(
 export const toggleUserStatusThunk = createAsyncThunk(
   "admin/toggleUserStatus",
   async (userId) => {
-    await adminApi.toggleUserStatus(userId);
+    await api.toggleUserStatus(userId);
     return userId;
   }
 );
@@ -53,7 +53,7 @@ export const toggleUserStatusThunk = createAsyncThunk(
 export const markMessageReadThunk = createAsyncThunk(
   "admin/markMessageRead",
   async (messageId) => {
-    await adminApi.markMessageRead(messageId);
+    await api.markMessageRead(messageId);
     return messageId;
   }
 );
@@ -61,7 +61,7 @@ export const markMessageReadThunk = createAsyncThunk(
 export const deleteMessageThunk = createAsyncThunk(
   "admin/deleteMessage",
   async (messageId) => {
-    await adminApi.deleteMessage(messageId);
+    await api.deleteMessage(messageId);
     return messageId;
   }
 );
@@ -69,7 +69,7 @@ export const deleteMessageThunk = createAsyncThunk(
 export const resetDemoDataThunk = createAsyncThunk(
   "admin/resetDemoData",
   async () => {
-    const resetData = await adminApi.resetDemoData();
+    const resetData = await api.resetDemoData();
     return resetData;
   }
 );

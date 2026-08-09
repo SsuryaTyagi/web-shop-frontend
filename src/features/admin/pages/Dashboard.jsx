@@ -75,7 +75,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <StatsCard
           title="Total Orders Today"
-          value={stats.totalOrdersToday || 142}
+          value={stats.totalOrdersToday || 0}
           change={stats.totalOrdersChange || 12.5}
           isPositive={(stats.totalOrdersChange || 12.5) >= 0}
           icon={ShoppingBag}
