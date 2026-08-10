@@ -13,7 +13,6 @@ import {
   Flame,
   ArrowRight,
   RefreshCw,
-  Star,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -39,8 +38,17 @@ export default function Dashboard() {
   const maxRevenue = Math.max(...chartData.map((d) => d.revenue), 1);
   const maxOrders = Math.max(...chartData.map((d) => d.orders), 1);
 
+  // Derived from real chartData instead of hardcoded numbers
+  const peakDay = chartData.reduce(
+    (best, d) => (d.revenue > (best?.revenue ?? -1) ? d : best),
+    null
+  );
+  const totalWeekRevenue = chartData.reduce((sum, d) => sum + d.revenue, 0);
+  const totalWeekOrders = chartData.reduce((sum, d) => sum + d.orders, 0);
+  const avgOrderValue = totalWeekOrders > 0 ? Math.round(totalWeekRevenue / totalWeekOrders) : 0;
+
   return (
-    <div className="space-[#E33B32] space-y-6">
+    <div className="space-y-6">
       {/* Top Banner Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-xs">
         <div>
@@ -75,9 +83,9 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <StatsCard
           title="Total Orders Today"
-          value={stats.totalOrdersToday || 0}
-          change={stats.totalOrdersChange || 12.5}
-          isPositive={(stats.totalOrdersChange || 12.5) >= 0}
+          value={stats.totalOrdersToday}
+          change={stats.totalOrdersChange}
+          isPositive={stats.totalOrdersChange >= 0}
           icon={ShoppingBag}
           iconBg="bg-amber-50"
           iconColor="text-amber-600"
@@ -85,9 +93,9 @@ export default function Dashboard() {
 
         <StatsCard
           title="Revenue Today (₹)"
-          value={`₹${(stats.revenueToday || 48950).toLocaleString("en-IN")}`}
-          change={stats.revenueChange || 8.4}
-          isPositive={(stats.revenueChange || 8.4) >= 0}
+          value={`₹${(stats.revenueToday ?? 0).toLocaleString("en-IN")}`}
+          change={stats.revenueChange}
+          isPositive={stats.revenueChange >= 0}
           icon={IndianRupee}
           iconBg="bg-[#E33B32]/10"
           iconColor="text-[#E33B32]"
@@ -95,9 +103,9 @@ export default function Dashboard() {
 
         <StatsCard
           title="Pending Orders"
-          value={stats.pendingOrders || 18}
-          change={stats.pendingChange || -3.2}
-          isPositive={(stats.pendingChange || -3.2) <= 0} // Less pending is good!
+          value={stats.pendingOrders}
+          change={stats.pendingChange}
+          isPositive={stats.pendingChange <= 0} // Less pending is good!
           icon={Clock}
           iconBg="bg-sky-50"
           iconColor="text-sky-600"
@@ -105,9 +113,9 @@ export default function Dashboard() {
 
         <StatsCard
           title="Total Registered Users"
-          value={(stats.totalUsers || 2845).toLocaleString("en-IN")}
-          change={stats.usersChange || 15.0}
-          isPositive={(stats.usersChange || 15.0) >= 0}
+          value={(stats.totalUsers ?? 0).toLocaleString("en-IN")}
+          change={stats.usersChange}
+          isPositive={stats.usersChange >= 0}
           icon={Users}
           iconBg="bg-emerald-50"
           iconColor="text-emerald-600"
@@ -206,9 +214,13 @@ export default function Dashboard() {
           </div>
 
           <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-            <span>Peak Day: Saturday (₹68,900)</span>
+            <span>
+              {peakDay
+                ? `Peak Day: ${peakDay.day} (₹${peakDay.revenue.toLocaleString("en-IN")})`
+                : "Peak Day: —"}
+            </span>
             <span className="text-[#E33B32] font-semibold">
-              Average Order Value: ₹344
+              Average Order Value: ₹{avgOrderValue}
             </span>
           </div>
         </div>
@@ -247,9 +259,9 @@ export default function Dashboard() {
                       {item.name}
                     </h5>
                     <div className="flex items-center gap-2 mt-0.5 text-[11px] text-slate-400">
-                      <span>{item.category}</span>
+                      <span>{item.category || "N/A"}</span>
                       <span>•</span>
-                      <span className="font-semibold text-slate-700">₹{item.price}</span>
+                      <span className="font-semibold text-slate-700">₹{item.price ?? "—"}</span>
                     </div>
                   </div>
 
@@ -268,7 +280,7 @@ export default function Dashboard() {
 
           <div className="mt-4 pt-3 border-t border-slate-100 text-center">
             <span className="text-xs text-slate-400 font-medium">
-              Popular items drive 68% of total daily revenue
+              Top-selling items overview
             </span>
           </div>
         </div>

@@ -8,7 +8,7 @@ import Checkout from "../features/pages/Checkout.jsx";
 import Address from "../features/pages/DeliveryAddres/Address.jsx";
 import OrderSuccess from "../features/pages/DeliveryAddres/OrderSucces.jsx";
 import YouOrder from "../features/pages/Profile/components/Order.jsx";
-import VerifyEmail from "../features/pages/VerifyEmail.jsx";
+import VerifyEmail from "../features/shared/components/VerifyEmail.jsx";
 
 const Home = lazy(() => import("../features/pages/Home/pages/Home.jsx"));
 const List = lazy(() => import("../features/pages/Home/components/Menu.jsx"));

@@ -4,7 +4,6 @@ import { buildOrderText } from "./orderText";
 import { useLocation, useNavigate } from "react-router-dom";
 import useCart from "../Cart/hooks/useCart";
 import { ToastContainer } from "react-toastify";
-import { Order } from "../../../services/orderCreate";
 
 export default function OrderSuccess() {
   const { clearCart } = useCart();

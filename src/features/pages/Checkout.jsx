@@ -4,6 +4,7 @@ import { validateForm } from "../../features/pages/DeliveryAddres/orderValidatio
 import { toast } from "react-toastify";
 import useAuth from "../pages/auth/hooks/useAuth";
 import useCart from "../pages/Cart/hooks/useCart";
+import { loadRazorpayScript } from "../../utils/loadRazorpay";
 
 const Checkout = ({ onPaymentSuccess, formData }) => {
   const { total, cartData, clearCart } = useCart();
@@ -13,8 +14,9 @@ const Checkout = ({ onPaymentSuccess, formData }) => {
     const error = validateForm(formData, cartData);
     if (error) return toast.error(error);
 
-    if (!window.Razorpay) {
-      return toast.error("Razorpay SDK load failed");
+    const isLoaded = await loadRazorpayScript();
+    if (!isLoaded) {
+      return toast.error("Razorpay SDK failed to load. Are you online?");
     }
 
     try {

@@ -4,9 +4,9 @@ import { setUserSearchQuery, toggleUserStatusThunk } from "../admin.Slice";
 
 export function useAdminUsers() {
   const dispatch = useDispatch();
-  const { users, filters, loading } = useSelector((state) => state.admin);
+  const { users, filters, loading, userSearchQuery } = useSelector((state) => state.admin);
 
-  const searchQuery = filters.userSearchQuery;
+  const searchQuery =   userSearchQuery;
 
   const filteredUsers = users.filter((user) => {
     if (searchQuery.trim() !== "") {
