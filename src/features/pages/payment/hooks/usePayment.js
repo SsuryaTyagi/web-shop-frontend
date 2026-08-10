@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { createOrder, verifyPayment, saveOrder } from "../services/payment.api";
-import { setLoading, setError, setCurrentOrder } from "../payment.slice";
+import { setLoading, setError, setCurrentOrder } from "../payment.Slice.js";
 import { loadRazorpayScript } from "../../../../utils/loadRazorpay";
 
 export const usePayment = () => {
