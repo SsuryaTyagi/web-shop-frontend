@@ -8,12 +8,12 @@ export const usePayment = ()=>{
     const dispatch = useDispatch();
     const {loading, error, message} = useSelector((state)=> state.payment);
 
-    const handleCreateOrder = async (orderData)=>{
+    const handleCreateOrder = async (amount)=>{
         try {
             dispatch(setLoading(true));
-            const order = await createOrder(orderData);
+            const order = await createOrder(amount);
             dispatch(setCurrentOrder(order));
-            toast.success(order.message, {toastId: "create-order-success"});
+            toast.success("Order created successfully", {toastId: "create-order-success"});
         } catch (error) {
             dispatch(setError(error.message));
             toast.error(error.message, {toastId: "create-order-error"});
@@ -21,6 +21,17 @@ export const usePayment = ()=>{
             dispatch(setLoading(false));
         }
     }
-    const handle
+    const handleVerifyPayment = async (paymentData)=>{
+        try{
+            dispatch(setLoading(true));
+            const verificationResult = await verifyPayment(paymentData);
+            toast.success(verificationResult.message, {toastId: "verify-payment-success"});
+        }catch(error){
+            dispatch(setError(error.message));
+            toast.error(error.message, {toastId: "verify-payment-error"});
+        } finally {
+            dispatch(setLoading(false));
+        }
 
+    }
 }
