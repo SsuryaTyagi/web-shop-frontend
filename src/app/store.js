@@ -5,6 +5,7 @@ import profileSlice from "../features/pages/Profile/profile.Slice";
 import contactSlice from "../features/pages/Contact/contact.Slice";
 import cartReducer from "../features/pages/Cart/cart.Slice.js";
 import adminReducer from "../features/admin/admin.Slice.js";
+import paymentReducer from "../features/pages/payment/payment.Slice.js";
 import { saveCart } from "../features/pages/Cart/service/cartStorage.js";
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
     profile: profileSlice,
     contact: contactSlice,
     cart: cartReducer,
+    payment: paymentReducer,
     admin: adminReducer,
   },
 });
@@ -25,4 +27,4 @@ store.subscribe(() => {
     saveCart(currentCart);
     previousCart = currentCart;
   }
-});
+});

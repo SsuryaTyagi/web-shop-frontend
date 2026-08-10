@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../features/Api";
+import { BASE_URL } from "../../../Api";
 
 // ─── CREATE ORDER ──────────────────────────────────────────
 export const createOrder = async (amount) => {

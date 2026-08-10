@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Checkout from "../Checkout";
+import Checkout from "../payment/pages/Checkout";
 import { useNavigate } from "react-router";
 import useCart from "../Cart/hooks/useCart";
 

@@ -1,10 +1,10 @@
 import React from "react";
-import { createOrder, verifyPayment, saveOrder } from "../../services/payment";
-import { validateForm } from "../../features/pages/DeliveryAddres/orderValidation";
+import { createOrder, verifyPayment, saveOrder } from "../services/payment.service";
+import { validateForm } from "../../DeliveryAddres/orderValidation";
 import { toast } from "react-toastify";
-import useAuth from "../pages/auth/hooks/useAuth";
-import useCart from "../pages/Cart/hooks/useCart";
-import { loadRazorpayScript } from "../../utils/loadRazorpay";
+import useAuth from "../../auth/hooks/useAuth";
+import useCart from "../../Cart/hooks/useCart";
+import { loadRazorpayScript } from "../../../../utils/loadRazorpay";
 
 const Checkout = ({ onPaymentSuccess, formData }) => {
   const { total, cartData, clearCart } = useCart();

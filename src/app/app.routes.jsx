@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router";
 import Login from "../features/pages/auth/pages/login.jsx";
 import Profile from "../features/pages/Profile/pages/Profile.jsx";
 import ContactPage from "../features/pages/Contact/pages/Contact.jsx";
-import Checkout from "../features/pages/Checkout.jsx";
+import Checkout from "../features/pages/payment/pages/Checkout.jsx";
 import Address from "../features/pages/DeliveryAddres/Address.jsx";
 import OrderSuccess from "../features/pages/DeliveryAddres/OrderSucces.jsx";
 import YouOrder from "../features/pages/Profile/components/Order.jsx";
