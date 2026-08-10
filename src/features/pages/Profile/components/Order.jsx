@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import useOrder from "../hooks/useOrder";
 
 export default function YouOrder() {
-  const { order } = useOrder();
-
+  const { order, handleOrder } = useOrder();
+  useEffect(() => {
+    handleOrder();
+  }, []);
   if (!order || order.length === 0) {
     return (
       <div className="text-center  py-[3rem]">
@@ -30,7 +32,6 @@ export default function YouOrder() {
               <b>Payment ID:</b> {ord.payment_id}
             </span>
           </div>
-
           {/* ITEMS */}
           {ord.items.map((item, i) => (
             <div key={i} className="flex gap-[1rem] py-[0.8rem] border-t">
@@ -54,8 +55,7 @@ export default function YouOrder() {
               </div>
             </div>
           ))}
-            Total: ₹{ord.order_total}
-
+          Total: ₹{ord.order_total}
         </div>
       ))}
     </div>

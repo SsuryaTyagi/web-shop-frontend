@@ -8,7 +8,7 @@ const profileSlice = createSlice({
     error: null,
   },
   reducers: {
-    SetOrder: (state, action) => {
+    setOrder: (state, action) => {
       state.order = action.payload;
     },
     setLoading: (state, action) => {

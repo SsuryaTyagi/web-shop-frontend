@@ -26,7 +26,7 @@ export const getProfile = async () => {
 export const getOrder = async () => {
   try {
     const res = await api.post(`/orderDetails`);
-    return res.data.order;
+    return res.data;
   } catch (error) {
     throw error.response?.data?.message || "Profile failed!";
   }
