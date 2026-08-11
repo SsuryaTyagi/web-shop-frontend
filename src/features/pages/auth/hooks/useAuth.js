@@ -62,10 +62,9 @@ export default function useAuth() {
     }
   };
 
-  const handleGoogleLogin = async (isLogin) => {
+  const handleGoogleLogin = async () => {
     try {
-      const mode = isLogin ? "login" : "register";
-      await googleLogin(mode);
+      await googleLogin();
     } catch (error) {
       const errMsg = error?.message || "Google login failed";
       dispatch(setError(errMsg));

@@ -50,7 +50,7 @@ export default function Login() {
   };
 
   const handleGoogleLoginClick = () => {
-    handleGoogleLogin(isLogin);
+    handleGoogleLogin();
   };
 
   const handleChange = (e) => {

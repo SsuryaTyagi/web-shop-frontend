@@ -29,8 +29,8 @@ export const getMe = async () => {
   const res = await api.get("/get-Me");
   return res.data;
 };
-export const googleLogin = (mode) => {
-  const url = `${BASE_URL}/auth/google?mode=${mode}`;
+export const googleLogin =  () => {
+  const url = `${BASE_URL}/auth/google`;
   window.location.href = url;
 };
 
