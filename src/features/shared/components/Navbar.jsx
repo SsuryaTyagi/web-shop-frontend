@@ -86,30 +86,29 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <ul className="md:hidden flex flex-col bg-white w-full mt-2 shadow-lg text-lg font-medium">
-          {(user === null ? links : links2).map((link, idx) => (
-            <Link key={idx} to={link.path}>
-              {link.Name === "Cart" && cartData.length > 0 ? (
-                <div className="relative flex items-center px-3 py-2">
-                  <li className="flex items-center gap-2 cursor-pointer hover:text-red-500 transition-colors duration-200">
-                    {link.icon} {link.Name}
-                  </li>
-
-                  <GoDotFill
-                    fontSize={32}
-                    className="text-red-600 absolute right-75 -top-0 wiggle"
-                  />
-                </div>
-              ) : (
-                <li className="flex items-center gap-2 cursor-pointer hover:text-red-500 transition-colors duration-200">
-                  {link.icon} {link.Name}
-                </li>
-              )}
-            </Link>
-          ))}
-        </ul>
-      )}
+    {menuOpen && (
+  <ul className="md:hidden flex flex-col bg-white w-full mt-2 shadow-lg text-lg font-medium">
+    {(user === null ? links : links2).map((link, idx) => (
+      <Link key={idx} to={link.path} onClick={() => setMenuOpen(false)}>
+        {link.Name === "Cart" && cartData.length > 0 ? (
+          <div className="relative flex items-center px-3 py-2">
+            <li className="flex items-center gap-2 cursor-pointer hover:text-red-500 transition-colors duration-200">
+              {link.icon} {link.Name}
+            </li>
+            <GoDotFill
+              fontSize={32}
+              className="text-red-600 absolute right-75 -top-0 wiggle"
+            />
+          </div>
+        ) : (
+          <li className="flex items-center gap-2 cursor-pointer hover:text-red-500 transition-colors duration-200">
+            {link.icon} {link.Name}
+          </li>
+        )}
+      </Link>
+    ))}
+  </ul>
+)}
     </nav>
   );
 }
