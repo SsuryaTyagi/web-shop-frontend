@@ -62,10 +62,10 @@ export default function useAuth() {
     }
   };
 
-  const handleGoogleLogin = (isLogin) => {
+  const handleGoogleLogin = async (isLogin) => {
     try {
       const mode = isLogin ? "login" : "register";
-      googleLogin(mode);
+      await googleLogin(mode);
     } catch (error) {
       const errMsg = error?.message || "Google login failed";
       dispatch(setError(errMsg));
@@ -90,9 +90,19 @@ export default function useAuth() {
     }
   };
 
-  useEffect(() => {
+ useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token");
+
+  if (token) {
+    localStorage.setItem("token", token);
+    // clean the token out of the URL
+    window.history.replaceState({}, document.title, window.location.pathname);
+    handleGetMe(); // now fetch the user with the token in place
+  } else {
     handleGetMe();
-  }, []);
+  }
+}, []);
 
   return {
     handleRegister,

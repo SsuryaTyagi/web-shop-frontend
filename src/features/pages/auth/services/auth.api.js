@@ -30,7 +30,7 @@ export const getMe = async () => {
   return res.data;
 };
 export const googleLogin = (mode) => {
-  const url = `https://web-shop-api.vercel.app/auth/google?mode=${mode}`;
+  const url = `${BASE_URL}/auth/google?mode=${mode}`;
   window.location.href = url;
 };
 
