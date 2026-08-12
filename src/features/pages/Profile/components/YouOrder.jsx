@@ -6,41 +6,40 @@ export default function Order() {
 
   if (!order || order.length === 0) {
     return (
-      <div className="text-center py-[3rem]">
-        <p className="text-gray-500 text-[1rem]">You have no orders yet.</p>
+      <div className="text-center py-12">
+        <p className="text-gray-500">You have no orders yet.</p>
       </div>
     );
   }
 
   return (
     <div>
-      <h3 className="text-[1.3rem] font-semibold mb-[1.2rem]">My Orders</h3>
+      <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-5">My Orders</h3>
 
-      <div className="space-y-[1rem]">
+      <div className="space-y-4">
         {order.map((ord) => (
           <div
             key={ord._id}
-            className="border rounded-lg p-[1rem] shadow-sm hover:shadow-md transition"
+            className="border border-gray-100 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="flex justify-between items-center mb-[0.5rem]">
-              <span className="font-semibold text-gray-700">
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-semibold text-slate-700">
                 Order #{ord._id?.slice(-6)}
               </span>
               <span
-                className={`text-[0.85rem] px-[0.7rem] py-[0.2rem] rounded-full font-medium
-                  ${
-                    ord.status === "delivered"
-                      ? "bg-green-100 text-green-700"
-                      : ord.status === "pending"
-                      ? "bg-yellow-100 text-yellow-700"
-                      : "bg-blue-100 text-blue-700"
-                  }`}
+                className={`text-xs px-2.5 py-1 rounded-full font-semibold capitalize ${
+                  ord.status === "delivered"
+                    ? "bg-green-100 text-green-700"
+                    : ord.status === "pending"
+                    ? "bg-amber-100 text-amber-700"
+                    : "bg-blue-100 text-blue-700"
+                }`}
               >
                 {ord.status || "processing"}
               </span>
             </div>
 
-            <div className="text-[0.9rem] text-gray-600 space-y-[0.2rem]">
+            <div className="text-sm text-gray-500 space-y-0.5">
               <p>Total: ₹{ord.total || ord.amount || 0}</p>
               <p>
                 Date:{" "}
@@ -51,12 +50,9 @@ export default function Order() {
             </div>
 
             {ord.items && (
-              <div className="mt-[0.7rem] border-t pt-[0.7rem] space-y-[0.3rem]">
+              <div className="mt-3 border-t border-gray-100 pt-3 space-y-1">
                 {ord.items.map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex justify-between text-[0.85rem] text-gray-500"
-                  >
+                  <div key={i} className="flex justify-between text-sm text-gray-500">
                     <span>
                       {item.name} × {item.quantity}
                     </span>

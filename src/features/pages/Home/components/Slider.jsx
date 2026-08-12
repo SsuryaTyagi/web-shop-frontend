@@ -4,11 +4,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function Slider() {
   const [index, setIndex] = useState(0);
   const images = [
-    "C:/Users/2040s/OneDrive/Desktop/javascript/slide/eiffel.avif",
-    "rome.avif",
-    "new york.avif",
-    "golden tample.jpg",
-    "red fort.jpg",
+    "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/slider/eiffel.avif",
+    "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/slider/rome.avif",
+    "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/slider/new-york.avif",
+    "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/slider/golden-temple.jpg",
+    "https://ik.imagekit.io/gb1lyvp8q/The%20pizza%20hub/slider/red-fort.jpg",
   ];
 
   const next = () => {
@@ -19,7 +19,6 @@ export default function Slider() {
     setIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  // Auto-slide every 3 seconds
   useEffect(() => {
     const interval = setInterval(next, 3000);
     return () => clearInterval(interval);
@@ -27,40 +26,44 @@ export default function Slider() {
 
   return (
     <div className="relative w-full max-w-2xl mx-auto mt-8">
-      {/* Image card */}
       <div
-        className="h-64 sm:h-80 md:h-96 rounded-2xl shadow-lg bg-center bg-cover transition-all duration-500"
-        style={{
-          backgroundImage: `url(${images[index]})`,
-        }}
+        className="h-56 sm:h-72 md:h-96 rounded-2xl shadow-lg bg-center bg-cover transition-all duration-500 relative overflow-hidden"
+        style={{ backgroundImage: `url(${images[index]})` }}
+        role="img"
+        aria-label={`Slide ${index + 1} of ${images.length}`}
       >
-        <div className="absolute inset-0 bg-black/25 rounded-2xl"></div>
+        <div className="absolute inset-0 bg-black/25 rounded-2xl" />
       </div>
 
-      {/* Buttons */}
       <button
+        type="button"
         onClick={prev}
-        className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition"
+        aria-label="Previous slide"
+        className="absolute top-1/2 left-3 sm:left-4 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
       >
-        <ChevronLeft className="w-6 h-6 text-gray-700" />
+        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
       </button>
 
       <button
+        type="button"
         onClick={next}
-        className="absolute top-1/2 right-4 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition"
+        aria-label="Next slide"
+        className="absolute top-1/2 right-3 sm:right-4 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-white"
       >
-        <ChevronRight className="w-6 h-6 text-gray-700" />
+        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
       </button>
 
-      {/* Small image indicators */}
       <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
         {images.map((_, i) => (
-          <div
+          <button
             key={i}
-            className={`h-2 w-2 rounded-full transition-all ${
-              i === index ? "bg-white" : "bg-gray-400/60"
+            type="button"
+            onClick={() => setIndex(i)}
+            aria-label={`Go to slide ${i + 1}`}
+            className={`h-2 rounded-full transition-all ${
+              i === index ? "w-5 bg-white" : "w-2 bg-gray-300/70 hover:bg-white/80"
             }`}
-          ></div>
+          />
         ))}
       </div>
     </div>

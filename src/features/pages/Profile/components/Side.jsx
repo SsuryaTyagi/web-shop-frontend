@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   FaUser,
   FaShoppingBag,
@@ -8,34 +8,50 @@ import {
 import useAuth from "../../auth/hooks/useAuth";
 
 export default function Sidebar({ activeTab, setActiveTab }) {
-  const {handleLogout} = useAuth()
-const Logout = async()=>{
-  await handleLogout()
-}
+  const { handleLogout } = useAuth();
+
+  const Logout = async () => {
+    await handleLogout();
+  };
+
+  const tabs = [
+    { id: "account", label: "Account Details", icon: <FaUser /> },
+    { id: "orders", label: "My Orders", icon: <FaShoppingBag /> },
+    { id: "terms", label: "Terms & Conditions", icon: <FaFileAlt /> },
+  ];
+
   const itemStyle = (tab) =>
-    `flex items-center gap-[0.7rem] p-[0.7rem] rounded-lg cursor-pointer
-     ${activeTab === tab ? "bg-gray-200 font-semibold" : "hover:bg-gray-100"}`;
+    `w-full flex items-center gap-3 p-3 rounded-lg text-left transition-colors focus:outline-none focus:ring-2 focus:ring-gray-300 relative
+     ${
+       activeTab === tab
+         ? "bg-gray-100 font-semibold text-slate-900"
+         : "text-gray-600 hover:bg-gray-50"
+     }`;
 
   return (
-    <div className="border-r p-[1.5rem] space-y-[0.6rem]">
-      <div className={itemStyle("account")} onClick={() => setActiveTab("account")}>
-        <FaUser /> Account Details
-      </div>
-
-      <div className={itemStyle("orders")} onClick={() => setActiveTab("orders")}>
-        <FaShoppingBag /> My Orders
-      </div>
-
-      <div className={itemStyle("terms")} onClick={() => setActiveTab("terms")}>
-        <FaFileAlt /> Terms & Conditions
-      </div>
+    <div className="border-r border-gray-100 p-4 sm:p-6 space-y-1.5">
+      {tabs.map((tab) => (
+        <button
+          key={tab.id}
+          type="button"
+          onClick={() => setActiveTab(tab.id)}
+          className={itemStyle(tab.id)}
+          aria-current={activeTab === tab.id ? "true" : undefined}
+        >
+          {activeTab === tab.id && (
+            <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-1 bg-[#E33B32] rounded-full" />
+          )}
+          {tab.icon} {tab.label}
+        </button>
+      ))}
 
       <button
+        type="button"
         onClick={Logout}
-        className="flex items-center gap-[0.7rem] text-red-600 mt-[1.5rem]"
+        className="w-full flex items-center gap-3 p-3 rounded-lg text-red-600 hover:bg-red-50 mt-4 transition-colors focus:outline-none focus:ring-2 focus:ring-red-200"
       >
         <FaSignOutAlt /> Logout
       </button>
-    </div>  
+    </div>
   );
 }

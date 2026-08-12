@@ -13,7 +13,7 @@ import { useMenu } from "../hooks/useMenu";
 export default function Home() {
   const { handlePopularItem, menuItem, popularItem, loading } = useMenu();
   const menuSectionRef = useRef(null);
-useEffect(() => {
+  useEffect(() => {
     handlePopularItem(true);
   }, []);
 
@@ -70,7 +70,9 @@ useEffect(() => {
           className="w-full h-auto flex justify-center mt-2 md:mt-8"
         >
           <div className="w-full max-w-[1400px] px-2">
-            <div className="text-2xl font-bold mt-6">What's on your mind?</div>
+            <div className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-6">
+              What's on your mind?
+            </div>
 
             <div className="mt-6 flex gap-4 overflow-x-auto no-scrollbar py-2">
               {menuItem?.map((value, index) => (
@@ -96,7 +98,7 @@ useEffect(() => {
 
             <hr className="border-gray-400  md:mt-6" />
 
-            <div className="text-2xl font-bold my-6 md:mt-6">
+            <div className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-6">
               Our Most Popular Deals!
             </div>
 
