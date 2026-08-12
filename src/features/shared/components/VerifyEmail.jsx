@@ -4,7 +4,7 @@ import axios from "axios";
 import { BASE_URL } from "../../Api.js";
 
 export default function VerifyEmail() {
-  const { token } = useParams();           
+  const { token } = useParams();
   const navigate = useNavigate();
   const [status, setStatus] = useState("loading");
 
@@ -15,9 +15,9 @@ export default function VerifyEmail() {
         setStatus("success");
       } catch (err) {
         const msg = err.response?.data?.message || "";
-        if (msg.includes("expired"))       setStatus("expired");
-        else if (msg.includes("already"))  setStatus("already-verified");
-        else                               setStatus("invalid");
+        if (msg.includes("expired")) setStatus("expired");
+        else if (msg.includes("already")) setStatus("already-verified");
+        else setStatus("invalid");
       }
     };
     if (token) verify();
@@ -27,61 +27,62 @@ export default function VerifyEmail() {
     loading: {
       emoji: "⏳",
       title: "Verifying your email...",
-      msg: "Please wait.",
-      color: "text-gray-500",
+      msg: "Please wait while we validate your verification token.",
+      color: "text-slate-700",
     },
     success: {
       emoji: "✅",
       title: "Email Verified Successfully!",
-      msg: "Your account has been verified. You can now login.",
-      color: "text-green-600",
+      msg: "Your account is active and verified. You can now log in.",
+      color: "text-emerald-600",
     },
     expired: {
       emoji: "⏰",
-      title: "Link Expired",
-      msg: "Your verification link has expired. Please register again.",
-      color: "text-orange-500",
+      title: "Verification Link Expired",
+      msg: "Your verification link has expired. Please register or request a new link.",
+      color: "text-amber-600",
     },
     invalid: {
       emoji: "❌",
-      title: "Invalid Link",
-      msg: "This verification link is not valid.",
-      color: "text-red-500",
+      title: "Invalid Verification Link",
+      msg: "This email verification link is malformed or invalid.",
+      color: "text-rose-600",
     },
     "already-verified": {
       emoji: "👍",
       title: "Already Verified",
-      msg: "Your email is already verified. Please login.",
-      color: "text-blue-500",
+      msg: "Your email address is already verified. You can log in right away.",
+      color: "text-sky-600",
     },
   };
 
   const current = content[status];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white shadow-lg rounded-2xl p-10 max-w-md w-full text-center">
-        
-        <div className="text-6xl mb-4">{current.emoji}</div>
+    <div className="min-h-screen pt-20 flex items-center justify-center bg-slate-50/50 p-4">
+      <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-100 shadow-xl max-w-md w-full text-center space-y-6 animate-in fade-in zoom-in-95 duration-300">
+        <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto text-4xl shadow-inner border border-slate-100">
+          {current.emoji}
+        </div>
 
-        <h1 className={`text-2xl font-bold mb-2 ${current.color}`}>
-          {current.title}
-        </h1>
+        <div className="space-y-2">
+          <h1 className={`text-2xl font-extrabold tracking-tight ${current.color}`}>
+            {current.title}
+          </h1>
+          <p className="text-xs text-slate-500 font-medium leading-relaxed">
+            {current.msg}
+          </p>
+        </div>
 
-        <p className="text-gray-500 mb-8">{current.msg}</p>
-
-        {/* Loading mein button mat dikhao */}
         {status !== "loading" && (
           <button
             onClick={() => navigate("/login")}
-            className="bg-[#E33B32] text-white px-8 py-3 rounded-lg 
-                       hover:bg-[#cf312a] transition font-medium"
+            className="w-full py-3.5 bg-[#E33B32] hover:bg-[#cf312a] text-white font-bold text-xs rounded-2xl shadow-lg shadow-[#E33B32]/30 transition-all"
           >
-            Go to Login
+            Proceed to Login
           </button>
         )}
-
       </div>
     </div>
   );
-}
+}
