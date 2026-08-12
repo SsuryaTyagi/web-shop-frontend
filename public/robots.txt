@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /cart/address
+Disallow: /order-success
+Disallow: /verify-email
+Disallow: /complete-profile
+
+Sitemap: https://web-shop-frontend.vercel.app/sitemap.xml
