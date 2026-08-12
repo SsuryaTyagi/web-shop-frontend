@@ -15,7 +15,7 @@ export default function Card(props) {
     if (size === "L") return props.price_l;
   };
 
-  // 🔑 derive from real cart data — matches on _id + selectedSize
+  // derive from real cart data — matches on _id + selectedSize
   const cartIndex = cartData.findIndex(
     (item) => item._id === props._id && item.selectedSize === size
   );
@@ -46,46 +46,50 @@ export default function Card(props) {
   };
 
   return (
-    <div className="w-[32vw] flex flex-col justify-between max-w-[320px] bg-white mb-4 rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl duration-300">
-      <div className="relative group">
+    <div className="w-full h-full flex flex-col justify-between bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group">
+      <div className="relative overflow-hidden">
         <img
           src={props.img}
-          alt=""
+          alt={props.name || "Food item"}
           loading="lazy"
-          className="w-full h-[120px] sm:h-[150px] md:h-[180px] object-cover group-hover:scale-110 transition-transform duration-300"
+          className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300"
         />
       </div>
 
-      <div className="p-2 sm:p-3">
-        <div className="flex justify-between">
+      <div className="p-3 sm:p-4 flex flex-col flex-1">
+        <div className="flex justify-between items-start gap-2">
           <h3 className="text-sm sm:text-base md:text-lg font-bold truncate">
             {props.name}
           </h3>
-          <div className="flex items-start text-[12px] sm:text-sm text-gray-600 mt-1">
-            <FaStar className="text-yellow-500 mr-1" />
+          <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-600 shrink-0">
+            <FaStar className="text-yellow-500" aria-hidden="true" />
             <span className="font-semibold">{props.rating}</span>
           </div>
         </div>
 
-        <div className="text-sm sm:text-sm text-gray-500 mt-1 truncate flex justify-between items-center">
-          <span>{props.category}</span>
-          <div className="font-bold">₹{getPrice()}</div>
+        <div className="text-xs sm:text-sm text-gray-500 mt-1 flex justify-between items-center gap-2">
+          <span className="truncate">{props.category}</span>
+          <span className="font-bold text-gray-800 shrink-0">₹{getPrice()}</span>
         </div>
 
-        <div className="text-sm sm:text-sm text-gray-400 truncate">
-          {props.title}
-        </div>
+        {props.title && (
+          <div className="text-xs sm:text-sm text-gray-400 truncate mt-0.5">
+            {props.title}
+          </div>
+        )}
 
         {props.category === "Pizza" && (
-          <div className="flex justify-around mt-2">
+          <div className="flex justify-center gap-2 mt-3" role="group" aria-label="Select size">
             {["S", "M", "L"].map((s) => (
               <button
                 key={s}
+                type="button"
                 disabled={isInCart}
-                className={`md:px-3 px-2 py-1 rounded-full border ${
+                aria-pressed={size === s}
+                className={`px-3 py-1 text-sm rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-300 ${
                   size === s
-                    ? "bg-yellow-500 text-white"
-                    : "bg-white text-gray-700"
+                    ? "bg-yellow-500 text-white border-yellow-500"
+                    : "bg-white text-gray-700 border-gray-300 hover:border-yellow-400"
                 } ${isInCart ? "opacity-50 cursor-not-allowed" : ""}`}
                 onClick={() => setSize(s)}
               >
@@ -95,24 +99,37 @@ export default function Card(props) {
           </div>
         )}
 
-        {!isInCart ? (
-          <button
-            onClick={handleAddToCart}
-            className="w-full mt-6 rounded-2xl text-center md:text-2xl text-[12px] text-white bg-green-400 active:bg-green-800"
-          >
-            Add to Cart
-          </button>
-        ) : (
-          <div className="flex items-center justify-center gap-4 mt-6">
-            <button onClick={handleDecrease} className="bg-amber-400 rounded-full p-1">
-              <FiMinusCircle fontSize={30} />
+        <div className="mt-auto pt-4">
+          {!isInCart ? (
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              className="w-full py-2 rounded-2xl text-center text-sm sm:text-base font-semibold text-white bg-green-500 hover:bg-green-600 active:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-green-300"
+            >
+              Add to Cart
             </button>
-            <span className="text-lg font-semibold">{currentQty}</span>
-            <button onClick={handleIncrease} className="bg-amber-400 rounded-full p-1">
-              <MdOutlineAddCircleOutline fontSize={30} />
-            </button>
-          </div>
-        )}
+          ) : (
+            <div className="flex items-center justify-center gap-4">
+              <button
+                type="button"
+                onClick={handleDecrease}
+                aria-label="Decrease quantity"
+                className="bg-amber-400 hover:bg-amber-500 rounded-full p-1 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-300"
+              >
+                <FiMinusCircle fontSize={26} />
+              </button>
+              <span className="text-lg font-semibold w-6 text-center">{currentQty}</span>
+              <button
+                type="button"
+                onClick={handleIncrease}
+                aria-label="Increase quantity"
+                className="bg-amber-400 hover:bg-amber-500 rounded-full p-1 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-300"
+              >
+                <MdOutlineAddCircleOutline fontSize={26} />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
