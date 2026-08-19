@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import useAuth from "../hooks/useAuth.js";
-import { toast } from "react-toastify";
+import Alert from "../../../shared/components/Alert";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
   const [formData, setFormData] = useState({
     name: "",
     number: "",
@@ -15,11 +16,37 @@ export default function Login() {
     address: "",
   });
 
-  const { handleRegister, handleLogin, handleGoogleLogin, user, loading, error, message } =
+  const { handleRegister, handleLogin, handleGoogleLogin, loading, error, message } =
     useAuth();
+
+  const validate = () => {
+    const errors = {};
+    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+    if (!formData.password || formData.password.length < 4) {
+      errors.password = "Password must be at least 4 characters.";
+    }
+
+    if (!isLogin) {
+      if (!formData.name?.trim()) {
+        errors.name = "Full name is required.";
+      }
+      if (!formData.number?.trim()) {
+        errors.number = "Phone number is required.";
+      }
+      if (!formData.address?.trim()) {
+        errors.address = "Address is required.";
+      }
+    }
+
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validate()) return;
 
     if (isLogin) {
       await handleLogin({
@@ -27,25 +54,8 @@ export default function Login() {
         password: formData.password,
       });
     } else {
-      if (
-        !formData.name ||
-        !formData.number ||
-        !formData.email ||
-        !formData.password ||
-        !formData.address
-      ) {
-        return toast.error("All fields are required");
-      }
       await handleRegister(formData);
     }
-
-    setFormData({
-      name: "",
-      number: "",
-      email: "",
-      password: "",
-      address: "",
-    });
   };
 
   const handleGoogleLoginClick = () => {
@@ -53,106 +63,134 @@ export default function Login() {
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name.toLowerCase()]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    // clear error for modified field
+    if (validationErrors[name]) {
+      setValidationErrors((prev) => ({
+        ...prev,
+        [name]: null,
+      }));
+    }
   };
 
-  const inputValue = [
-    { name: "name", type: "text", placeholder: "Enter your Name" },
-    { name: "address", type: "text", placeholder: "Enter your address" },
-    { name: "number", type: "tel", placeholder: "Enter your Phone No." },
-    { name: "email", type: "email", placeholder: "Enter your Email" },
+  const inputFields = [
+    { name: "name", label: "Full Name", type: "text", placeholder: "Enter your full name" },
+    { name: "address", label: "Address", type: "text", placeholder: "Enter your delivery address" },
+    { name: "number", label: "Phone Number", type: "tel", placeholder: "Enter your phone number" },
+    { name: "email", label: "Email Address", type: "email", placeholder: "Enter your email address" },
     {
       name: "password",
+      label: "Password",
       type: showPassword ? "text" : "password",
-      placeholder: "Enter your Password",
+      placeholder: "Enter your password",
     },
   ];
 
-  const filterValue = inputValue.filter(
-    (value) => value.name === "email" || value.name === "password",
-  );
+  const activeFields = isLogin
+    ? inputFields.filter((f) => f.name === "email" || f.name === "password")
+    : inputFields;
 
   return (
-    <div className="min-h-screen flex bg-gray-50">
+    <div className="min-h-screen flex bg-slate-50 pt-16 sm:pt-20">
+      {/* Left Hero Graphic Section */}
       <div className="hidden md:flex w-1/2 bg-[url('https://i.imgur.com/Zf7Xk3Q.png')] bg-cover bg-center relative">
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="z-10 text-white p-10 flex flex-col justify-center h-full">
-          <h1 className="text-4xl font-bold mb-4">
-            Welcome to The Pizza Hub
+        <div className="absolute inset-0 bg-slate-950/65 backdrop-blur-xs" />
+        <div className="z-10 text-white p-12 flex flex-col justify-center h-full max-w-lg mx-auto">
+          <span className="inline-block bg-[#E33B32] text-white text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full w-fit mb-4">
+            The Pizza Hub
+          </span>
+          <h1 className="text-4xl font-extrabold tracking-tight leading-tight mb-4">
+            Craving Fresh, Hot Pizza?
           </h1>
-          <p className="text-lg leading-relaxed text-gray-200">
-            Bringing you flavors that comfort the soul and freshness that
-            excites your senses — because good food deserves great moments.
+          <p className="text-base leading-relaxed text-slate-200 font-medium">
+            Bringing you authentic flavors, golden crispy crusts, and unbeatable quality right to your doorstep.
           </p>
         </div>
       </div>
 
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-6 sm:px-12 py-16 md:py-0">
-        <div className="bg-white shadow-lg rounded-2xl p-6 sm:p-8 w-full max-w-md">
-          <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+      {/* Right Form Section */}
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center px-4 sm:px-8 py-10 sm:py-16">
+        <div className="bg-white shadow-sm border border-slate-200 rounded-3xl p-6 sm:p-10 w-full max-w-md">
+          <h2 className="text-2xl sm:text-3xl font-extrabold mb-2 text-slate-900">
             {isLogin ? "Sign In" : "Create Account"}
           </h2>
+          <p className="text-sm text-slate-500 mb-6 font-medium">
+            {isLogin
+              ? "Welcome back! Please enter your details."
+              : "Sign up to track orders and save your favorite pizzas."}
+          </p>
 
+          {/* Traditional Alert Message for API error/message */}
+          {error && (
+            <Alert
+              type="error"
+              message={typeof error === "string" ? error : "Authentication failed. Please check your credentials."}
+              className="mb-6"
+            />
+          )}
+          {message && (
+            <Alert type="success" message={message} className="mb-6" />
+          )}
+
+          {/* Google Login Button */}
           <button
             type="button"
             onClick={handleGoogleLoginClick}
-            className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2.5 mb-4 hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-300"
+            className="w-full flex items-center justify-center gap-3 border border-slate-300 rounded-xl py-3 px-4 hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-300 cursor-pointer min-h-[44px]"
           >
-            <FcGoogle className="text-xl" />
-            <span className="text-sm font-medium text-gray-700">Continue with Google</span>
+            <FcGoogle className="text-2xl shrink-0" />
+            <span className="text-sm font-bold text-slate-700">Continue with Google</span>
           </button>
 
-          <div className="flex items-center mb-4">
-            <hr className="flex-grow border-gray-200" />
-            <span className="mx-3 text-gray-400 text-xs uppercase tracking-wide">or</span>
-            <hr className="flex-grow border-gray-200" />
+          <div className="flex items-center my-6">
+            <hr className="flex-grow border-slate-200" />
+            <span className="mx-3 text-slate-400 text-xs uppercase font-extrabold tracking-wider">or</span>
+            <hr className="flex-grow border-slate-200" />
           </div>
 
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4 space-y-4">
-              {(isLogin ? filterValue : inputValue).map((value, index) => (
-                <div key={index}>
+          <form onSubmit={handleSubmit} noValidate>
+            <div className="space-y-4 mb-6">
+              {activeFields.map((field) => (
+                <div key={field.name}>
                   <label
-                    htmlFor={value.name}
-                    className="block text-sm font-medium text-gray-700 mb-1 capitalize"
+                    htmlFor={field.name}
+                    className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5"
                   >
-                    {value.name}
+                    {field.label}
                   </label>
-                  {value.name === "password" ? (
-                    <div className="relative">
-                      <input
-                        id={value.name}
-                        name={value.name}
-                        value={formData[value.name]}
-                        onChange={handleChange}
-                        type={value.type}
-                        required
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-[#E33B32]/40 focus:border-[#E33B32] transition-colors"
-                        placeholder={value.placeholder}
-                      />
+                  <div className="relative">
+                    <input
+                      id={field.name}
+                      name={field.name}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      className={`w-full bg-white border rounded-xl px-3.5 py-3 outline-none transition-all text-sm min-h-[44px] ${
+                        validationErrors[field.name]
+                          ? "border-red-500 focus:ring-2 focus:ring-red-200 bg-red-50/20"
+                          : "border-slate-300 focus:ring-2 focus:ring-[#E33B32]/30 focus:border-[#E33B32]"
+                      }`}
+                    />
+                    {field.name === "password" && (
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
                         aria-label={showPassword ? "Hide password" : "Show password"}
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 p-1 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 p-1.5 rounded-lg focus:outline-none"
                       >
                         {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
                       </button>
-                    </div>
-                  ) : (
-                    <input
-                      id={value.name}
-                      name={value.name}
-                      value={formData[value.name]}
-                      onChange={handleChange}
-                      type={value.type}
-                      required
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-[#E33B32]/40 focus:border-[#E33B32] transition-colors"
-                      placeholder={value.placeholder}
-                    />
+                    )}
+                  </div>
+                  {validationErrors[field.name] && (
+                    <p className="text-xs font-semibold text-red-600 mt-1 flex items-center gap-1">
+                      <span>•</span> {validationErrors[field.name]}
+                    </p>
                   )}
                 </div>
               ))}
@@ -161,26 +199,31 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#E33B32] text-white py-2.5 rounded-lg font-semibold hover:bg-[#cf312a] transition-colors disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#E33B32]/40"
+              className="w-full bg-[#E33B32] text-white py-3 rounded-xl font-bold hover:bg-[#cf312a] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed shadow-xs focus:outline-none focus:ring-2 focus:ring-[#E33B32]/40 min-h-[44px] text-sm cursor-pointer"
             >
-              {loading ? "Please wait..." : isLogin ? "Sign In" : "Sign Up"}
+              {loading ? "Processing..." : isLogin ? "Sign In" : "Create Account"}
             </button>
           </form>
 
-          <p className="text-center mt-6 text-gray-600 text-sm">
-            {isLogin ? "New to our app?" : "Already have an account?"}{" "}
-            <button
-              type="button"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-[#E33B32] font-medium hover:underline focus:outline-none"
-            >
-              {isLogin ? "Create an account" : "Sign in"}
-            </button>
-          </p>
+          <div className="text-center mt-6 pt-4 border-t border-slate-100">
+            <p className="text-sm text-slate-600">
+              {isLogin ? "New to The Pizza Hub?" : "Already have an account?"}{" "}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsLogin(!isLogin);
+                  setValidationErrors({});
+                }}
+                className="text-[#E33B32] font-bold hover:underline focus:outline-none"
+              >
+                {isLogin ? "Create an account" : "Sign in"}
+              </button>
+            </p>
+          </div>
         </div>
 
-        <p className="text-xs text-gray-500 mt-6 text-center max-w-md px-4">
-          By continuing, you agree to our Terms of Service & Privacy Policy.
+        <p className="text-xs text-slate-500 mt-6 text-center max-w-sm px-4">
+          By signing in, you agree to our Terms of Service & Privacy Policy.
         </p>
       </div>
     </div>

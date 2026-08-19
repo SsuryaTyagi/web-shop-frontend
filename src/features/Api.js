@@ -1,4 +1,4 @@
-export const BASE_URL = "https://web-shop-api.vercel.app";
+export const BASE_URL = "http://localhost:8000";
 
 // https://web-shop-api.vercel.app
 

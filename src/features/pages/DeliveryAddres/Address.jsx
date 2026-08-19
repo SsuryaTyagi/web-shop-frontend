@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Checkout from "../payment/pages/Checkout";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import useCart from "../Cart/hooks/useCart";
 import useAuth from "../auth/hooks/useAuth";
-import { FiCheckCircle } from "react-icons/fi";
+import { FiCheckCircle, FiShield } from "react-icons/fi";
+import Alert from "../../shared/components/Alert";
 
 export default function Address() {
   const [formData, setFormData] = useState({
@@ -12,9 +13,9 @@ export default function Address() {
     number: "",
     address: "",
   });
+  const [fieldErrors, setFieldErrors] = useState({});
   const { user } = useAuth();
   const { cartData, total } = useCart();
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,6 +27,7 @@ export default function Address() {
         address: user.address || "",
       });
     }
+    window.scrollTo(0, 0);
   }, [user]);
 
   const handlePaymentSuccess = (paymentResponse) => {
@@ -43,32 +45,35 @@ export default function Address() {
   const fields = [
     { key: "name", label: "Full Name", type: "text", placeholder: "Enter your full name" },
     { key: "email", label: "Email Address", type: "email", placeholder: "Enter your email" },
-    { key: "number", label: "Phone Number (WhatsApp)", type: "text", placeholder: "Enter active phone number" },
+    { key: "number", label: "Phone Number (WhatsApp)", type: "tel", placeholder: "Enter active 10-digit mobile number" },
   ];
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 flex justify-center py-24 sm:py-28 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+    <div className="w-full min-h-screen bg-slate-50 flex justify-center py-24 sm:py-28 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-4xl bg-white rounded-3xl shadow-sm border border-slate-200 p-6 sm:p-10">
         <div className="mb-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-[#E33B32] bg-red-50 px-3 py-1 rounded-full">
+            Checkout Step 1 of 2
+          </span>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
             Delivery Details
           </h1>
-          <p className="text-gray-600 mt-2">
-            Please confirm your address before proceeding to payment
+          <p className="text-sm text-slate-500 mt-1 font-medium">
+            Please confirm your contact and delivery location before processing payment.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {fields.map((field) => (
             <div key={field.key}>
-              <label htmlFor={field.key} className="text-sm font-medium text-gray-700">
+              <label htmlFor={field.key} className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">
                 {field.label}
               </label>
               <input
                 id={field.key}
                 type={field.type}
                 placeholder={field.placeholder}
-                className="mt-1 w-full border border-gray-300 rounded-lg p-3 outline-none focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 transition-colors"
+                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-3 outline-none focus:ring-2 focus:ring-[#E33B32]/30 focus:border-[#E33B32] transition-colors text-sm min-h-[44px]"
                 value={formData[field.key]}
                 onChange={(e) =>
                   setFormData({ ...formData, [field.key]: e.target.value })
@@ -78,14 +83,14 @@ export default function Address() {
           ))}
 
           <div>
-            <label htmlFor="address" className="text-sm font-medium text-gray-700">
-              Delivery Address
+            <label htmlFor="address" className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">
+              Complete Delivery Address
             </label>
             <textarea
               id="address"
               rows="3"
-              placeholder="House no, street, area, city"
-              className="mt-1 w-full border border-gray-300 rounded-lg p-3 outline-none focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 transition-colors resize-none"
+              placeholder="House no, street, landmark, area, city, pincode"
+              className="w-full bg-white border border-slate-300 rounded-xl p-3.5 outline-none focus:ring-2 focus:ring-[#E33B32]/30 focus:border-[#E33B32] transition-colors text-sm resize-none"
               value={formData.address}
               onChange={(e) =>
                 setFormData({ ...formData, address: e.target.value })
@@ -94,10 +99,10 @@ export default function Address() {
           </div>
         </div>
 
-        <p className="flex items-center gap-2 text-sm text-gray-500 mt-6">
-          <FiCheckCircle className="text-green-500 shrink-0" aria-hidden="true" />
-          Your details are safe and used only for delivery
-        </p>
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500 mt-6 bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <FiShield className="text-emerald-600 shrink-0 text-base" aria-hidden="true" />
+          <span>Your contact information is encrypted and strictly used for order updates and delivery.</span>
+        </div>
 
         <div className="mt-8 max-w-md">
           <Checkout

@@ -11,7 +11,7 @@ export default function ContactPage() {
     subject: "",
     message: "",
   });
-  const { handleContact } = useContact();
+  const { handleContact, loading } = useContact();
 
   const handleChange = (e) => {
     setMsg({
@@ -22,23 +22,41 @@ export default function ContactPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleContact(msg);
+    try {
+      await handleContact(msg);
 
-    Swal.fire({
-      title: "Message Sent!",
-      text: "Thanks for contacting us. We will get back to you soon.",
-      icon: "success",
-      confirmButtonColor: "#facc15",
-    });
+      Swal.fire({
+        title: "Message Sent!",
+        text: "Thanks for reaching out! Our team will get back to you shortly.",
+        icon: "success",
+        confirmButtonColor: "#E33B32",
+        customClass: {
+          popup: "rounded-3xl",
+          confirmButton: "rounded-xl font-bold px-6 py-2.5",
+        },
+      });
 
-    setMsg({ name: "", email: "", subject: "", message: "" });
+      setMsg({ name: "", email: "", subject: "", message: "" });
+    } catch (err) {
+      Swal.fire({
+        title: "Submission Error",
+        text: "Could not send your message right now. Please try again or call us directly.",
+        icon: "error",
+        confirmButtonColor: "#E33B32",
+      });
+    }
   };
 
   const contactDetails = [
-    { icon: <FiPhone />, text: "+91 9354770802" },
-    { icon: <FiMail />, text: "2040surya@gmail.com" },
-    { icon: <FiGlobe />, text: "www.awesomesite.com" },
-    { icon: <FiMapPin />, text: "Uttam Nagar, Rajapuri" },
+    { icon: <FiPhone />, label: "Phone", text: "+91 9354770802", href: "tel:+919354770802" },
+    { icon: <FiMail />, label: "Email", text: "2040surya@gmail.com", href: "mailto:2040surya@gmail.com" },
+    { icon: <FiGlobe />, label: "Website", text: "www.thepizzahub.com", href: "#" },
+    {
+      icon: <FiMapPin />,
+      label: "Location",
+      text: "E-90, Chanakya Place, Delhi, India",
+      href: "https://www.google.com/maps/search/?api=1&query=E-90+Chanakya+Place+Delhi",
+    },
   ];
 
   const socials = [
@@ -49,152 +67,184 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-gray-50 pt-20">
-      {/* Top Banner */}
-      <div
-        className="w-full h-[30vh] sm:h-[35vh] bg-cover bg-center flex items-center justify-center relative"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?auto=format&fit=crop&w=1350&q=80')",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/40" />
-        <h1 className="relative text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-          Contact <span className="text-yellow-400">Us</span>
-        </h1>
+    <div className="w-full min-h-screen bg-slate-50 pt-16 sm:pt-20">
+      {/* Responsive Top Hero Banner */}
+      <div className="relative w-full h-48 sm:h-64 md:h-80 overflow-hidden flex items-center justify-center bg-slate-900">
+        <img
+          src="https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?auto=format&fit=crop&w=1350&q=80"
+          alt="The Pizza Hub Contact Banner"
+          className="w-full h-full object-cover object-center max-w-full"
+        />
+        <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-xs" />
+        <div className="relative z-10 text-center px-4 max-w-2xl mx-auto">
+          <span className="inline-block bg-[#E33B32] text-white text-[10px] sm:text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full mb-2 shadow-md">
+            Customer Support
+          </span>
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
+            Contact <span className="text-amber-400">The Pizza Hub</span>
+          </h1>
+          <p className="text-xs sm:text-sm md:text-base text-slate-200 mt-1.5 max-w-lg mx-auto font-medium leading-normal">
+            Have questions, order feedback, or party catering requests? We're located at E-90, Chanakya Place, Delhi!
+          </p>
+        </div>
       </div>
 
-      {/* Main Section */}
-      <div className="w-full max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* Left Side Form */}
-        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name" className="text-gray-600 text-sm font-medium">
-              Your Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              name="name"
-              value={msg.name}
-              onChange={handleChange}
-              required
-              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2.5 text-base outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400 transition-colors"
-              placeholder="Full Name"
-            />
+      {/* Main Content Grid */}
+      <div className="w-full max-w-7xl mx-auto py-8 sm:py-14 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          {/* Left Side: Contact Form Card */}
+          <div className="bg-white p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs">
+            <h2 className="text-xl sm:text-2xl font-black text-slate-900 mb-1">
+              Send Us a Message
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500 mb-6 font-medium">
+              Fill out the form below and we will get back to you within 24 hours.
+            </p>
+
+            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="name" className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">
+                  Your Full Name *
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  value={msg.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#E33B32]/30 focus:border-[#E33B32] transition-colors min-h-[44px]"
+                  placeholder="e.g. Rahul Sharma"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">
+                  Your Email Address *
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={msg.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#E33B32]/30 focus:border-[#E33B32] transition-colors min-h-[44px]"
+                  placeholder="e.g. rahul@example.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="subject" className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">
+                  Subject
+                </label>
+                <input
+                  id="subject"
+                  type="text"
+                  name="subject"
+                  value={msg.subject}
+                  onChange={handleChange}
+                  className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#E33B32]/30 focus:border-[#E33B32] transition-colors min-h-[44px]"
+                  placeholder="Order inquiry, feedback, catering..."
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5">
+                  Your Message *
+                </label>
+                <textarea
+                  id="message"
+                  rows="4"
+                  name="message"
+                  value={msg.message}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-[#E33B32]/30 focus:border-[#E33B32] transition-colors resize-none"
+                  placeholder="Write your message here..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-[#E33B32] hover:bg-[#cf312a] text-white font-extrabold px-8 py-3.5 rounded-xl transition-all shadow-xs focus:outline-none focus:ring-2 focus:ring-[#E33B32]/40 min-h-[44px] cursor-pointer mt-2 text-sm"
+              >
+                {loading ? "Sending Message..." : "Send Message"}
+              </button>
+            </form>
           </div>
 
-          <div>
-            <label htmlFor="email" className="text-gray-600 text-sm font-medium">
-              Your Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={msg.email}
-              onChange={handleChange}
-              required
-              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2.5 text-base outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400 transition-colors"
-              placeholder="Email Address"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="subject" className="text-gray-600 text-sm font-medium">
-              Subject
-            </label>
-            <input
-              id="subject"
-              type="text"
-              name="subject"
-              value={msg.subject}
-              onChange={handleChange}
-              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2.5 text-base outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400 transition-colors"
-              placeholder="Subject"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="message" className="text-gray-600 text-sm font-medium">
-              Your Message
-            </label>
-            <textarea
-              id="message"
-              rows="5"
-              name="message"
-              value={msg.message}
-              onChange={handleChange}
-              className="w-full mt-1 border border-gray-300 rounded-lg px-4 py-2.5 text-base outline-none focus:ring-2 focus:ring-yellow-400/50 focus:border-yellow-400 transition-colors resize-none"
-              placeholder="Message"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-8 py-3 rounded-lg w-fit transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-300"
-          >
-            Send Message
-          </button>
-        </form>
-
-        {/* Right Side Contact Info */}
-        <div>
-          <h3 className="text-yellow-500 font-semibold text-sm uppercase tracking-wide">
-            Contact Us
-          </h3>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mt-1 text-slate-900">
-            Get In Touch
-          </h2>
-
-          <p className="text-gray-600 leading-relaxed mt-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-            velit unde vel earum aperiam suscipit magni esse ea eaque, nisi
-            dolores expedita!
-          </p>
-
-          {/* Contact Details */}
-          <div className="mt-6 space-y-4">
-            {contactDetails.map((item, i) => (
-              <p key={i} className="flex gap-3 items-center text-gray-700">
-                <span className="text-yellow-500 text-lg shrink-0" aria-hidden="true">
-                  {item.icon}
-                </span>
-                <span>{item.text}</span>
+          {/* Right Side: Contact Info & Socials */}
+          <div className="space-y-6">
+            <div className="bg-white p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-[#E33B32] bg-red-50 px-2.5 py-1 rounded-md inline-block mb-2">
+                Get In Touch
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+                We're Here to Help
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium leading-relaxed">
+                Visit us at our Delhi outlet or reach out via phone/email for quick support.
               </p>
-            ))}
-          </div>
 
-          {/* Social Icons */}
-          <div className="mt-8">
-            <h3 className="text-gray-700 font-semibold text-sm uppercase tracking-wide">
-              Follow Us On
-            </h3>
-            <div className="flex gap-3 mt-3">
-              {socials.map((s, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  aria-label={`Follow us on ${s.label}`}
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-yellow-50 text-yellow-500 hover:bg-yellow-500 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-300"
-                >
-                  {s.icon}
-                </a>
-              ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mt-6">
+                {contactDetails.map((item, i) => (
+                  <a
+                    key={i}
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-red-200 transition-all flex items-start gap-3 group"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-red-50 text-[#E33B32] flex items-center justify-center shrink-0 text-lg group-hover:bg-[#E33B32] group-hover:text-white transition-colors">
+                      {item.icon}
+                    </div>
+                    <div className="min-w-0">
+                      <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        {item.label}
+                      </span>
+                      <span className="text-xs sm:text-sm font-extrabold text-slate-800 break-words">
+                        {item.text}
+                      </span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Social Channels Card */}
+            <div className="bg-white p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs">
+              <h3 className="text-base font-extrabold text-slate-900 mb-3">
+                Follow Us On Social Media
+              </h3>
+              <div className="flex gap-2.5 flex-wrap">
+                {socials.map((s, i) => (
+                  <a
+                    key={i}
+                    href="#"
+                    aria-label={`Follow us on ${s.label}`}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-[#E33B32] hover:text-white transition-all text-xs font-bold"
+                  >
+                    {s.icon}
+                    <span>{s.label}</span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Map Section */}
-      <div className="w-full h-[30vh] sm:h-[35vh] grayscale hover:grayscale-0 transition-all duration-500">
+      {/* Map Section pointing to E-90 Chanakya Place Delhi */}
+      <div className="w-full h-64 sm:h-80 md:h-96 border-t border-slate-200 grayscale hover:grayscale-0 transition-all duration-500">
         <iframe
-          title="Our location on map"
+          title="The Pizza Hub at E-90 Chanakya Place Delhi Google Map"
           width="100%"
           height="100%"
           loading="lazy"
           allowFullScreen
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19808.635291266977!2d-0.1341365!3d51.5098651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761ad40c4f1a6d%3A0xa0f0f9fa9c6af8d!2sLondon!5e0!3m2!1sen!2suk!4v1700000000000"
+          src="https://maps.google.com/maps?q=E-90%20Chanakya%20Place%20Delhi&t=&z=15&ie=UTF8&iwloc=&output=embed"
         />
       </div>
     </div>
