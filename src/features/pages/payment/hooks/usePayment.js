@@ -4,17 +4,21 @@ import { toast } from "react-toastify";
 import { createOrder, verifyPayment, saveOrder } from "../services/payment.api";
 import { setLoading, setError, setCurrentOrder } from "../payment.Slice.js";
 import { loadRazorpayScript } from "../../../../utils/loadRazorpay";
+import { storeRecentOrder } from "../../DeliveryAddres/services/orderService";
+import useCart from "../../Cart/hooks/useCart";
 
 export const usePayment = () => {
   const dispatch = useDispatch();
   const { loading, error, currentOrder } = useSelector((state) => state.payment);
+  const { clearCart } = useCart();
 
-  const handlePaymentSuccess = async (response, order, ctx) => {
+  const handlePaymentSuccess = async (response, rzpOrder, ctx) => {
     const { user, formData, cartData, amount, onSuccess } = ctx;
 
     try {
+      // 1. Verify Razorpay Payment Signature
       const verified = await verifyPayment({
-        razorpay_order_id: response.razorpay_order_id || order.id,
+        razorpay_order_id: response.razorpay_order_id || rzpOrder.id,
         razorpay_payment_id: response.razorpay_payment_id,
         razorpay_signature: response.razorpay_signature,
       });
@@ -25,7 +29,8 @@ export const usePayment = () => {
         });
       }
 
-      await saveOrder({
+      // 2. Create Order in Backend Database
+      const savedResponse = await saveOrder({
         user: {
           name: user?.name || formData?.name,
           email: user?.email || formData?.email,
@@ -37,10 +42,26 @@ export const usePayment = () => {
         payment_id: response.razorpay_payment_id,
       });
 
+      const backendOrder = savedResponse?.order || savedResponse;
+      const orderId = backendOrder?._id || backendOrder?.id;
+
+      if (backendOrder) {
+        storeRecentOrder(backendOrder);
+      }
+
+      // 3. Clear Cart ONLY after successful order creation in backend
+      clearCart();
+
       toast.success("Order placed successfully!", { toastId: "order-success" });
-      onSuccess?.(response);
+
+      onSuccess?.({
+        paymentResponse: response,
+        orderId,
+        savedOrder: backendOrder,
+      });
     } catch (err) {
-      toast.error("Something went wrong after payment!", {
+      console.error("Post payment order creation error", err);
+      toast.error("Payment received, but order creation failed. Please contact support.", {
         toastId: "post-payment-error",
       });
     }
@@ -56,14 +77,14 @@ export const usePayment = () => {
           throw new Error("Razorpay SDK failed to load. Are you online?");
         }
 
-        const order = await createOrder(amount);
-        dispatch(setCurrentOrder(order));
+        const rzpOrder = await createOrder(amount);
+        dispatch(setCurrentOrder(rzpOrder));
 
         const options = {
           key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-          amount: order.amount,
-          currency: order.currency,
-          order_id: order.id,
+          amount: rzpOrder.amount,
+          currency: rzpOrder.currency,
+          order_id: rzpOrder.id,
           name: "The Pizza Hub",
           description: "Food Order Payment",
           prefill: {
@@ -72,7 +93,13 @@ export const usePayment = () => {
           },
           theme: { color: "#E33B32" },
           handler: (response) =>
-            handlePaymentSuccess(response, order, { user, formData, cartData, amount, onSuccess }),
+            handlePaymentSuccess(response, rzpOrder, {
+              user,
+              formData,
+              cartData,
+              amount,
+              onSuccess,
+            }),
         };
 
         const rzp = new window.Razorpay(options);
@@ -91,7 +118,7 @@ export const usePayment = () => {
         dispatch(setLoading(false));
       }
     },
-    [dispatch]
+    [dispatch, clearCart]
   );
 
   return { loading, error, currentOrder, initiatePayment };

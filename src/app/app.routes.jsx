@@ -30,6 +30,7 @@ export default function AppRoutes() {
         <Route path="/razorpay" element={<Checkout />} />
         <Route path="/cart/address" element={<Address />} />
         <Route path="/order-success" element={<OrderSuccess />} />
+        <Route path="/order-success/:orderId" element={<OrderSuccess />} />
         <Route path="/order" element={<YouOrder />} />
         <Route path="/verify-email/:token" element={<VerifyEmail />} />
         <Route path="/admin/*" element={<AdminRoutes />} />
