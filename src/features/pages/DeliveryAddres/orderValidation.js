@@ -1,7 +1,10 @@
-export const validateForm = (formData, cartData) => {
-  const { name, email, number, address } = formData;
+export const validateForm = (formData = {}, cartData = []) => {
+  const name = String(formData?.name || "").trim();
+  const email = String(formData?.email || "").trim();
+  const number = String(formData?.number || "").trim();
+  const address = String(formData?.address || "").trim();
 
-  if (cartData.length === 0) return "Cart is empty!";
+  if (!cartData || cartData.length === 0) return "Cart is empty!";
   if (!name || !email || !number || !address)
     return "Please fill all the details!";
 

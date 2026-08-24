@@ -24,10 +24,10 @@ export default function Address() {
   useEffect(() => {
     if (user) {
       setFormData({
-        name: user.name || "",
-        email: user.email || "",
-        number: user.number || "",
-        address: user.address || "",
+        name: user.name ? String(user.name) : "",
+        email: user.email ? String(user.email) : "",
+        number: user.number != null ? String(user.number) : "",
+        address: user.address ? String(user.address) : "",
       });
     }
     window.scrollTo(0, 0);
@@ -36,27 +36,32 @@ export default function Address() {
   // Validation helper
   const validateFields = (data = formData) => {
     const errors = {};
-    if (!data.name?.trim()) {
+    const nameStr = String(data.name || "").trim();
+    const emailStr = String(data.email || "").trim();
+    const numberStr = String(data.number || "").trim();
+    const addressStr = String(data.address || "").trim();
+
+    if (!nameStr) {
       errors.name = "Full Name is required";
-    } else if (data.name.trim().length < 2) {
+    } else if (nameStr.length < 2) {
       errors.name = "Name must be at least 2 characters";
     }
 
-    if (!data.email?.trim()) {
+    if (!emailStr) {
       errors.email = "Email Address is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailStr)) {
       errors.email = "Please enter a valid email address";
     }
 
-    if (!data.number?.trim()) {
+    if (!numberStr) {
       errors.number = "Phone Number is required";
-    } else if (!/^0?[6-9]\d{9}$/.test(data.number.trim())) {
+    } else if (!/^0?[6-9]\d{9}$/.test(numberStr)) {
       errors.number = "Please enter a valid 10-digit mobile number";
     }
 
-    if (!data.address?.trim()) {
+    if (!addressStr) {
       errors.address = "Complete Delivery Address is required";
-    } else if (data.address.trim().length < 10) {
+    } else if (addressStr.length < 10) {
       errors.address = "Please provide detailed house/street/pincode address (min 10 chars)";
     }
 
