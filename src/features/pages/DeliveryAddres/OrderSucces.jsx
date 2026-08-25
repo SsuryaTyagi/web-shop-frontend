@@ -1,15 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useLocation, useNavigate, useSearchParams, useParams } from "react-router-dom";
-import {
-  CheckCircle2,
-  Copy,
-  Check,
-  ShoppingBag,
-  ArrowRight,
-  Clock,
-  RefreshCw,
-  PhoneCall,
-} from "lucide-react";
+import { CheckCircle2, Copy, Check, ShoppingBag, ArrowRight, Clock, RefreshCw, PhoneCall } from "lucide-react";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { fetchOrderById, getStoredRecentOrder } from "./services/orderService";
 import { normalizeOrderStatus, calculateEstimatedDeliveryTime } from "./statusConfig";
