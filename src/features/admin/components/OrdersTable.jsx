@@ -100,8 +100,7 @@ export default function OrdersTable({ orders, onUpdateStatus, isCompact = false 
                         )}
                       </button>
                     </td>
-
-                    {/* Delivery & Payment (Full mode only) */}
+                    
                     {!isCompact && (
                       <td className="py-4 px-4">
                         <div className="space-y-1 text-xs">
