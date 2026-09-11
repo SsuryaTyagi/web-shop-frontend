@@ -1,4 +1,3 @@
-// src/features/admin/components/AddMenuItemModal.jsx
 import React, { useState, useEffect } from "react";
 import { X, Upload, Sparkles, Check } from "lucide-react";
 
