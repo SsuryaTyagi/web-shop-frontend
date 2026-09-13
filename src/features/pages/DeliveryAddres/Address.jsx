@@ -41,6 +41,7 @@ export default function Address() {
     const numberStr = String(data.number || "").trim();
     const addressStr = String(data.address || "").trim();
 
+    // Validation rules
     if (!nameStr) {
       errors.name = "Full Name is required";
     } else if (nameStr.length < 2) {
@@ -68,12 +69,14 @@ export default function Address() {
     return errors;
   };
 
+  // Handlers for input changes and blur events
   const handleBlur = (field) => {
     setTouched((prev) => ({ ...prev, [field]: true }));
     const errors = validateFields();
     setFieldErrors(errors);
   };
 
+  // Handler for input changes
   const handleChange = (field, value) => {
     const updated = { ...formData, [field]: value };
     setFormData(updated);
