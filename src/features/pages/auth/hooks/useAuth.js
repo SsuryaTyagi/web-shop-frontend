@@ -16,6 +16,7 @@ export default function useAuth() {
   const navigate = useNavigate();
   const { user, message, loading, error } = useSelector((state) => state.auth);
 
+  // Handle Register
   const handleRegister = async (userData) => {
     try {
       dispatch(setLoading(true));
@@ -31,6 +32,7 @@ export default function useAuth() {
     }
   };
 
+  // Handle Login
   const handleLogin = async (userData) => {
     try {
       dispatch(setLoading(true));
@@ -49,6 +51,7 @@ export default function useAuth() {
     }
   };
 
+  // Handle Get User
   const handleGetMe = async () => {
     try {
       dispatch(setLoading(true));
@@ -62,6 +65,7 @@ export default function useAuth() {
     }
   };
 
+  // Handle Google Login
   const handleGoogleLogin = async () => {
     try {
       await googleLogin();
@@ -72,6 +76,7 @@ export default function useAuth() {
     }
   };
 
+  // Handle Logout
   const handleLogout = async () => {
     try {
       dispatch(setLoading(true));
@@ -95,9 +100,8 @@ export default function useAuth() {
 
   if (token) {
     localStorage.setItem("token", token);
-    // clean the token out of the URL
     window.history.replaceState({}, document.title, window.location.pathname);
-    handleGetMe(); // now fetch the user with the token in place
+    handleGetMe(); 
   } else {
     handleGetMe();
   }
