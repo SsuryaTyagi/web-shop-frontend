@@ -19,6 +19,7 @@ export default function Login() {
   const { handleRegister, handleLogin, handleGoogleLogin, loading, error, message } =
     useAuth();
 
+    // Validation function to check form inputs
   const validate = () => {
     const errors = {};
     if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
